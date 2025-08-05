@@ -46,14 +46,14 @@
             <div class="flex justify-between items-center py-4">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <img src="../img/sportshub.png" alt="Logo" class="h-12">
+                    <img src="./src/img-about/logo.png" alt="Logo" class="h-12">
                 </div>
 
                 <!-- Navigation -->
                 <nav class="hidden md:flex space-x-8">
-                    <a href="#" class="custom-text hover:text-blue-600 transition-colors font-medium">Home</a>
-                    <a href="#" class="custom-text hover:text-blue-600 transition-colors font-medium">Event</a>
-                    <a href="#" class="custom-text hover:text-blue-600 transition-colors font-medium">About</a>
+                    <a href="./index.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Home</a>
+                    <a href="./src/html/event.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Event</a>
+                    <a href="./src/html/about.html" class="custom-text hover:text-blue-600 transition-colors font-medium">About</a>
                 </nav>
 
                 <!-- Right Side Icons and Button -->
@@ -170,17 +170,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-5 gap-8">
                 <div>
-                    <h1 class="text-lg font-semibold mb-4 khmer-text">បង្កើតដោយ</h1>
-                    <img src="../img/istad.jpg" alt="ISTAD Logo" class="w-20 h-8 mb-4">
+                    <h1 class="text-lg font-semibold mb-4 khmer-text">Organized By</h1>
+                    <img src="./src/img-about/istad.png" alt="ISTAD Logo" class="w-20 h-15 mb-4">
                 </div>
 
                 <div>
-                    <h1 class="text-lg font-semibold mb-4 khmer-text">រៀបចំដោយ</h1>
-                    <img src="../img/sportshub.png" alt="IT Program Logo" class="w-20 h-8 mb-4">
+                    <h1 class="text-lg font-semibold mb-4 khmer-text">Prepared By</h1>
+                    <img src="./src/img-about/logo.png" alt="sportshub Logo" class="w-21 h-20 mb-4">
                 </div>
 
                 <nav>
-                    <h3 class="text-lg font-semibold mb-4 khmer-text">ប្រភេទ</h3>
+                    <h3 class="text-lg font-semibold mb-4 khmer-text">Category</h3>
                     <ul class="space-y-2 text-[#000249] ">
                         <li><a href="#" class="hover:text-blue-600 transition-colors">Football</a></li>
                         <li><a href="#" class="hover:text-blue-600 transition-colors">Basketball</a></li>
@@ -191,7 +191,7 @@
                 </nav>
 
                 <nav>
-                    <h3 class="text-lg font-semibold mb-4 khmer-text">តំណភ្ជាប់រហ័ស</h3>
+                    <h3 class="text-lg font-semibold mb-4 khmer-text">Quick Links</h3>
                     <ul class="space-y-2 text-[#000249] ">
                         <li><a href="#" class="hover:text-blue-600 transition-colors">All News</a></li>
                         <li><a href="#" class="hover:text-blue-600 transition-colors">Event</a></li>
@@ -227,59 +227,55 @@
     <script>
         // Data for different sections
         const heroData = [{
-            image: "https://api.istad.co/media/image/e52a65a6-9289-4244-8833-b0a70f435015.png",
+            image: "./src/image/istad.png",
             title: "ISTAD Sport Community",
             description: "ចូលរួមជាមួយសហគមន៍កីឡារបស់យើង"
         }, {
-            image: "https://api.istad.co/media/image/a4a83a05-1a89-4994-a690-872f2f114c6e.png",
+            image: "./src/image/football.png",
             title: "Football Championship",
             description: "ការប្រកួតបាល់ទាត់ថ្នាក់ជាតិ"
         }, {
-            image: "https://api.istad.co/media/image/33c1334c-7389-4673-874f-9e3d3b760a33.png",
+            image: "./src/image/vb.png",
             title: "Sports Excellence",
             description: "ភាពល្អឥតខ្ចោះក្នុងកីឡា"
         }];
 
         const newEventsData = [{
-            image: "https://api.istad.co/media/image/a4a83a05-1a89-4994-a690-872f2f114c6e.png",
+            image: "./src/image/istad.png",
             category: "Football",
             title: "កម្មវិធីលេងកីឡា សាមគ្គីភាតរភាព របស់គ្រួសារ ISTAD នៃវិទ្យាស្ថាន សាយអិនស៍ អេន ថេក ណូ ឡជី អ៊ែតវ៉ានស៍ ឌីវេឡុបម៉ិន (ISTAD)",
             date: "ISTAD - July 30, 2025",
-            description: "នាថ្ងៃសៅរ៍ ទី៥ ខែកក្កដា ឆ្នាំ២០២៥ វិទ្យាស្ថាន សាយអិនស៍ អេន ថេកណឡជី អ៊ែតវ៉ានស៍ ឌីវេឡុបម៉ិន (ISTAD) បានរៀបចំកម្មវិធីលេងកីឡា ការលេងល្បែងកម្សាន្ត សាមគ្គីភាតរភាព ដោយមានការចូលរួមពី លោកគ្រូនាយក លោកគ្រូអ្នកគ្រូ ព្រមទាំងសិស្សនិស្សិត អាហារូបករណ៍ Fullstack Web development ជំនាន់ទី ១, អាហារូបករណ៍ ព័ត៌មានវិទ្យាកម្រិតមូលដ្ឋាន(Foundation) ជំនាន់ទី ៤, អាហារូបករណ៍បច្ចេកវិទ្យាឌីជីថល (Pre-university) ជំនាន់ទី ៤ និងថ្នាក់សញ្ញាបត្របច្ចេកទេស ជាន់ខ្ពស់ (Associate)  ប្រកបដោយភាពសប្បាយរីករាយ។"
+            description: "នាថ្ងៃសៅរ៍ ទី៥ ខែកក្កដា ឆ្នាំ២០២៥ វិទ្យាស្ថាន សាយអិនស៍ អេន ថេកណឡជី អ៊ែតវ៉ានស៍ ឌីវេឡុបម៉ិន (ISTAD) បានរៀបចំកម្មវិធីលេងកីឡា ការលេងល្បែងកម្សាន្ត សាមគ្គីភាតរភាព ដោយមានការចូលរួមពី លោកគ្រូនាយក លោកគ្រូអ្នកគ្រូ ព្រមទាំងសិស្សនិស្សិត អាហារូបករណ៍ Fullstack Web development ជំនាន់ទី ១, អាហារូបករណ៍ ព័ត៌មានវិទ្យាកម្រិតមូលដ្ឋាន(Foundation) ជំនាន់ទី ៤, អាហារូបករណ៍បច្ចេកវិទ្យាឌីជីថល (Pre-university) ជំនាន់ទី ៤ និងថ្នាក់សញ្ញាបត្របច្ចេកទេស ជាន់ខ្ពស់ (Associate)  ប្រកបដោយភាពសប្បាយរីករាយ។"
         }, {
-            image: "https://api.istad.co/media/image/33c1334c-7389-4673-874f-9e3d3b760a33.png",
+            image: "./src/image/vb.png",
             category: "Basketball",
-            title: "ក្រុមបាល់បោះរទេះនារីកម្ពុជាបន្តឈ្នះម្ចាស់ផ្ទះថៃឈរលេខ១ក្នុងពូល ជម្រុះប៉ារ៉ាឡាំពិក",
+            title: "ក្រុមបាល់ទះនារីកម្ពុជាបន្តឈ្នះម្ចាស់ផ្ទះថៃឈរលេខ១ក្នុងពូល ជម្រុះប៉ារ៉ាឡាំពិក",
             date: "ISTAD - August 1, 2025",
-            description: "នៅ​យប់​ ថ្ងៃ​ទី​១០ ខែ​មករានេះ ក្រុម​កីឡា​បាល់បោះរទេះ​នារី​ជម្រើស​ជាតិ​កម្ពុជា​បាន​យក​ឈ្នះ​ក្រុម​បាល់បោះនារីម្ចាស់​ផ្ទះ​ថៃ ដោយ​លទ្ធផល ៩-២ ដើម្បី​ឈរ​លេខ១​ក្នុងពូល B សម្រាប់​វិញ្ញាសាសា​៣​ទល់​៣ ក្នុង​ការ​​ប្រកួត​ជើង​ឯក​តំបន់អាស៊ី-អូសេអានី IWBF AOZ Championship និង​ជម្រុះ​ព្រឹត្តិការណ៍​កីឡា​ប៉ារ៉ាឡាំពិក ឆ្នាំ​២០២៤ នៅ​ប្រទេស​ថៃ។"
+            description: "នៅ​យប់​ ថ្ងៃ​ទី​១០ ខែ​មករានេះ ក្រុម​កីឡា​បាល់ទះ​នារី​ជម្រើស​ជាតិ​កម្ពុជា​បាន​យក​ឈ្នះ​ក្រុម​បាល់បោះនារីម្ចាស់​ផ្ទះ​ថៃ ដោយ​លទ្ធផល ៩-២ ដើម្បី​ឈរ​លេខ១​ក្នុងពូល B សម្រាប់​វិញ្ញាសាសា​៣​ទល់​៣ ក្នុង​ការ​​ប្រកួត​ជើង​ឯក​តំបន់អាស៊ី-អូសេអានី IWBF AOZ Championship និង​ជម្រុះ​ព្រឹត្តិការណ៍​កីឡា​ប៉ារ៉ាឡាំពិក ឆ្នាំ​២០២៤ នៅ​ប្រទេស​ថៃ។"
         }];
 
         const popularEventsData = [{
-            image: "../img/us.jpg",
+            image: "./src/image/my.png",
             title: "ប្រធានក្រុមបាល់ទាត់ផ្ការីកគ្រប់រដូវ ជម្រះមន្ទិលមហាជន លើការ ប្រកួតបាល់ទាត់មិត្ដភាព នៅកូរ៉េ។ ដើម្បីបង្កើតចំណង់មិត្តភាព​ និង...",
             date: "Jan 25, 2025"
         }, {
-            image: "https://api.istad.co/media/image/f814b6d4-3435-4206-a67b-1176551b9b65.png",
+            image: "./src/image/vbboy.png",
             title: "ក្រុមបាល់ទះរបស់ជម្រើសជាតិឥណ្ឌូណេស៊ីទទួលបានមេដាយមាសនិង​ក្រុមបាល់ទះជម្រើសជាតិកម្ពុជា ​ទទួលបាន​​​មេដាយប្រាក់...",
             date: "Jan 25, 2025"
         }, {
-            image: "https://api.istad.co/media/image/a53b92db-c292-411a-8b1b-9f931d5b0a70.png",
+            image: "./src/image/tdon.png",
             title: "ការប្រកួតកីឡាតេក្វាន់ដូ WT ជើងឯកថ្នាក់ជាតិ ឆ្នាំ២០២៣ មានកីឡាករ កីឡាការិនីសរុប ១២០នាក់ចូលរួម​ប្រជែង​មេដាយ មាស...",
             date: "Jan 25, 2025"
         }, {
-            image: "https://api.istad.co/media/image/233a7aa9-417c-482d-9669-e58f005c215e.png",
-            title: "កីឡាករប្រដាល់៣រូបដែលធ្វើអោយពិភពលោកស្គាល់កណ្ដាប់ដៃអ៊ុយក្រែនដ៏កណាចរបស់ពួកគេទទួលបានខ្សែក្រវាត់ពិភពលោកនិង...",
-            date: "Jan 25, 2025"
-        }, {
-            image: "https://api.istad.co/media/image/b8ae8681-3720-4a6f-a42f-87d27e7f6e80.png",
+            image: "./src/image/swimon.png",
             title: "កីឡាហែលទឹកផ្តល់អត្ថប្រយោជន៍​យ៉ាងច្រើន​ដល់សុខភាព រាងកាយ និងផ្លូវចិត្ត...",
             date: "Jan 25, 2025"
         }, {
-            image: "https://api.istad.co/media/image/2e59e354-9418-45a1-8646-92c10b7b6294.png",
+            image: "./src/image/tdon.png",
             title: "ការប្រកួតកីឡាវាយសី វិញ្ញាសាវាយជាគូចម្រុះ (បុរស-នារី) ដែល កម្ពុជាទទួលបានមេដាយមាស កីឡា​វាយ​សី​ជួយ​បន្ថយហានិភ័យ​ពី​​...",
             date: "Jan 25, 2025"
         }, {
-            image: "https://cdn.sabay.com/cdn/media.sabay.com/media/Bun.Sophearum/Sport(4)/(10)/6885e1b85cd31_1753604520_medium.jpg",
+            image: "./src/image/Boxing.png",
             title: "កីឡាករប្រដាល់ ៣ រូបដែលធ្វើអោយពិភពលោក ស្គាល់កណ្ដាប់ដៃអ៊ុយក្រែន",
             date: "Jan 20, 2025"
         }, {
@@ -297,35 +293,35 @@
         }];
 
         const sportsCategoriesData = [{
-            image: "https://api.istad.co/media/image/845c4b18-8120-48cb-a83a-18f6ad72c8f8.png",
+            image: "./src/image/ski.png",
             title: "កីឡាជិះ​ស្គី​ទឹកកក",
             description: "កីឡាជិះស្គីទឹកកក គឺជាប្រភេទ កីឡាដែល ប្រព្រឹត្តិទៅនៅរដូវរងា..."
         }, {
-            image: "https://api.istad.co/media/image/a01048a1-c068-450f-a312-63b786c53e0d.png",
+            image: "./src/image/golf.png",
             title: "កីឡាវាយកូនហ្កោល",
             description: "កីឡាវាយកូនហ្គោលគឺជាកីឡាដ៏មានប្រជាប្រិយភាពមួយដែលលេងនៅលើវាលស្មៅ..."
         }, {
-            image: "https://api.istad.co/media/image/7a26241a-a384-482a-a9a7-195b058af56b.png",
+            image: "./src/image/swim.png",
             title: "កីឡាហែលទឹក",
             description: "កីឡាហែលទឹកគឺជាប្រភេទកីឡាមួយដែលមានប្រជាប្រិយភាពជាសកល..."
         }, {
-            image: "https://api.istad.co/media/image/8b383bf9-53e3-4700-9852-678bbd252f85.png",
+            image: "./src/image/football.png",
             title: "កីឡាបាល់ទាត់",
             description: "កីឡាបាល់ទាត់គឺជាកីឡាប្រកួតគ្នារវាងក្រុម ២ ដែលមាន អ្នកលេងនីមួយៗ ១១ នាក់..."
         }, {
-            image: "https://api.istad.co/media/image/57a7f4d2-23c2-4119-a16f-777b7c25eb44.png",
+            image: "./src/image/run.png",
             title: "កីឡារត់ប្រណាំង",
             description: "កីឡារត់ប្រណាំងគឺជាប្រភេទ កីឡាអត្តពល កម្មដ៏ល្បីល្បាញ់..."
         }, {
-            image: "https://api.istad.co/media/image/8a1b18d8-e74f-4d40-9a33-912f22b251f9.png",
+            image: "./src/image/boxing.png",
             title: "កីឡាប្រដាល់",
             description: "កីឡាប្រដាល់គឺជាកីឡាប្រយុទ្ធដ៏ចាស់បុរាណមួយដែលមានប្រជាប្រិយភាពនៅ..."
         }, {
-            image: "https://api.istad.co/media/image/e71b269b-3254-436f-b565-5c129e9d1a1b.png",
+            image: "./src/image/vb.png",
             title: "កីឡាបាល់ទះ",
             description: "កីឡាបាល់ទះគឺជាកីឡាក្រុមមួយប្រភេទដែលលេងដោយក្រុមពីរ មានសមាជិក..."
         }, {
-            image: "https://api.istad.co/media/image/0948924b-352b-472b-8a30-f651c6b541ef.png",
+            image: "./src/image/bkb.png",
             title: "កីឡាបាល់បោះ",
             description: "បាល់បោះគឺជាកីឡាក្រុមដែល​មានអ្នកលេង ៥នាក់​ក្នុងមួយ​ក្រុម។គោលបំណង..."
         }, {

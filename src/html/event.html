@@ -239,12 +239,6 @@
                         </div>
                     </div>
 
-                    <!-- Contact Information -->
-                    <div>
-                        <label class="block text-sm font-medium custom-text mb-2">Contact Information</label>
-                        <input type="text" id="eventContact" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Phone number or email">
-                    </div>
-
                     <!-- Form Buttons -->
                     <div class="flex space-x-3 pt-4">
                         <button type="button" id="cancelBtn" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
@@ -325,25 +319,69 @@
         // Global variables
         let eventsData = [{
             id: 1,
-            title: "ការប្រកួតកីឡាបាល់ទាត់រវាងនិស្សិត",
+            title: "កម្ពុជាធ្វើម្ចាស់ផ្ទះរៀបចំការប្រកួតកីឡាវាយកូនហ្គោលនៃការប្រកួតកីឡាអន្តរជាតិ",
             description: "ការប្រកួតកីឡាបាល់ទាត់រវាងនិស្សិតដ៏អស្ចារ្យ",
             date: "២០២៥-០២-១៥",
             time: "14:00",
             location: "ទីលានកីឡា ISTAD",
             locationLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.7937414488034!2d104.91444121533492!3d11.568633291834647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951e96d257a6b%3A0x6b66703c5fc0c7cc!2sInstitute%20of%20Science%20and%20Technology%20Advanced%20Development!5e0!3m2!1sen!2skh!4v1642150234567!5m2!1sen!2skh',
             category: "football",
-            image: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&h=400&fit=crop",
+            image: "../Photo_Event/Id1_Even.jpg",
             contact: "012345678"
         }, {
             id: 2,
-            title: "ការប្រកួតហែលទឹក ក្នុងអាងហែលទឹក",
+            title: "ការប្រកីឡាការិនីរត់ប្រណាំង ប៊ូ សំណាង ទោះទៅដល់ទីក្រោយគេ តែឈ្នះបេះដូងប្រជាជនកម្ពុជាកួតហែលទឹក ក្នុងអាងហែលទឹក",
             description: "ការប្រកួតហែលទឹកសម្រាប់អ្នកចូលចិត្តកីឡា",
             date: "២០២៥-០២-២០",
             time: "10:00",
             location: "អាងហែលទឹកជាតិ",
             locationLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62540.49962881492!2d104.88699570861851!3d11.567535195752065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095144cbdbf311%3A0x2588e1ac1787eb64!2sWat%20Phnom%20Daun%20Penh!5e0!3m2!1sen!2skh!4v1754378695201!5m2!1sen!2skh',
             category: "swimming",
-            image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=400&fit=crop",
+            image: "../Photo_Event/Id2_Even.jpg",
+            contact: "012345679"
+        }, {
+            id: 3,
+            title: "ការប្រកួតកីឡា តេក្វាន់ ដូ អាយធីអែហ្វ អាស៊ីអាគ្នេយ៍លើក ទី២  ឆ្នាំ២០២៥​ In CAMBODIA",
+            description: "ការប្រកួតហែលទឹកសម្រាប់អ្នកចូលចិត្តកីឡា",
+            date: "២០២៥-០២-២០",
+            time: "10:00",
+            location: "អាងហែលទឹកជាតិ",
+            locationLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62540.49962881492!2d104.88699570861851!3d11.567535195752065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095144cbdbf311%3A0x2588e1ac1787eb64!2sWat%20Phnom%20Daun%20Penh!5e0!3m2!1sen!2skh!4v1754378695201!5m2!1sen!2skh',
+            category: "swimming",
+            image: "../Photo_Event/Id3_Even.jpg",
+            contact: "012345679"
+        }, {
+            id: 4,
+            title: "អបអរសាទរពិធីបើកការប្រកួតកីឡាជាតិលើកទី៤  និង កីឡា ជាតិ ជនពិការ លើកទី២",
+            description: "ការប្រកួតហែលទឹកសម្រាប់អ្នកចូលចិត្តកីឡា",
+            date: "២០២៥-០២-២០",
+            time: "10:00",
+            location: "អាងហែលទឹកជាតិ",
+            locationLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62540.49962881492!2d104.88699570861851!3d11.567535195752065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095144cbdbf311%3A0x2588e1ac1787eb64!2sWat%20Phnom%20Daun%20Penh!5e0!3m2!1sen!2skh!4v1754378695201!5m2!1sen!2skh',
+            category: "swimming",
+            image: "../Photo_Event/Id4_Even.jpg",
+            contact: "012345679"
+        }, {
+            id: 5,
+            title: "ការប្រកួតកីឡាបាល់បោះលើវិញ្ញាសា ៣ទល់៣ រវាងកម្ពុជា និងថៃ",
+            description: "ការប្រកួតហែលទឹកសម្រាប់អ្នកចូលចិត្តកីឡា",
+            date: "២០២៥-០២-២០",
+            time: "10:00",
+            location: "អាងហែលទឹកជាតិ",
+            locationLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62540.49962881492!2d104.88699570861851!3d11.567535195752065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095144cbdbf311%3A0x2588e1ac1787eb64!2sWat%20Phnom%20Daun%20Penh!5e0!3m2!1sen!2skh!4v1754378695201!5m2!1sen!2skh',
+            category: "swimming",
+            image: "../Photo_Event/Id5_Even.jpg",
+            contact: "012345679"
+        }, {
+            id: 6,
+            title: "ការប្រកួតហែលទឹក ក្នុងអាងហែលទឹក",
+            description: "ការប្រកួតហែលទឹកសម្រាប់អ្នកចូលចិត្តកីឡា",
+            date: "២០២៥-០២-២០",
+            time: "10:00",
+            location: "Djokovic ថា Nadalនឹងនៅតែខ្លាំងពេលត្រឡប់ពីរបួសវិញ ទោះបច្ចុប្បន្នធ្លាក់ចំណាត់ថ្នាក់ដល់៦៧០ពិភពលោកក្ដី",
+            locationLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62540.49962881492!2d104.88699570861851!3d11.567535195752065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095144cbdbf311%3A0x2588e1ac1787eb64!2sWat%20Phnom%20Daun%20Penh!5e0!3m2!1sen!2skh!4v1754378695201!5m2!1sen!2skh',
+            category: "swimming",
+            image: "../Photo_Event/Id6_Even.jpg",
             contact: "012345679"
         }];
 
@@ -447,7 +485,7 @@
                         <div class="flex justify-between items-center py-4">
                             <!-- Logo -->
                             <div class="flex items-center">
-                                <img src="https://via.placeholder.com/40x40/007AFF/FFFFFF?text=SH" alt="Logo" class="h-10">
+                                <img src="../img-about/logo.png" alt="Logo" class="h-10">
                             </div>
 
                             <!-- Navigation -->
@@ -485,58 +523,64 @@
         // Footer Component
         function createFooter() {
             return `
-                <div class="custom-bg text-gray-800 py-12">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="grid md:grid-cols-5 gap-8">
-                            <div>
-                                <h1 class="text-lg font-semibold mb-4 khmer-text">បង្កើតដោយ</h1>
-                                <img src="https://via.placeholder.com/80x32/000249/FFFFFF?text=ISTAD" alt="ISTAD Logo" class="w-20 h-8 mb-4">
-                            </div>
-                            <div>
-                                <h1 class="text-lg font-semibold mb-4 khmer-text">រៀបចំដោយ</h1>
-                                <img src="https://via.placeholder.com/80x32/007AFF/FFFFFF?text=SH" alt="IT Program Logo" class="w-20 h-8 mb-4">
-                            </div>
-                            <nav>
-                                <h3 class="text-lg font-semibold mb-4 khmer-text">ប្រភេទ</h3>
-                                <ul class="space-y-2 text-gray-600">
-                                    <li><a href="#" class="hover:text-blue-600 transition-colors">Football</a></li>
-                                    <li><a href="#" class="hover:text-blue-600 transition-colors">Basketball</a></li>
-                                    <li><a href="#" class="hover:text-blue-600 transition-colors">Swimming</a></li>
-                                    <li><a href="#" class="hover:text-blue-600 transition-colors">Tennis</a></li>
-                                    <li><a href="#" class="hover:text-blue-600 transition-colors">Golf</a></li>
-                                </ul>
-                            </nav>
-                            <nav>
-                                <h3 class="text-lg font-semibold mb-4 khmer-text">តំណភ្ជាប់រហ័ស</h3>
-                                <ul class="space-y-2 text-gray-600">
-                                    <li><a href="#" class="hover:text-blue-600 transition-colors">All News</a></li>
-                                    <li><a href="#" class="hover:text-blue-600 transition-colors">Event</a></li>
-                                    <li><a href="#" class="hover:text-blue-600 transition-colors">About Us</a></li>
-                                </ul>
-                            </nav>
-                            <nav>
-                                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
-                                <div class="flex space-x-4">
-                                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
-                                        <i class="fab fa-facebook-f text-xl"></i>
-                                    </a>
-                                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
-                                        <i class="fab fa-telegram text-xl"></i>
-                                    </a>
-                                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
-                                        <i class="fab fa-instagram text-xl"></i>
-                                    </a>
-                                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
-                                        <i class="fab fa-youtube text-xl"></i>
-                                    </a>
-                                </div>
-                            </nav>
-                        </div>
-                        <div class="border-t border-gray-300 mt-8 pt-8 text-center">
-                            <p class="text-gray-600 text-sm">© 2025 SportHub. All Rights Reserved.</p>
-                        </div>
-                    </div>
+               <!-- Footer -->
+    <footer class="custom-bg text-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-5 gap-8">
+                <div>
+                    <h1 class="text-lg font-semibold mb-4 khmer-text">Organized By</h1>
+                    <img src="../img-about/istad.png" alt="ISTAD Logo" class="w-20 h-15 mb-4">
                 </div>
+
+                <div>
+                    <h1 class="text-lg font-semibold mb-4 khmer-text">Prepared By</h1>
+                    <img src="../img-about/logo.png" alt="sportshub Logo" class="w-21 h-20 mb-4">
+                </div>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 khmer-text">Category</h3>
+                    <ul class="space-y-2 text-[#000249] ">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Football</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Basketball</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Swimming</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Tennis</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Golf</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 khmer-text">Quick Links</h3>
+                    <ul class="space-y-2 text-[#000249] ">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">All News</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Event</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">About Us</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="border-t border-gray-300 mt-8 pt-8 text-center">
+                <p class="text-[#000249]  text-sm">© 2025 SportHub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
             `;
         }
 
