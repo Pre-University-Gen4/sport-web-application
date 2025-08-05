@@ -1,246 +1,594 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="km">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportHub - Your Ultimate Sports Platform</title>
+    <title>ISTAD Sport</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1e40af',
-                        secondary: '#f59e0b',
-                        accent: '#10b981'
-                    }
-                }
-            }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Koulen&family=Noto+Sans+Khmer:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #000249;
         }
-    </script>
+        
+        .custom-bg {
+            background-color: #FAF9F0;
+        }
+        
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Khmer OS', 'Roboto', sans-serif;
+            color: #000249;
+        }
+        
+        .hero-slide {
+            transition: opacity 0.8s ease-in-out;
+        }
+        
+        .card-container {
+            transition: transform 0.5s ease-in-out;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50">
+    <!-- Header -->
+    <header class="custom-bg shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
                 <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <h1 class="text-2xl font-bold text-primary">SportHub</h1>
-                    </div>
-                    <div class="hidden md:block ml-10">
-                        <div class="flex items-baseline space-x-4">
-                            <a href="#" class="text-gray-900 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
-                            <a href="#" class="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Sports</a>
-                            <a href="#" class="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">News</a>
-                            <a href="#" class="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Events</a>
-                            <a href="#" class="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
-                        </div>
-                    </div>
+                    <img src="../img/sportshub.png" alt="Logo" class="h-12">
                 </div>
-                <div class="hidden md:block">
-                    <div class="flex items-center space-x-4">
-                        <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">Sign In</button>
-                        <button class="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors">Join Now</button>
-                    </div>
-                </div>
-                <div class="md:hidden">
-                    <button class="text-gray-700 hover:text-primary">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="custom-text hover:text-blue-600 transition-colors font-medium">Home</a>
+                    <a href="#" class="custom-text hover:text-blue-600 transition-colors font-medium">Event</a>
+                    <a href="#" class="custom-text hover:text-blue-600 transition-colors font-medium">About</a>
+                </nav>
+
+                <!-- Right Side Icons and Button -->
+                <div class="flex items-center space-x-4">
+                    <!-- Heart/Favorite Icon -->
+                    <button id="favoriteBtn" class="p-2 text-[#000249]  hover:text-red-500 transition-colors relative">
+                        <i class="fas fa-heart text-xl"></i>
+                        <span id="favoriteCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+
+                    <!-- Account Icon -->
+                    <button id="accountBtn" class="p-2 text-[#000249]  hover:text-blue-600 transition-colors">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </button>
+
+                    <!-- Post Button -->
+                    <button id="postEventBtn" class="post-button text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+                        <i class="fas fa-plus"></i>
+                        <span>Post</span>
                     </button>
                 </div>
             </div>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-primary to-blue-800 text-white py-20 overflow-hidden">
-        <div class="absolute inset-0 bg-black opacity-20"></div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                    Your Ultimate <span class="text-secondary">Sports</span> Experience
-                </h1>
-                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
-                    Connect with fellow athletes, discover events, and elevate your game with SportHub's comprehensive platform
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <button class="bg-secondary hover:bg-amber-600 text-white font-bold py-4 px-8 rounded-full text-lg transition-all transform hover:scale-105 shadow-lg">
-                        Get Started
-                    </button>
-                    <button class="border-2 border-white text-white hover:bg-white hover:text-primary font-bold py-4 px-8 rounded-full text-lg transition-all">
-                        Watch Demo
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Decorative elements -->
-        <div class="absolute top-10 right-10 w-20 h-20 bg-secondary rounded-full opacity-20 animate-pulse"></div>
-        <div class="absolute bottom-10 left-10 w-16 h-16 bg-accent rounded-full opacity-30 animate-bounce"></div>
+    <section class="relative w-full h-screen overflow-hidden">
+        <article id="hero-container" class="relative w-full h-full">
+            <!-- Hero slides will be dynamically inserted here -->
+        </article>
+
+        <button id="hero-prev" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 z-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+
+        <button id="hero-next" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 z-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+
+        <!-- Hero indicators -->
+        <nav class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10" id="hero-indicators">
+            <!-- Indicators will be dynamically inserted here -->
+        </nav>
     </section>
 
-    <!-- Features Section -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose SportHub?</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Discover the features that make SportHub the go-to platform for sports enthusiasts worldwide</p>
-            </div>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-10">
+        <!-- New Events Section -->
+        <section class="mb-12">
+            <header class="mb-6">
+                <h2 class="text-2xl mb-2 pb-1 border-b-2 border-gray-300">អត្ថបទថ្មីៗ</h2>
+            </header>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center group hover:transform hover:scale-105 transition-all duration-300">
-                    <div class="bg-gradient-to-br from-primary to-blue-600 w-16 h-16 rounded-xl mx-auto mb-6 flex items-center justify-center group-hover:shadow-lg">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Community Connect</h3>
-                    <p class="text-gray-600">Join thousands of athletes and sports enthusiasts in our vibrant community platform</p>
+            <article class="relative">
+                <div id="new-events-container" class="overflow-hidden">
+                    <!-- New events cards will be dynamically inserted here -->
                 </div>
 
-                <div class="text-center group hover:transform hover:scale-105 transition-all duration-300">
-                    <div class="bg-gradient-to-br from-secondary to-orange-600 w-16 h-16 rounded-xl mx-auto mb-6 flex items-center justify-center group-hover:shadow-lg">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Event Management</h3>
-                    <p class="text-gray-600">Organize and participate in sports events with our comprehensive event management tools</p>
-                </div>
-
-                <div class="text-center group hover:transform hover:scale-105 transition-all duration-300">
-                    <div class="bg-gradient-to-br from-accent to-green-600 w-16 h-16 rounded-xl mx-auto mb-6 flex items-center justify-center group-hover:shadow-lg">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Performance Tracking</h3>
-                    <p class="text-gray-600">Track your progress and achievements with detailed analytics and performance insights</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sports Categories -->
-    <section class="py-20 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Sports</h2>
-                <p class="text-xl text-gray-600">Explore a wide variety of sports and find your passion</p>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="bg-white rounded-xl p-6 text-center hover:shadow-lg transition-shadow cursor-pointer group">
-                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">⚽</div>
-                    <h3 class="font-bold text-gray-900">Football</h3>
-                    <p class="text-sm text-gray-600 mt-2">2.4k+ members</p>
-                </div>
-
-                <div class="bg-white rounded-xl p-6 text-center hover:shadow-lg transition-shadow cursor-pointer group">
-                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🏀</div>
-                    <h3 class="font-bold text-gray-900">Basketball</h3>
-                    <p class="text-sm text-gray-600 mt-2">1.8k+ members</p>
-                </div>
-
-                <div class="bg-white rounded-xl p-6 text-center hover:shadow-lg transition-shadow cursor-pointer group">
-                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🎾</div>
-                    <h3 class="font-bold text-gray-900">Tennis</h3>
-                    <p class="text-sm text-gray-600 mt-2">1.2k+ members</p>
-                </div>
-
-                <div class="bg-white rounded-xl p-6 text-center hover:shadow-lg transition-shadow cursor-pointer group">
-                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🏊</div>
-                    <h3 class="font-bold text-gray-900">Swimming</h3>
-                    <p class="text-sm text-gray-600 mt-2">980+ members</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-primary to-blue-700 text-white">
-        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Join SportHub?</h2>
-            <p class="text-xl mb-8 opacity-90">Start your journey today and connect with athletes worldwide</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button class="bg-secondary hover:bg-amber-600 text-white font-bold py-4 px-8 rounded-full text-lg transition-all transform hover:scale-105">
-                    Sign Up Free
+                <button id="new-events-prev" class="absolute top-1/2 left-2 -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-all duration-300 z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
                 </button>
-                <button class="border-2 border-white text-white hover:bg-white hover:text-primary font-bold py-4 px-8 rounded-full text-lg transition-all">
-                    Learn More
+
+                <button id="new-events-next" class="absolute top-1/2 right-2 -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-all duration-300 z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
                 </button>
-            </div>
-        </div>
-    </section>
+            </article>
+        </section>
+
+        <!-- Popular Events Section -->
+        <section class="mb-12">
+            <header class="mb-6">
+                <h2 class="text-2xl mb-2 pb-2 border-b-2 border-gray-300">អត្ថបទពេញនិយម</h2>
+            </header>
+
+            <article id="popular-events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Popular events cards will be dynamically inserted here -->
+            </article>
+
+            <nav class="text-center mt-8">
+                <button id="popular-see-more" class="text-blue-600 font-semibold border-2 border-blue-600 rounded-full px-8 py-2 hover:bg-blue-600 hover:text-white transition duration-300">
+                    អានបន្ថែម
+                </button>
+            </nav>
+        </section>
+
+        <!-- Sports Categories Section -->
+        <section>
+            <header class="mb-6">
+                <h2 class="text-2xl mb-2 pb-2 border-b-2 border-gray-300">ប្រភេទកីឡា</h2>
+            </header>
+
+            <article id="sports-categories-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Sports categories cards will be dynamically inserted here -->
+            </article>
+
+            <nav class="text-center mt-8">
+                <button id="sports-see-more" class="text-blue-600 font-semibold border-2 border-blue-600 rounded-full px-8 py-2 hover:bg-blue-600 hover:text-white transition duration-300">
+                    មើលបន្ថែម
+                </button>
+            </nav>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="custom-bg text-gray-800 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="grid md:grid-cols-5 gap-8">
                 <div>
-                    <h3 class="text-2xl font-bold text-primary mb-4">SportHub</h3>
-                    <p class="text-gray-400">Your ultimate destination for sports community and events.</p>
+                    <h1 class="text-lg font-semibold mb-4 khmer-text">បង្កើតដោយ</h1>
+                    <img src="../img/istad.jpg" alt="ISTAD Logo" class="w-20 h-8 mb-4">
                 </div>
+
                 <div>
-                    <h4 class="font-bold mb-4">Platform</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Features</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Events</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Community</a></li>
+                    <h1 class="text-lg font-semibold mb-4 khmer-text">រៀបចំដោយ</h1>
+                    <img src="../img/sportshub.png" alt="IT Program Logo" class="w-20 h-8 mb-4">
+                </div>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 khmer-text">ប្រភេទ</h3>
+                    <ul class="space-y-2 text-[#000249] ">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Football</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Basketball</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Swimming</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Tennis</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Golf</a></li>
                     </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Support</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 khmer-text">តំណភ្ជាប់រហ័ស</h3>
+                    <ul class="space-y-2 text-[#000249] ">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">All News</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Event</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">About Us</a></li>
                     </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Connect</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Twitter</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Instagram</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Facebook</a></li>
-                    </ul>
-                </div>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </nav>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 SportHub. All rights reserved.</p>
+
+            <div class="border-t border-gray-300 mt-8 pt-8 text-center">
+                <p class="text-[#000249]  text-sm">© 2025 SportHub. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Add smooth scrolling and interactive effects
-        document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
+        // Data for different sections
+        const heroData = [{
+            image: "https://api.istad.co/media/image/e52a65a6-9289-4244-8833-b0a70f435015.png",
+            title: "ISTAD Sport Community",
+            description: "ចូលរួមជាមួយសហគមន៍កីឡារបស់យើង"
+        }, {
+            image: "https://api.istad.co/media/image/a4a83a05-1a89-4994-a690-872f2f114c6e.png",
+            title: "Football Championship",
+            description: "ការប្រកួតបាល់ទាត់ថ្នាក់ជាតិ"
+        }, {
+            image: "https://api.istad.co/media/image/33c1334c-7389-4673-874f-9e3d3b760a33.png",
+            title: "Sports Excellence",
+            description: "ភាពល្អឥតខ្ចោះក្នុងកីឡា"
+        }];
+
+        const newEventsData = [{
+            image: "https://api.istad.co/media/image/a4a83a05-1a89-4994-a690-872f2f114c6e.png",
+            category: "Football",
+            title: "កម្មវិធីលេងកីឡា សាមគ្គីភាតរភាព របស់គ្រួសារ ISTAD នៃវិទ្យាស្ថាន សាយអិនស៍ អេន ថេក ណូ ឡជី អ៊ែតវ៉ានស៍ ឌីវេឡុបម៉ិន (ISTAD)",
+            date: "ISTAD - July 30, 2025",
+            description: "នាថ្ងៃសៅរ៍ ទី៥ ខែកក្កដា ឆ្នាំ២០២៥ វិទ្យាស្ថាន សាយអិនស៍ អេន ថេកណឡជី អ៊ែតវ៉ានស៍ ឌីវេឡុបម៉ិន (ISTAD) បានរៀបចំកម្មវិធីលេងកីឡា ការលេងល្បែងកម្សាន្ត សាមគ្គីភាតរភាព ដោយមានការចូលរួមពី លោកគ្រូនាយក លោកគ្រូអ្នកគ្រូ ព្រមទាំងសិស្សនិស្សិត អាហារូបករណ៍ Fullstack Web development ជំនាន់ទី ១, អាហារូបករណ៍ ព័ត៌មានវិទ្យាកម្រិតមូលដ្ឋាន(Foundation) ជំនាន់ទី ៤, អាហារូបករណ៍បច្ចេកវិទ្យាឌីជីថល (Pre-university) ជំនាន់ទី ៤ និងថ្នាក់សញ្ញាបត្របច្ចេកទេស ជាន់ខ្ពស់ (Associate)  ប្រកបដោយភាពសប្បាយរីករាយ។"
+        }, {
+            image: "https://api.istad.co/media/image/33c1334c-7389-4673-874f-9e3d3b760a33.png",
+            category: "Basketball",
+            title: "ក្រុមបាល់បោះរទេះនារីកម្ពុជាបន្តឈ្នះម្ចាស់ផ្ទះថៃឈរលេខ១ក្នុងពូល ជម្រុះប៉ារ៉ាឡាំពិក",
+            date: "ISTAD - August 1, 2025",
+            description: "នៅ​យប់​ ថ្ងៃ​ទី​១០ ខែ​មករានេះ ក្រុម​កីឡា​បាល់បោះរទេះ​នារី​ជម្រើស​ជាតិ​កម្ពុជា​បាន​យក​ឈ្នះ​ក្រុម​បាល់បោះនារីម្ចាស់​ផ្ទះ​ថៃ ដោយ​លទ្ធផល ៩-២ ដើម្បី​ឈរ​លេខ១​ក្នុងពូល B សម្រាប់​វិញ្ញាសាសា​៣​ទល់​៣ ក្នុង​ការ​​ប្រកួត​ជើង​ឯក​តំបន់អាស៊ី-អូសេអានី IWBF AOZ Championship និង​ជម្រុះ​ព្រឹត្តិការណ៍​កីឡា​ប៉ារ៉ាឡាំពិក ឆ្នាំ​២០២៤ នៅ​ប្រទេស​ថៃ។"
+        }];
+
+        const popularEventsData = [{
+            image: "../img/us.jpg",
+            title: "ប្រធានក្រុមបាល់ទាត់ផ្ការីកគ្រប់រដូវ ជម្រះមន្ទិលមហាជន លើការ ប្រកួតបាល់ទាត់មិត្ដភាព នៅកូរ៉េ។ ដើម្បីបង្កើតចំណង់មិត្តភាព​ និង...",
+            date: "Jan 25, 2025"
+        }, {
+            image: "https://api.istad.co/media/image/f814b6d4-3435-4206-a67b-1176551b9b65.png",
+            title: "ក្រុមបាល់ទះរបស់ជម្រើសជាតិឥណ្ឌូណេស៊ីទទួលបានមេដាយមាសនិង​ក្រុមបាល់ទះជម្រើសជាតិកម្ពុជា ​ទទួលបាន​​​មេដាយប្រាក់...",
+            date: "Jan 25, 2025"
+        }, {
+            image: "https://api.istad.co/media/image/a53b92db-c292-411a-8b1b-9f931d5b0a70.png",
+            title: "ការប្រកួតកីឡាតេក្វាន់ដូ WT ជើងឯកថ្នាក់ជាតិ ឆ្នាំ២០២៣ មានកីឡាករ កីឡាការិនីសរុប ១២០នាក់ចូលរួម​ប្រជែង​មេដាយ មាស...",
+            date: "Jan 25, 2025"
+        }, {
+            image: "https://api.istad.co/media/image/233a7aa9-417c-482d-9669-e58f005c215e.png",
+            title: "កីឡាករប្រដាល់៣រូបដែលធ្វើអោយពិភពលោកស្គាល់កណ្ដាប់ដៃអ៊ុយក្រែនដ៏កណាចរបស់ពួកគេទទួលបានខ្សែក្រវាត់ពិភពលោកនិង...",
+            date: "Jan 25, 2025"
+        }, {
+            image: "https://api.istad.co/media/image/b8ae8681-3720-4a6f-a42f-87d27e7f6e80.png",
+            title: "កីឡាហែលទឹកផ្តល់អត្ថប្រយោជន៍​យ៉ាងច្រើន​ដល់សុខភាព រាងកាយ និងផ្លូវចិត្ត...",
+            date: "Jan 25, 2025"
+        }, {
+            image: "https://api.istad.co/media/image/2e59e354-9418-45a1-8646-92c10b7b6294.png",
+            title: "ការប្រកួតកីឡាវាយសី វិញ្ញាសាវាយជាគូចម្រុះ (បុរស-នារី) ដែល កម្ពុជាទទួលបានមេដាយមាស កីឡា​វាយ​សី​ជួយ​បន្ថយហានិភ័យ​ពី​​...",
+            date: "Jan 25, 2025"
+        }, {
+            image: "https://cdn.sabay.com/cdn/media.sabay.com/media/Bun.Sophearum/Sport(4)/(10)/6885e1b85cd31_1753604520_medium.jpg",
+            title: "កីឡាករប្រដាល់ ៣ រូបដែលធ្វើអោយពិភពលោក ស្គាល់កណ្ដាប់ដៃអ៊ុយក្រែន",
+            date: "Jan 20, 2025"
+        }, {
+            image: "https://cdn.sabay.com/cdn/media.sabay.com/media/Bun.Sophearum/Social(39)/686de51bc8a1c_1752032520_medium.jpg",
+            title: "ប្រសិនបើ Pacquiao យកឈ្នះ Barrios នឹងបំបែកកំណត់ត្រា ជាម្ចាស់ជើងឯកខ្សែក្រវ៉ាត់ WBC វ័យចំណាស់ជាងគេ",
+            date: "Jan 18, 2025"
+        }, {
+            image: "https://cdn.sabay.com/cdn/media.sabay.com/media/Bun.Sophearum/Social(39)/686b71b14c08e_1751871900_medium.jpg",
+            title: "ពិធីប្រណាំងទូកនៅឥណ្ឌូនេស៊ី កំពុងទទួលការចាប់អារម្មណ៍ដោយសារក្មេងប្រុសម្នាក់!",
+            date: "Jan 15, 2025"
+        }, {
+            image: "https://cdn.sabay.com/cdn/media.sabay.com/media/Chin-Sopheak/CS-(11)/68628cda3c80a_1751289000_medium.jpg",
+            title: "កម្ពុជា​ ឈរនៅលេខរៀងលើគេបង្អស់​ ដោយដណ្ដើមមេដាយ​ ៩០គ្រឿង ក្នុងព្រឹត្ដិការណ៍ប្រកួត ITF​ ឆ្នាំនេះ",
+            date: "Jan 12, 2025"
+        }];
+
+        const sportsCategoriesData = [{
+            image: "https://api.istad.co/media/image/845c4b18-8120-48cb-a83a-18f6ad72c8f8.png",
+            title: "កីឡាជិះ​ស្គី​ទឹកកក",
+            description: "កីឡាជិះស្គីទឹកកក គឺជាប្រភេទ កីឡាដែល ប្រព្រឹត្តិទៅនៅរដូវរងា..."
+        }, {
+            image: "https://api.istad.co/media/image/a01048a1-c068-450f-a312-63b786c53e0d.png",
+            title: "កីឡាវាយកូនហ្កោល",
+            description: "កីឡាវាយកូនហ្គោលគឺជាកីឡាដ៏មានប្រជាប្រិយភាពមួយដែលលេងនៅលើវាលស្មៅ..."
+        }, {
+            image: "https://api.istad.co/media/image/7a26241a-a384-482a-a9a7-195b058af56b.png",
+            title: "កីឡាហែលទឹក",
+            description: "កីឡាហែលទឹកគឺជាប្រភេទកីឡាមួយដែលមានប្រជាប្រិយភាពជាសកល..."
+        }, {
+            image: "https://api.istad.co/media/image/8b383bf9-53e3-4700-9852-678bbd252f85.png",
+            title: "កីឡាបាល់ទាត់",
+            description: "កីឡាបាល់ទាត់គឺជាកីឡាប្រកួតគ្នារវាងក្រុម ២ ដែលមាន អ្នកលេងនីមួយៗ ១១ នាក់..."
+        }, {
+            image: "https://api.istad.co/media/image/57a7f4d2-23c2-4119-a16f-777b7c25eb44.png",
+            title: "កីឡារត់ប្រណាំង",
+            description: "កីឡារត់ប្រណាំងគឺជាប្រភេទ កីឡាអត្តពល កម្មដ៏ល្បីល្បាញ់..."
+        }, {
+            image: "https://api.istad.co/media/image/8a1b18d8-e74f-4d40-9a33-912f22b251f9.png",
+            title: "កីឡាប្រដាល់",
+            description: "កីឡាប្រដាល់គឺជាកីឡាប្រយុទ្ធដ៏ចាស់បុរាណមួយដែលមានប្រជាប្រិយភាពនៅ..."
+        }, {
+            image: "https://api.istad.co/media/image/e71b269b-3254-436f-b565-5c129e9d1a1b.png",
+            title: "កីឡាបាល់ទះ",
+            description: "កីឡាបាល់ទះគឺជាកីឡាក្រុមមួយប្រភេទដែលលេងដោយក្រុមពីរ មានសមាជិក..."
+        }, {
+            image: "https://api.istad.co/media/image/0948924b-352b-472b-8a30-f651c6b541ef.png",
+            title: "កីឡាបាល់បោះ",
+            description: "បាល់បោះគឺជាកីឡាក្រុមដែល​មានអ្នកលេង ៥នាក់​ក្នុងមួយ​ក្រុម។គោលបំណង..."
+        }, {
+            image: "https://khmer.rvasia.org/sites/default/files/styles/max_width_770px/public/2024-02/btmaanjaati_87_0.jpg?itok=hv8qi0FR",
+            title: "កីឡាតេនីស",
+            description: "ណាអូមី អូសាកា កំពូលកីឡាការិនីតេនីស អាជីបលេខមួយនៅលើពិភពលោក"
+        }, {
+            image: "https://image.thmeythmey.com/pictures/2023/05/20/20520231405front.jpg",
+            title: "កីឡាអត្តពលិកពិការ",
+            description: "អត្តពលិកកម្ពុជាមានពិការភាព ២៣៦នាក់ នឹងចូលរួមប្រកួតក្នុងព្រឹត្តិការណ៍អាស៊ានប៉ារ៉ា"
+        }, {
+            image: "https://cdn.sabay.com/cdn/media.sabay.com/media/sabay-news/Sport-News/E-Sport-For-Sea-Games/62124cda3b6a8_1645366440_medium.jpg",
+            title: "កីឡាអេឡិចត្រូនិក",
+            description: "BURN X PLASH ​ក្លាយ​ជា​ជើង​ឯក​ឆ្នាំ​២០២២នៅលើ​​វិញ្ញាសា Mobile Legends "
+        }, {
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9VhRAuc96AziNe0VGGHgmjbQe5gPodWGOH31SoFxd4mWvpAkmkJo8xcGPkYUPXf2JRuuOItPlOMS3ZSbsNHVjiZnMw4OQjaTeuCRjdw",
+            title: "កីឡាគុនដាវ",
+            description: "កីឡាចាក់សាប គឺជាកីឡានៃការប្រយុទ្ធដោយប្រើដាវ។"
+        }];
+
+        // Hero Section Logic
+        let currentHeroIndex = 0;
+        let heroInterval;
+
+        function initHero() {
+            const container = document.getElementById('hero-container');
+            const indicators = document.getElementById('hero-indicators');
+
+            // Create hero slides
+            heroData.forEach((slide, index) => {
+                const slideElement = document.createElement('div');
+                slideElement.className = `hero-slide absolute inset-0 w-full h-full ${index === 0 ? 'opacity-100' : 'opacity-0'}`;
+                slideElement.innerHTML = `
+                    <img src="${slide.image}" alt="${slide.title}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                        <div class="text-center text-white px-4">
+                            <h1 class="text-4xl md:text-6xl font-bold mb-4">${slide.title}</h1>
+                            <p class="text-xl md:text-2xl">${slide.description}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(slideElement);
+
+                // Create indicator
+                const indicator = document.createElement('button');
+                indicator.className = `w-3 h-3 rounded-full transition-all ${index === 0 ? 'bg-white' : 'bg-white/50'}`;
+                indicator.addEventListener('click', () => showHeroSlide(index));
+                indicators.appendChild(indicator);
             });
 
-            // Add scroll effect to navigation
-            window.addEventListener('scroll', function() {
-                const nav = document.querySelector('nav');
-                if (window.scrollY > 100) {
-                    nav.classList.add('backdrop-blur-md', 'bg-white/95');
-                } else {
-                    nav.classList.remove('backdrop-blur-md', 'bg-white/95');
-                }
+            startHeroRotation();
+        }
+
+        function showHeroSlide(index) {
+            const slides = document.querySelectorAll('.hero-slide');
+            const indicators = document.querySelectorAll('#hero-indicators button');
+
+            slides[currentHeroIndex].classList.remove('opacity-100');
+            slides[currentHeroIndex].classList.add('opacity-0');
+            indicators[currentHeroIndex].classList.remove('bg-white');
+            indicators[currentHeroIndex].classList.add('bg-white/50');
+
+            currentHeroIndex = index;
+
+            slides[currentHeroIndex].classList.remove('opacity-0');
+            slides[currentHeroIndex].classList.add('opacity-100');
+            indicators[currentHeroIndex].classList.remove('bg-white/50');
+            indicators[currentHeroIndex].classList.add('bg-white');
+        }
+
+        function nextHeroSlide() {
+            const nextIndex = (currentHeroIndex + 1) % heroData.length;
+            showHeroSlide(nextIndex);
+        }
+
+        function prevHeroSlide() {
+            const prevIndex = (currentHeroIndex - 1 + heroData.length) % heroData.length;
+            showHeroSlide(prevIndex);
+        }
+
+        function startHeroRotation() {
+            heroInterval = setInterval(nextHeroSlide, 8000);
+        }
+
+        function stopHeroRotation() {
+            clearInterval(heroInterval);
+        }
+
+        // New Events Section Logic
+        let currentNewEventIndex = 0;
+        let newEventInterval;
+
+        function initNewEvents() {
+            const container = document.getElementById('new-events-container');
+
+            newEventsData.forEach((event, index) => {
+                const eventElement = document.createElement('div');
+                eventElement.className = `card-container ${index === 0 ? 'block' : 'hidden'}`;
+                eventElement.innerHTML = `
+                    <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md flex flex-col md:flex-row gap-6 items-center min-h-[400px] md:min-h-[350px]">
+                        <div class="md:w-2/5 w-full">
+                            <img src="${event.image}" alt="${event.title}" class="rounded-lg w-full h-full object-cover min-h-[200px] md:min-h-[300px]">
+                        </div>
+                        <div class="md:w-3/5 w-full flex flex-col justify-center">
+                            <h3 class="text-xl font-bold lg:text-2xl my-2 leading-tight" style="color: #000249;">${event.title}</h3>
+                            <p class="text-gray-500 text-sm mb-4">${event.date}</p>
+                            <p class="text-gray-600 leading-relaxed text-justify" style="color: #000249;">${event.description}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(eventElement);
             });
+
+            startNewEventRotation();
+        }
+
+        function showNewEvent(index) {
+            const events = document.querySelectorAll('#new-events-container .card-container');
+
+            events[currentNewEventIndex].classList.add('hidden');
+            events[currentNewEventIndex].classList.remove('block');
+
+            currentNewEventIndex = index;
+
+            events[currentNewEventIndex].classList.remove('hidden');
+            events[currentNewEventIndex].classList.add('block');
+        }
+
+        function nextNewEvent() {
+            const nextIndex = (currentNewEventIndex + 1) % newEventsData.length;
+            showNewEvent(nextIndex);
+        }
+
+        function prevNewEvent() {
+            const prevIndex = (currentNewEventIndex - 1 + newEventsData.length) % newEventsData.length;
+            showNewEvent(prevIndex);
+        }
+
+        function startNewEventRotation() {
+            newEventInterval = setInterval(nextNewEvent, 10000);
+        }
+
+        function stopNewEventRotation() {
+            clearInterval(newEventInterval);
+        }
+
+        // Popular Events Section Logic
+        let popularEventsVisible = 6;
+
+        function initPopularEvents() {
+            renderPopularEvents();
+        }
+
+        function renderPopularEvents() {
+            const container = document.getElementById('popular-events-grid');
+            const seeMoreBtn = document.getElementById('popular-see-more');
+
+            container.innerHTML = '';
+
+            for (let i = 0; i < Math.min(popularEventsVisible, popularEventsData.length); i++) {
+                const event = popularEventsData[i];
+                const eventElement = document.createElement('article');
+                eventElement.className = 'bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300';
+                eventElement.innerHTML = `
+                    <img src="${event.image}" class="w-full h-48 object-cover" alt="${event.title}">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2 leading-tight" style="color: #000249;">${event.title}</h3>
+                        <time class="text-gray-400 text-xs">${event.date}</time>
+                    </div>
+                `;
+                container.appendChild(eventElement);
+            }
+
+            // Hide/show "See More" button
+            if (popularEventsVisible >= popularEventsData.length) {
+                seeMoreBtn.style.display = 'none';
+            } else {
+                seeMoreBtn.style.display = 'inline-block';
+            }
+        }
+
+        function showMorePopularEvents() {
+            popularEventsVisible += 4;
+            renderPopularEvents();
+        }
+
+        // Sports Categories Section Logic
+        let sportsCategoriesVisible = 6;
+
+        function initSportsCategories() {
+            renderSportsCategories();
+        }
+
+        function renderSportsCategories() {
+            const container = document.getElementById('sports-categories-grid');
+            const seeMoreBtn = document.getElementById('sports-see-more');
+
+            container.innerHTML = '';
+
+            for (let i = 0; i < Math.min(sportsCategoriesVisible, sportsCategoriesData.length); i++) {
+                const sport = sportsCategoriesData[i];
+                const sportElement = document.createElement('article');
+                sportElement.className = 'bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300';
+                sportElement.innerHTML = `
+                    <img src="${sport.image}" class="w-full h-48 object-cover" alt="${sport.title}">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2 leading-tight" style="color: #000249;">${sport.title}</h3>
+                        <p class="text-sm" style="color: #000249;">${sport.description}</p>
+                    </div>
+                `;
+                container.appendChild(sportElement);
+            }
+
+            // Hide/show "See More" button
+            if (sportsCategoriesVisible >= sportsCategoriesData.length) {
+                seeMoreBtn.style.display = 'none';
+            } else {
+                seeMoreBtn.style.display = 'inline-block';
+            }
+        }
+
+        function showMoreSportsCategories() {
+            sportsCategoriesVisible += 4;
+            renderSportsCategories();
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all sections
+            initHero();
+            initNewEvents();
+            initPopularEvents();
+            initSportsCategories();
+
+            // Hero navigation
+            document.getElementById('hero-prev').addEventListener('click', () => {
+                stopHeroRotation();
+                prevHeroSlide();
+                startHeroRotation();
+            });
+
+            document.getElementById('hero-next').addEventListener('click', () => {
+                stopHeroRotation();
+                nextHeroSlide();
+                startHeroRotation();
+            });
+
+            // New events navigation
+            document.getElementById('new-events-prev').addEventListener('click', () => {
+                stopNewEventRotation();
+                prevNewEvent();
+                startNewEventRotation();
+            });
+
+            document.getElementById('new-events-next').addEventListener('click', () => {
+                stopNewEventRotation();
+                nextNewEvent();
+                startNewEventRotation();
+            });
+
+            // See more buttons
+            document.getElementById('popular-see-more').addEventListener('click', showMorePopularEvents);
+            document.getElementById('sports-see-more').addEventListener('click', showMoreSportsCategories);
         });
     </script>
 </body>

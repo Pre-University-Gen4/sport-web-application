@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Pagination Component</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Use Inter font as the base font */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-200 flex items-center justify-center min-h-screen p-4">
+
+    <!-- Pagination Component Container -->
+    <nav id="pagination-component" class="w-full max-w-4xl bg-[#F8F6F0] rounded-full flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 px-7 py-3 shadow-sm">
+
+        <!-- Left Side: Items per page -->
+        <div class="pagination-show-per-page flex items-center gap-2.5 text-sm text-slate-800">
+            <span>Show</span>
+            <span id="items-per-page-display" class="bg-slate-800 text-white text-sm font-medium px-4 py-1.5 rounded-full">12</span>
+            <span>per page</span>
+        </div>
+
+        <!-- Center: Pagination Controls -->
+        <div id="pagination-controls" class="pagination-controls flex items-center gap-3 sm:gap-5">
+            <!-- Previous Arrow will be inserted here by JS -->
+            <!-- Page Numbers will be inserted here by JS -->
+            <!-- Next Arrow will be inserted here by JS -->
+        </div>
+
+        <!-- Right Side: Info -->
+        <div id="pagination-info" class="pagination-info text-sm text-slate-800 font-medium whitespace-nowrap">
+            <!-- Info text will be inserted here by JS -->
+        </div>
+    </nav>
+
+    <script>
+        // --- CONFIGURATION ---
+        let currentPage = 1;
+        const itemsPerPage = 12;
+        const totalItems = 144;
+        // Maximum number of page links to show (excluding arrows and ellipsis)
+        const maxVisiblePages = 5; 
+
+        // --- DOM ELEMENTS ---
+        const paginationControls = document.getElementById('pagination-controls');
+        const paginationInfo = document.getElementById('pagination-info');
+        const itemsPerPageDisplay = document.getElementById('items-per-page-display');
+
+        /**
+         * Main function to render the entire pagination component based on the current state.
+         */
+        function renderPagination() {
+            // Clear previous controls
+            paginationControls.innerHTML = '';
+            
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+            // 1. Update "Showing X-Y of Z" text
+            const startItem = (currentPage - 1) * itemsPerPage + 1;
+            const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+            paginationInfo.textContent = `Showing ${startItem}-${endItem} of ${totalItems} events`;
+            itemsPerPageDisplay.textContent = itemsPerPage;
+
+            // 2. Create and add the 'Previous' arrow
+            const prevArrow = createArrowLink('prev', currentPage > 1);
+            paginationControls.appendChild(prevArrow);
+
+            // 3. Create and add the page number links
+            const pageList = document.createElement('ul');
+            pageList.className = 'flex items-center gap-3 sm:gap-5 list-none m-0 p-0';
+            
+            const pageNumbers = getPageNumbers(totalPages, currentPage, maxVisiblePages);
+
+            pageNumbers.forEach(page => {
+                const li = document.createElement('li');
+                if (page === '...') {
+                    const ellipsis = createEllipsis();
+                    li.appendChild(ellipsis);
+                } else {
+                    const pageLink = createPageLink(page, page === currentPage);
+                    li.appendChild(pageLink);
+                }
+                pageList.appendChild(li);
+            });
+            paginationControls.appendChild(pageList);
+
+
+            // 4. Create and add the 'Next' arrow
+            const nextArrow = createArrowLink('next', currentPage < totalPages);
+            paginationControls.appendChild(nextArrow);
+        }
+
+        /**
+         * Creates an arrow link (previous or next).
+         * @param {'prev' | 'next'} type - The type of arrow.
+         * @param {boolean} isEnabled - Whether the arrow should be clickable.
+         * @returns {HTMLAnchorElement} The created arrow element.
+         */
+        function createArrowLink(type, isEnabled) {
+            const link = document.createElement('a');
+            link.href = '#';
+            link.innerHTML = type === 'prev' ? '&leftarrow;' : '&rightarrow;';
+            link.dataset.page = type === 'prev' ? currentPage - 1 : currentPage + 1;
+            
+            let baseClasses = 'text-slate-800 font-bold text-xl';
+            if (isEnabled) {
+                link.className = `${baseClasses} hover:text-blue-600`;
+            } else {
+                link.className = `${baseClasses} text-gray-300 cursor-not-allowed`;
+                link.setAttribute('aria-disabled', 'true');
+                link.tabIndex = -1;
+            }
+            return link;
+        }
+
+        /**
+         * Creates a page number link.
+         * @param {number} pageNumber - The page number for the link.
+         * @param {boolean} isActive - Whether this is the current page.
+         * @returns {HTMLAnchorElement} The created page link element.
+         */
+        function createPageLink(pageNumber, isActive) {
+            const link = document.createElement('a');
+            link.href = '#';
+            link.textContent = pageNumber;
+            link.dataset.page = pageNumber;
+            
+            let baseClasses = 'flex items-center justify-center text-sm font-medium rounded-full transition-colors duration-200';
+            if (isActive) {
+                link.className = `${baseClasses} w-9 h-9 bg-slate-800 text-white`;
+                link.setAttribute('aria-current', 'page');
+            } else {
+                link.className = `${baseClasses} w-9 h-9 text-slate-800 hover:bg-gray-200`;
+            }
+            return link;
+        }
+
+        /**
+         * Creates an ellipsis (...) element.
+         * @returns {HTMLSpanElement} The created ellipsis span.
+         */
+        function createEllipsis() {
+            const ellipsis = document.createElement('span');
+            ellipsis.textContent = '...';
+            ellipsis.className = 'text-slate-800 font-medium';
+            return ellipsis;
+        }
+
+        /**
+         * Calculates which page numbers to display, including ellipses.
+         * This logic ensures the first, last, and current pages are visible,
+         * with surrounding pages and ellipses to bridge the gaps.
+         * @param {number} totalPages - Total number of pages.
+         * @param {number} currentPage - The currently active page.
+         * @param {number} maxVisible - The max number of page links to show.
+         * @returns {Array<number|string>} An array of page numbers and '...' strings.
+         */
+        function getPageNumbers(totalPages, currentPage, maxVisible) {
+            if (totalPages <= maxVisible) {
+                return Array.from({ length: totalPages }, (_, i) => i + 1);
+            }
+
+            let pages = [];
+            const half = Math.floor(maxVisible / 2);
+            let start = Math.max(currentPage - half, 1);
+            let end = Math.min(start + maxVisible - 1, totalPages);
+
+            if (end - start < maxVisible - 1) {
+                start = Math.max(end - maxVisible + 1, 1);
+            }
+
+            if (start > 1) {
+                pages.push(1);
+                if (start > 2) {
+                    pages.push('...');
+                }
+            }
+
+            for (let i = start; i <= end; i++) {
+                pages.push(i);
+            }
+
+            if (end < totalPages) {
+                if (end < totalPages - 1) {
+                    pages.push('...');
+                }
+                pages.push(totalPages);
+            }
+            
+            return pages;
+        }
+
+
+        // --- EVENT HANDLING ---
+        paginationControls.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent page jump from '#' href
+            
+            const target = e.target.closest('a');
+
+            if (!target || target.hasAttribute('aria-disabled')) {
+                return; // Exit if not a clickable link
+            }
+
+            const newPage = parseInt(target.dataset.page, 10);
+            if (newPage && newPage !== currentPage) {
+                currentPage = newPage;
+                renderPagination();
+            }
+        });
+
+        // --- INITIAL RENDER ---
+        document.addEventListener('DOMContentLoaded', renderPagination);
+    </script>
+</body>
+</html>

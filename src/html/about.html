@@ -24,63 +24,68 @@
             }
         }
     </script>
+    <style>
+        .custom-bg {
+            background-color: #FAF9F0;
+        }
+        
+        .custom-text {
+            color: #374151;
+        }
+        
+        .post-button {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        }
+        
+        .khmer-text {
+            font-family: 'Khmer OS', sans-serif;
+        }
+    </style>
 </head>
 
 <body class="bg-white">
-
-
-    <!-- Hero Section with Olympic Rings -->
-    <section class="relative bg-gradient-to-b from-sky-200 to-sky-100 overflow-hidden">
-        <!-- Colorful silhouette background -->
-        <div class="absolute bottom-0 left-0 right-0 h-32">
-            <svg viewBox="0 0 1200 200" class="w-full h-full">
-                <!-- Colorful building silhouettes -->
-                <path d="M0,200 L0,100 L50,80 L100,90 L150,70 L200,85 L250,60 L300,75 L350,55 L400,70 L450,50 L500,65 L550,45 L600,60 L650,40 L700,55 L750,35 L800,50 L850,30 L900,45 L950,25 L1000,40 L1050,20 L1100,35 L1150,15 L1200,30 L1200,200 Z" 
-                      fill="url(#cityGradient)"/>
-                <defs>
-                    <linearGradient id="cityGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#f97316"/>
-                        <stop offset="25%" style="stop-color:#eab308"/>
-                        <stop offset="50%" style="stop-color:#22c55e"/>
-                        <stop offset="75%" style="stop-color:#3b82f6"/>
-                        <stop offset="100%" style="stop-color:#8b5cf6"/>
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
-
-        <div class="container mx-auto px-4 py-16 relative z-10">
-            <div class="text-center">
-                <!-- SportHub Logo -->
-                <div class="flex justify-center mb-8">
-                    <div class="bg-gradient-to-r from-blue-500 via-green-500 to-orange-500 rounded-full p-4">
-                        <div class="text-white text-4xl font-bold">SPORT HUB</div>
-                    </div>
+    <!-- Header -->
+    <header class="custom-bg shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="../img/logo.png" alt="Logo" class="h-12">
                 </div>
 
-                <!-- Khmer text -->
-                <h1 class="text-2xl font-bold text-gray-800 mb-4">ការណែនាំអំពីកីឡានៅក្នុងប្រទេស SPORT</h1>
-                <p class="text-gray-600 max-w-4xl mx-auto mb-8 leading-relaxed">
-                    កីឡាជាផ្នែកមួយសំខាន់នៃជីវិតរបស់យើង។ វាជួយបង្កើនសុខភាពរាងកាយ និងផ្នែកចិត្ត។ នៅក្នុងប្រទេសកម្ពុជា យើងមានកីឡាជាច្រើនប្រភេទដែលមានប្រជាប្រិយភាព ដូចជា កីឡាបាល់ទាត់ បាល់បោះ ហែលទឹក និងកីឡាប្រពៃណី។
-                </p>
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="../../index.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Home</a>
+                    <a href="../html/event.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Event</a>
+                    <a href="../html/about.html" class="custom-text hover:text-blue-600 transition-colors font-medium">About</a>
+                </nav>
 
-                <!-- Olympic Rings -->
-                <div class="flex justify-center mb-8">
-                    <svg width="200" height="100" viewBox="0 0 200 100">
-                        <!-- Blue ring -->
-                        <circle cx="40" cy="40" r="18" fill="none" stroke="#0066cc" stroke-width="4"/>
-                        <!-- Yellow ring -->
-                        <circle cx="80" cy="40" r="18" fill="none" stroke="#ffcc00" stroke-width="4"/>
-                        <!-- Black ring -->
-                        <circle cx="120" cy="40" r="18" fill="none" stroke="#000000" stroke-width="4"/>
-                        <!-- Green ring -->
-                        <circle cx="160" cy="40" r="18" fill="none" stroke="#009900" stroke-width="4"/>
-                        <!-- Red ring -->
-                        <circle cx="100" cy="60" r="18" fill="none" stroke="#cc0000" stroke-width="4"/>
-                    </svg>
+                <!-- Right Side Icons and Button -->
+                <div class="flex items-center space-x-4">
+                    <!-- Heart/Favorite Icon -->
+                    <button id="favoriteBtn" class="p-2 text-[#000249]  hover:text-red-500 transition-colors relative">
+                        <i class="fas fa-heart text-xl"></i>
+                        <span id="favoriteCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+
+                    <!-- Account Icon -->
+                    <button id="accountBtn" class="p-2 text-[#000249]  hover:text-blue-600 transition-colors">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </button>
+
+                    <!-- Post Button -->
+                    <button id="postEventBtn" class="post-button text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+                        <i class="fas fa-plus"></i>
+                        <span>Post</span>
+                    </button>
                 </div>
             </div>
         </div>
+    </header>
+
+    <!-- Hero Section with Full Viewport Image -->
+    <section class="relative w-full h-screen overflow-hidden">
+        <img src="../img/about.png" alt="Sports Arena Background" class="w-full h-full object-cover" id="heroImage" />
     </section>
 
     <!-- Stadium Section -->
@@ -88,43 +93,31 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <div class="bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
-                        <div class="h-64 bg-gradient-to-b from-gray-700 to-gray-900 relative">
-                            <!-- Stadium illustration -->
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-48 h-24 border-4 border-green-400 rounded-full relative overflow-hidden">
-                                    <div class="absolute inset-2 bg-green-500 rounded-full"></div>
-                                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 border-2 border-white rounded-full"></div>
-                                </div>
-                            </div>
-                            <!-- Stadium lights -->
-                            <div class="absolute top-4 left-8 w-2 h-2 bg-yellow-300 rounded-full animate-pulse"></div>
-                            <div class="absolute top-4 right-8 w-2 h-2 bg-yellow-300 rounded-full animate-pulse"></div>
-                            <div class="absolute top-8 left-16 w-2 h-2 bg-yellow-300 rounded-full animate-pulse"></div>
-                            <div class="absolute top-8 right-16 w-2 h-2 bg-yellow-300 rounded-full animate-pulse"></div>
-                        </div>
-                    </div>
+                    <img src="../img/hmm.jpg" alt="Sports Stadium" class="w-full h-64 object-cover rounded-2xl shadow-2xl" id="stadiumImage" />
                 </div>
 
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">អត្ថប្រយោជន៍របស់កីឡា</h2>
-                    <ul class="space-y-4">
-                        <li class="flex items-start space-x-3">
-                            <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
-                            <span class="text-gray-600">កីឡាជួយបង្កើនកម្លាំងរាងកាយ និងភាពបត់បែនរបស់សាច់ដុំ</span>
-                        </li>
-                        <li class="flex items-start space-x-3">
-                            <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                            <span class="text-gray-600">ជួយកាត់បន្ថយស្ត្រេស និងបង្កើនអារម្មណ៍ល្អ</span>
-                        </li>
-                        <li class="flex items-start space-x-3">
-                            <div class="w-2 h-2 bg-orange-500 rounded-full mt-2"></div>
-                            <span class="text-gray-600">បង្កើនការទំនាក់ទំនងសង្គម និងការធ្វើការជាក្រុម</span>
-                        </li>
-                        <li class="flex items-start space-x-3">
-                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
-                            <span class="text-gray-600">ជួយក្នុងការអភិវឌ្ឍន៍វិន័យ និងការរៀនសូត្រ</span>
-                        </li>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">ការផ្សព្វផ្សាយកីឡាក្នុងស្រុក</h2>
+                    <li class="flex items-start space-x-3">
+                        <span class="w-2 h-2 bg-[#000249]  rounded-full mt-2"></span>
+                        <span class="text-[#000249] ">ជំរុញការយល់ដឹងអំពីកីឡាក្នុងស្រុកនិងក្លឹបកីឡាក្នុងតំបន់</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <span class="w-2 h-2 bg-[#000249]  rounded-full mt-2"></span>
+                        <span class="text-[#000249] ">ផ្តល់វេទិកាដល់ក្រុមកីឡាថ្នាក់មូលដ្ឋានដើម្បីបង្ហាញខ្លួន</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <span class="w-2 h-2 bg-[#000249]  rounded-full mt-2"></span>
+                        <span class="text-[#000249] ">គាំទ្រដល់កីឡាករកម្ពុជា និងផ្សព្វផ្សាយសមិទ្ធផលរបស់ពួកគេ</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <span class="w-2 h-2 bg-[#000249]  rounded-full mt-2"></span>
+                        <span class="text-[#000249] ">មានមុខងារសម្រាប់បង្កើតប្រូហ្វាលផ្ទាល់ខ្លួន</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <span class="w-2 h-2 bg-[#000249]  rounded-full mt-2"></span>
+                        <span class="text-[#000249] ">វេទិកាពិភាក្សាតាមប្រភេទកីឡា</span>
+                    </li>
                     </ul>
                 </div>
             </div>
@@ -138,45 +131,37 @@
                 <!-- Service 1 -->
                 <div class="bg-white rounded-xl p-6 shadow-lg text-center">
                     <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
+                        <i class="fas fa-dumbbell text-purple-600 text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">កម្មវិធីហ្វឹកហាត់</h3>
-                    <p class="text-gray-600 text-sm">កម្មវិធីហ្វឹកហាត់ជាមួយគ្រូបង្វឹកមានបទពិសោធន៍ ដើម្បីអភិវឌ្ឍន៍ជំនាញកីឡារបស់អ្នក</p>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">ឧត្តមភាព</h3>
+                    <p class="text-[#000249]  text-sm">យើងខិតខំដើម្បីភាពល្អប្រសើរនៅក្នុងអ្វីគ្រប់យ៉ាងដែលយើងធ្វើចាប់ពីអង្គការព្រឹត្តិការណ៍រហូតដល់ការគាំទ្រពីសហគមន៍។</p>
                 </div>
 
                 <!-- Service 2 -->
                 <div class="bg-white rounded-xl p-6 shadow-lg text-center">
                     <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-pink-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
-                        </svg>
+                        <i class="fas fa-trophy text-pink-600 text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">ការប្រកួតប្រជែង</h3>
-                    <p class="text-gray-600 text-sm">ការរៀបចំការប្រកួតប្រជែងកីឡាជាប្រចាំ ដើម្បីលើកកម្ពស់ការចូលរួម</p>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">សហគមន៍</h3>
+                    <p class="text-[#000249]  text-sm">ការកសាងសហគមន៍រស់រវើកនៃអ្នកចូលចិត្តកីឡាដែលចែករំលែកចំណង់ចំណូលចិត្តចំណេះដឹងនិងភាពរំភើប</p>
                 </div>
 
                 <!-- Service 3 -->
                 <div class="bg-white rounded-xl p-6 shadow-lg text-center">
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
-                        </svg>
+                        <i class="fas fa-running text-blue-600 text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">បរិក្ខារកីឡា</h3>
-                    <p class="text-gray-600 text-sm">ផ្គត់ផ្គង់បរិក្ខារកីឡាគុណភាពខ្ពស់ សម្រាប់ការអនុវត្តន៍ និងការប្រកួត</p>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">មាតិកាគុណភាព</h3>
+                    <p class="text-[#000249]  text-sm">ការចែកចាយមាតិកាកីឡាត្រឹមត្រូវទាន់ពេលវេលានិងចូលរួមពីប្រភពដែលអាចទុកចិត្តបាននិងអ្នកវិភាគជំនាញ។</p>
                 </div>
 
                 <!-- Service 4 -->
                 <div class="bg-white rounded-xl p-6 shadow-lg text-center">
                     <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
-                        </svg>
+                        <i class="fas fa-calendar-alt text-green-600 text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">កាលវិភាគ</h3>
-                    <p class="text-gray-600 text-sm">កាលវិភាគហ្វឹកហាត់ និងការប្រកួតប្រជែងត្រូវបានរៀបចំយ៉ាងល្អិតល្អន់</p>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">គ្របដណ្តប់សកល</h3>
+                    <p class="text-[#000249]  text-sm">គ្របដណ្តប់កីឡាពីជុំវិញពិភពលោកដោយនាំការប្រកួតប្រជែងអន្តរជាតិទៅចុងម្រាមដៃរបស់អ្នក។</p>
                 </div>
             </div>
         </div>
@@ -185,171 +170,226 @@
     <!-- Our Members Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
+            <!-- Meet Our Mentors -->
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Meet Our Mentors</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">
-                    សមាជិកដ៏មានទេពកោសល្យរបស់យើង ដែលបានចូលរួមចំណែកក្នុងការអភិវឌ្ឍន៍កីឡានៅកម្ពុជា
+                <p class="text-[#000249]  max-w-2xl mx-auto">
+                    អ្នកណែនាំរបស់យើងគឺជាក្រុមអ្នកដឹកនាំគម្រោង និងអ្នកជំនាញដ៏អស្ចារ្យ ហើយពួកគាត់ម្នាក់ៗបាននាំយកចំណេះដឹង និងបទពិសោធន៍ជាច្រើនមកសម្រាប់ក្រុមយើង។
                 </p>
             </div>
 
-            <!-- Featured Mentors -->
-            <div id="featuredMentors" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 justify-items-center">
+            <!-- Featured Mentors - 2 columns with same size as team cards -->
+            <div id="featuredMentors" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-16">
                 <!-- Featured mentors will be populated by JavaScript -->
             </div>
 
-            <!-- Team Members Grid -->
-            <div class="text-center mb-8">
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">Meet Our Members</h3>
-                <p class="text-gray-600">គ្រូបង្វឹក និងអ្នកជំនាញផ្សេងៗក្នុងវិស័យកីឡា</p>
+            <!-- Meet Our Team -->
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Meet Our Team</h3>
+                <p class="text-[#000249] ">ក្រុមយើងជាបណ្តុំអ្នកជំនាញចម្រុះពីច្រើនវិស័យ ដែលរួបរួមគ្នាក្រោមគោលដៅរួមតែមួយ។</p>
             </div>
 
-            <!-- First row: 3 cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 justify-items-center">
-                <div id="membersRow1" class="contents">
-                    <!-- First 3 members will be populated here -->
+            <!-- Team Members Grid - 3 on top, 4 below -->
+            <div class="max-w-6xl mx-auto">
+                <!-- First row: 3 cards centered -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto">
+                    <div id="membersRow1" class="contents">
+                        <!-- First 3 members will be populated here -->
+                    </div>
                 </div>
-            </div>
 
-            <!-- Second row: 4 cards -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center">
-                <div id="membersRow2" class="contents">
-                    <!-- Last 4 members will be populated here -->
+                <!-- Second row: 4 cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div id="membersRow2" class="contents">
+                        <!-- Last 4 members will be populated here -->
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer class="custom-bg text-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-5 gap-8">
+                <div>
+                    <h1 class="text-lg font-semibold mb-4 khmer-text">Organized By</h1>
+                    <img src="../img/istad.png" alt="ISTAD Logo" class="w-20 h-15 mb-4">
+                </div>
 
+                <div>
+                    <h1 class="text-lg font-semibold mb-4 khmer-text">Prepared By</h1>
+                    <img src="../img/logo.png" alt="sportshub Logo" class="w-21 h-20 mb-4">
+                </div>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 khmer-text">Category</h3>
+                    <ul class="space-y-2 text-[#000249] ">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Football</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Basketball</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Swimming</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Tennis</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Golf</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 khmer-text">Quick Links</h3>
+                    <ul class="space-y-2 text-[#000249] ">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">All News</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Event</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">About Us</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="border-t border-gray-300 mt-8 pt-8 text-center">
+                <p class="text-[#000249]  text-sm">© 2025 SportHub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Featured mentors data (simplified structure)
+        // Featured mentors data with only Facebook and GitHub
         let featuredMentors = [{
-            name: "Lim Chanratana",
-            role: "Head Coach",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+            name: "Ms. Eung Lyzhia",
+            role: "Instructor",
+            image: "",
+            description: "Every single step, challenges make him stronger...",
             socialLinks: [{
                 platform: "facebook",
                 url: "https://facebook.com/limchanratana",
                 icon: "fab fa-facebook-f"
             }, {
-                platform: "twitter",
-                url: "https://twitter.com/limchanratana",
-                icon: "fab fa-twitter"
-            }, {
-                platform: "telegram",
-                url: "https://t.me/limchanratana",
-                icon: "fab fa-telegram-plane"
+                platform: "github",
+                url: "https://github.com/limchanratana",
+                icon: "fab fa-github"
             }]
         }, {
-            name: "Sok Pisey",
-            role: "Swimming Instructor",
-            image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+            name: "Mr. Kim Chansokpheng",
+            role: "Instructor",
+            image: "",
+            description: "If you want the best, you've gotta put up...",
             socialLinks: [{
                 platform: "facebook",
                 url: "https://facebook.com/sokpisey",
                 icon: "fab fa-facebook-f"
             }, {
-                platform: "instagram",
-                url: "https://instagram.com/sokpisey",
-                icon: "fab fa-instagram"
-            }, {
-                platform: "telegram",
-                url: "https://t.me/sokpisey",
-                icon: "fab fa-telegram-plane"
+                platform: "github",
+                url: "https://github.com/sokpisey",
+                icon: "fab fa-github"
             }]
         }];
 
-        // Team members data - only 7 members (3 top row + 4 bottom row)
+        // Team members data with only Facebook and GitHub
         let members = [{
-            name: "Ms. Sophea",
-            role: "Fitness Trainer",
-            image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+            name: "Tak Sreylim",
+            role: "Team Leader",
+            image: "",
             socialLinks: [{
                 platform: "facebook",
-                url: "https://facebook.com/sophea",
+                url: "https://facebook.com/taksreylim",
                 icon: "fab fa-facebook-f"
             }, {
-                platform: "instagram",
-                url: "https://instagram.com/sophea",
-                icon: "fab fa-instagram"
+                platform: "github",
+                url: "https://github.com/taksreylim",
+                icon: "fab fa-github"
             }]
         }, {
-            name: "Mr. Samreth",
-            role: "Basketball Coach",
-            image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+            name: "So Sampoleu",
+            role: "Sub Leader",
+            image: "",
             socialLinks: [{
                 platform: "facebook",
-                url: "https://facebook.com/samreth",
+                url: "https://facebook.com/sosamroeun",
                 icon: "fab fa-facebook-f"
             }, {
-                platform: "telegram",
-                url: "https://t.me/samreth",
-                icon: "fab fa-telegram-plane"
+                platform: "github",
+                url: "https://github.com/sosamroeun",
+                icon: "fab fa-github"
             }]
         }, {
-            name: "Ms. Sreypov",
-            role: "Yoga Instructor",
-            image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
-            socialLinks: [{
-                platform: "instagram",
-                url: "https://instagram.com/sreypov",
-                icon: "fab fa-instagram"
-            }, {
-                platform: "telegram",
-                url: "https://t.me/sreypov",
-                icon: "fab fa-telegram-plane"
-            }]
-        }, {
-            name: "Mr. Dara",
-            role: "Martial Arts",
-            image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+            name: "Dy Riya",
+            role: "Member",
+            image: "",
             socialLinks: [{
                 platform: "facebook",
-                url: "https://facebook.com/dara",
+                url: "https://facebook.com/dyriya",
                 icon: "fab fa-facebook-f"
             }, {
-                platform: "instagram",
-                url: "https://instagram.com/dara",
-                icon: "fab fa-instagram"
+                platform: "github",
+                url: "https://github.com/dyriya",
+                icon: "fab fa-github"
             }]
         }, {
-            name: "Ms. Channary",
-            role: "Tennis Coach",
-            image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
+            name: "Oeurn Selachhari",
+            role: "Member",
+            image: "",
             socialLinks: [{
                 platform: "facebook",
-                url: "https://facebook.com/channary",
+                url: "https://facebook.com/odomsakchhert",
                 icon: "fab fa-facebook-f"
             }, {
-                platform: "twitter",
-                url: "https://twitter.com/channary",
-                icon: "fab fa-twitter"
+                platform: "github",
+                url: "https://github.com/odomsakchhert",
+                icon: "fab fa-github"
             }]
         }, {
-            name: "Saing Sengthay",
+            name: "Chhorn sengleang",
             role: "Menber",
-            image: "../image/me.jpg",
+            image: "",
             socialLinks: [{
                 platform: "facebook",
-                url: "https://facebook.com/veasna",
+                url: "https://facebook.com/chhomsengleang",
                 icon: "fab fa-facebook-f"
             }, {
-                platform: "telegram",
-                url: "https://t.me/veasna",
-                icon: "fab fa-telegram-plane"
+                platform: "github",
+                url: "https://github.com/chhomsengleang",
+                icon: "fab fa-github"
             }]
         }, {
-            name: "Ms. Bopha",
-            role: "Badminton Coach",
-            image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
+            name: "Dy Chandara",
+            role: "Menber",
+            image: "",
             socialLinks: [{
-                platform: "instagram",
-                url: "https://instagram.com/bopha",
-                icon: "fab fa-instagram"
+                platform: "facebook",
+                url: "https://facebook.com/dachandara",
+                icon: "fab fa-facebook-f"
             }, {
-                platform: "telegram",
-                url: "https://t.me/bopha",
-                icon: "fab fa-telegram-plane"
+                platform: "github",
+                url: "https://github.com/dachandara",
+                icon: "fab fa-github"
+            }]
+        }, {
+            name: "Saing Senthay",
+            role: "Menber",
+            image: "",
+            socialLinks: [{
+                platform: "facebook",
+                url: "https://facebook.com/saingsenthay",
+                icon: "fab fa-facebook-f"
+            }, {
+                platform: "github",
+                url: "https://github.com/Saing-Sengthay",
+                icon: "fab fa-github"
             }]
         }];
 
@@ -360,25 +400,25 @@
 
             featuredMentors.forEach((mentor, index) => {
                         const mentorCard = document.createElement('div');
-                        mentorCard.className = 'bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow border border-gray-100 w-80 h-72';
+                        mentorCard.className = 'bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow';
 
                         const socialLinksHTML = mentor.socialLinks.map(social =>
-                            `<a href="${social.url}" class="text-gray-600 hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
+                            `<a href="${social.url}" class="text-[#000249]  hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
                         <i class="${social.icon} text-lg"></i>
                     </a>`
                         ).join('');
 
                         mentorCard.innerHTML = `
-                    <div class="text-center h-full flex flex-col justify-center">
-                        <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-6 overflow-hidden">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-gray-300 rounded-full mx-auto mb-4 overflow-hidden">
                             ${mentor.image ? 
                                 `<img src="${mentor.image}" alt="${mentor.name}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                 <div class="w-full h-full bg-gradient-to-b from-gray-400 to-gray-600 hidden"></div>` :
-                                `<div class="w-full h-full bg-gradient-to-b from-gray-400 to-gray-600"></div>`
+                                 <span class="w-full h-full bg-gradient-to-b from-gray-400 to-[#000249]  hidden"></span>` :
+                                `<span class="w-full h-full bg-gradient-to-b from-gray-400 to-[#000249] "></span>`
                             }
                         </div>
-                        <h3 class="font-bold text-gray-800 text-lg mb-2">${mentor.name}</h3>
-                        <p class="text-blue-600 font-semibold text-sm mb-6">${mentor.role}</p>
+                        <h3 class="font-bold text-gray-800 text-base mb-2">${mentor.name}</h3>
+                        <p class="text-blue-600 font-semibold text-sm mb-4">${mentor.role}</p>
                         <div class="flex justify-center space-x-4">
                             ${socialLinksHTML}
                         </div>
@@ -399,21 +439,21 @@
 
             members.forEach((member, index) => {
                 const memberCard = document.createElement('div');
-                memberCard.className = 'bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow w-72 h-64';
+                memberCard.className = 'bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow';
 
                 const socialLinksHTML = member.socialLinks.map(social =>
-                    `<a href="${social.url}" class="text-gray-600 hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
+                    `<a href="${social.url}" class="text-[#000249]  hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
                         <i class="${social.icon} text-lg"></i>
                     </a>`
                 ).join('');
 
                 memberCard.innerHTML = `
-                    <div class="text-center h-full flex flex-col justify-center">
+                    <div class="text-center">
                         <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
                             ${member.image ? 
                                 `<img src="${member.image}" alt="${member.name}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                 <div class="w-full h-full bg-gradient-to-b from-blue-400 to-blue-600 hidden"></div>` :
-                                '<div class="w-full h-full bg-gradient-to-b from-blue-400 to-blue-600"></div>'
+                                 <span class="w-full h-full bg-gradient-to-b from-blue-400 to-blue-600 hidden"></span>` :
+                                '<span class="w-full h-full bg-gradient-to-b from-blue-400 to-blue-600"></span>'
                             }
                         </div>
                         <h4 class="font-bold text-gray-800 text-base mb-2">${member.name}</h4>
@@ -433,15 +473,20 @@
             });
         }
 
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            renderFeaturedMentors();
-            renderMembers();
-        });
+        // Utility functions for image changes
+        function changeHeroImage(imageUrl) {
+            const heroImage = document.getElementById('heroImage');
+            heroImage.src = imageUrl;
+        }
+
+        function changeStadiumImage(imageUrl) {
+            const stadiumImage = document.getElementById('stadiumImage');
+            stadiumImage.src = imageUrl;
+        }
 
         // Functions to manage featured mentors
-        function addFeaturedMentor(name, role, image = null, socialLinks = []) {
-            featuredMentors.push({ name, role, image, socialLinks });
+        function addFeaturedMentor(name, role, image = null, description = '', socialLinks = []) {
+            featuredMentors.push({ name, role, image, description, socialLinks });
             renderFeaturedMentors();
         }
 
@@ -488,6 +533,12 @@
                 renderMembers();
             }
         }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFeaturedMentors();
+            renderMembers();
+        });
     </script>
 </body>
 
