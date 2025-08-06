@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportHub</title>
+    <title>SportHub - About</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Updated Google Fonts link to include Inter and Noto Sans Khmer -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Noto+Sans+Khmer:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -34,12 +37,14 @@
             color: #000249;
         }
         
+        /* Set Noto Sans Khmer for elements with this class */
         .khmer-text {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Noto Sans Khmer', sans-serif;
         }
         
+        /* Set Inter as the default font for the body */
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
     </style>
 </head>
@@ -48,25 +53,45 @@
     <!-- Header -->
     <header class="custom-bg shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-center items-center py-4 relative">
+            <div class="flex justify-between items-center py-4">
                 <!-- Logo -->
-                <div class="absolute left-0 flex items-center">
-                    <img src="../img-about/logo.png" alt="Logo" class="h-12">
+                <div class="flex items-center">
+                    <img src="../img-about/logo.png" alt="Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/100x40/ffffff/000000?text=Logo';">
                 </div>
 
                 <!-- Navigation -->
-                <nav class="flex space-x-8">
-                    <a href="../../index.html" class="text-[#000249] hover:text-blue-600 transition-colors font-medium">Home</a>
-                    <a href="../html/event.html" class="text-[#000249] hover:text-blue-600 transition-colors font-medium">Event</a>
-                    <a href="../html/about.html" class="text-[#000249] hover:text-blue-600 transition-colors font-medium">About</a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="../../index.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Home</a>
+                    <a href="../html/event.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Event</a>
+                    <a href="../html/about.html" class="text-blue-600 font-medium border-b-2 border-blue-600 pb-1">About</a>
                 </nav>
+
+                <!-- Right Side Icons and Button -->
+                <div class="flex items-center space-x-4">
+                    <!-- Heart/Favorite Icon -->
+                    <button id="favoriteBtn" class="p-2 text-gray-600 hover:text-red-500 transition-colors relative">
+                        <i class="fas fa-heart text-xl"></i>
+                        <span id="favoriteCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+
+                    <!-- Account Icon -->
+                    <button class="p-2 text-gray-600 hover:text-blue-600 transition-colors">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </button>
+
+                    <!-- Post Button -->
+                    <button id="postEventBtn" class="bg-[#007AFF] hover:bg-[#0056CC] text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+                        <i class="fas fa-plus"></i>
+                        <span>Post</span>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Hero Section with Full Viewport Image -->
     <section class="relative w-full h-screen overflow-hidden">
-        <img src="../img-about/about.png" alt="Sports Arena Background" class="w-full h-full object-cover" id="heroImage" />
+        <img src="../img-about/about.png" alt="Sports Arena Background" class="w-full h-full object-cover" id="heroImage" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/cccccc/ffffff?text=Hero+Image';">
     </section>
 
     <!-- Stadium Section -->
@@ -74,31 +99,32 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <img src="../img-about/hmm.jpg" alt="Sports Stadium" class="w-full h-64 object-cover rounded-2xl shadow-2xl" id="stadiumImage" />
+                    <img src="../img-about/hmm.jpg" alt="Sports Stadium" class="w-full h-full object-cover rounded-2xl shadow-2xl" id="stadiumImage" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Stadium';">
                 </div>
 
                 <div>
-                    <h2 class="text-2xl font-bold text-[#000249] mb-6">ការផ្សព្វផ្សាយកីឡាក្នុងស្រុក</h2>
-                    <li class="flex items-start space-x-3 mb-3">
-                        <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
-                        <span class="text-[#000249] text-base">ជំរុញការយល់ដឹងអំពីកីឡាក្នុងស្រុកនិងក្លឹបកីឡាក្នុងតំបន់</span>
-                    </li>
-                    <li class="flex items-start space-x-3 mb-3">
-                        <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
-                        <span class="text-[#000249] text-base">ផ្តល់វេទិកាដល់ក្រុមកីឡាថ្នាក់មូលដ្ឋានដើម្បីបង្ហាញខ្លួន</span>
-                    </li>
-                    <li class="flex items-start space-x-3 mb-3">
-                        <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
-                        <span class="text-[#000249] text-base">គាំទ្រដល់កីឡាករកម្ពុជា និងផ្សព្វផ្សាយសមិទ្ធផលរបស់ពួកគេ</span>
-                    </li>
-                    <li class="flex items-start space-x-3 mb-3">
-                        <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
-                        <span class="text-[#000249] text-base">មានមុខងារសម្រាប់បង្កើតប្រូហ្វាលផ្ទាល់ខ្លួន</span>
-                    </li>
-                    <li class="flex items-start space-x-3 mb-3">
-                        <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
-                        <span class="text-[#000249] text-base">វេទិកាពិភាក្សាតាមប្រភេទកីឡា</span>
-                    </li>
+                    <h2 class="text-3xl font-bold text-[#000249] mb-6 khmer-text">ការផ្សព្វផ្សាយកីឡាក្នុងស្រុក</h2>
+                    <ul>
+                        <li class="flex items-start space-x-5 mb-5">
+                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                            <span class="text-[#000249] text-2xl khmer-text">ជំរុញការយល់ដឹងអំពីកីឡាក្នុងស្រុកនិងក្លឹបកីឡាក្នុងតំបន់</span>
+                        </li>
+                        <li class="flex items-start space-x-5 mb-5">
+                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                            <span class="text-[#000249] text-2xl khmer-text">ផ្តល់វេទិកាដល់ក្រុមកីឡាថ្នាក់មូលដ្ឋានដើម្បីបង្ហាញខ្លួន</span>
+                        </li>
+                        <li class="flex items-start space-x-5 mb-5">
+                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                            <span class="text-[#000249] text-2xl khmer-text">គាំទ្រដល់កីឡាករកម្ពុជា និងផ្សព្វផ្សាយសមិទ្ធផលរបស់ពួកគេ</span>
+                        </li>
+                        <li class="flex items-start space-x-5 mb-5">
+                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                            <span class="text-[#000249] text-2xl khmer-text">មានមុខងារសម្រាប់បង្កើតប្រូហ្វាលផ្ទាល់ខ្លួន</span>
+                        </li>
+                        <li class="flex items-start space-x-5 mb-5">
+                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                            <span class="text-[#000249] text-2xl khmer-text">វេទិកាពិភាក្សាតាមប្រភេទកីឡា</span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -114,8 +140,8 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-trophy text-[#000249] text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-[#000249] mb-2">ឧត្តមភាព</h3>
-                    <p class="text-[#000249] text-sm">យើងខិតខំដើម្បីភាពល្អប្រសើរនៅក្នុងអ្វីគ្រប់យ៉ាងដែលយើងធ្វើចាប់ពីអង្គការព្រឹត្តិការណ៍រហូតដល់ការគាំទ្រពីសហគមន៍។</p>
+                    <h3 class="text-xl font-bold text-[#000249] mb-2 khmer-text">ឧត្តមភាព</h3>
+                    <p class="text-[#000249] text-lg khmer-text">យើងខិតខំដើម្បីភាពល្អប្រសើរនៅក្នុងអ្វីគ្រប់យ៉ាងដែលយើងធ្វើចាប់ពីអង្គការព្រឹត្តិការណ៍រហូតដល់ការគាំទ្រពីសហគមន៍។</p>
                 </div>
 
                 <!-- Service 2 - Community -->
@@ -123,8 +149,8 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-users text-[#000249] text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-[#000249] mb-2">សហគមន៍</h3>
-                    <p class="text-[#000249] text-sm">ការកសាងសហគមន៍រស់រវើកនៃអ្នកចូលចិត្តកីឡាដែលចែករំលែកចំណង់ចំណូលចិត្តចំណេះដឹងនិងភាពរំភើប</p>
+                    <h3 class="text-xl font-bold text-[#000249] mb-2 khmer-text">សហគមន៍</h3>
+                    <p class="text-[#000249] text-lg khmer-text">ការកសាងសហគមន៍រស់រវើកនៃអ្នកចូលចិត្តកីឡាដែលចែករំលែកចំណង់ចំណូលចិត្តចំណេះដឹងនិងភាពរំភើប</p>
                 </div>
 
                 <!-- Service 3 - Quality Content -->
@@ -132,8 +158,8 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-star text-[#000249] text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-[#000249] mb-2">មាតិកាគុណភាព</h3>
-                    <p class="text-[#000249] text-sm">ការចែកចាយមាតិកាកីឡាត្រឹមត្រូវទាន់ពេលវេលានិងចូលរួមពីប្រភពដែលអាចទុកចិត្តបាននិងអ្នកវិភាគជំនាញ។</p>
+                    <h3 class="text-xl font-bold text-[#000249] mb-2 khmer-text">មាតិកាគុណភាព</h3>
+                    <p class="text-[#000249] text-lg khmer-text">ការចែកចាយមាតិកាកីឡាត្រឹមត្រូវទាន់ពេលវេលានិងចូលរួមពីប្រភពដែលអាចទុកចិត្តបាននិងអ្នកវិភាគជំនាញ។</p>
                 </div>
 
                 <!-- Service 4 - Global Coverage -->
@@ -141,8 +167,8 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-globe-americas text-[#000249] text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-[#000249] mb-2">គ្របដណ្តប់សកល</h3>
-                    <p class="text-[#000249] text-sm">គ្របដណ្តប់កីឡាពីជុំវិញពិភពលោកដោយនាំការប្រកួតប្រជែងអន្តរជាតិទៅចុងម្រាមដៃរបស់អ្នក។</p>
+                    <h3 class="text-xl font-bold text-[#000249] mb-2 khmer-text">គ្របដណ្តប់សកល</h3>
+                    <p class="text-[#000249] text-lg khmer-text">គ្របដណ្តប់កីឡាពីជុំវិញពិភពលោកដោយនាំការប្រកួតប្រជែងអន្តរជាតិទៅចុងម្រាមដៃរបស់អ្នក។</p>
                 </div>
             </div>
         </div>
@@ -154,9 +180,7 @@
             <!-- Meet Our Mentors -->
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-[#000249] mb-4">Meet Our Mentors</h2>
-                <p class="text-[#000249] max-w-2xl mx-auto">
-                    អ្នកណែនាំរបស់យើងគឺជាក្រុមអ្នកដឹកនាំគម្រោង និងអ្នកជំនាញដ៏អស្ចារ្យ ហើយពួកគាត់ម្នាក់ៗបាននាំយកចំណេះដឹង និងបទពិសោធន៍ជាច្រើនមកសម្រាប់ក្រុមយើង។
-                </p>
+                <p class="text-[#000249] max-w-2xl mx-auto khmer-text"></p>
             </div>
 
             <!-- Featured Mentors - 2 columns with same size as team cards -->
@@ -167,7 +191,7 @@
             <!-- Meet Our Team -->
             <div class="text-center mb-12">
                 <h3 class="text-2xl font-bold text-[#000249] mb-4">Meet Our Team</h3>
-                <p class="text-[#000249]">ក្រុមយើងជាបណ្តុំអ្នកជំនាញចម្រុះពីច្រើនវិស័យ ដែលរួបរួមគ្នាក្រោមគោលដៅរួមតែមួយ។</p>
+                <p class="text-[#000249] khmer-text">ក្រុមយើងជាបណ្តុំអ្នកជំនាញចម្រុះពីច្រើនវិស័យ ដែលរួបរួមគ្នាក្រោមគោលដៅរួមតែមួយ។</p>
             </div>
 
             <!-- Team Members Grid - 3 on top, 4 below -->
@@ -195,12 +219,12 @@
             <div class="grid md:grid-cols-5 gap-8">
                 <div>
                     <h1 class="text-lg font-semibold mb-4 khmer-text">Organized By</h1>
-                    <img src="../img-about/istad.png" alt="ISTAD Logo" class="w-20 h-15 mb-4">
+                    <img src="../img-about/istad.png" alt="ISTAD Logo" class="w-20 h-15 mb-4" onerror="this.onerror=null;this.src='https://placehold.co/80x60/ffffff/000000?text=ISTAD';">
                 </div>
 
                 <div>
                     <h1 class="text-lg font-semibold mb-4 khmer-text">Prepared By</h1>
-                    <img src="../img-about/logo.png" alt="sportshub Logo" class="w-21 h-20 mb-4">
+                    <img src="../img-about/logo.png" alt="sportshub Logo" class="w-21 h-20 mb-4" onerror="this.onerror=null;this.src='https://placehold.co/84x80/ffffff/000000?text=Logo';">
                 </div>
 
                 <nav>
@@ -394,7 +418,7 @@
                     <div class="text-center">
                         <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 overflow-hidden">
                             ${mentor.image ? 
-                                `<img src="${mentor.image}" alt="${mentor.name}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                `<img src="${mentor.image}" alt="${mentor.name}" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/96x96/cccccc/ffffff?text=Mentor'; this.nextElementSibling.style.display='block';">
                                  <span class="w-full h-full bg-gradient-to-b from-gray-400 to-[#000249] hidden"></span>` :
                                 `<span class="w-full h-full bg-gradient-to-b from-gray-400 to-[#000249]"></span>`
                             }
@@ -433,7 +457,7 @@
                     <div class="text-center">
                         <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
                             ${member.image ? 
-                                `<img src="${member.image}" alt="${member.name}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                `<img src="${member.image}" alt="${member.name}" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/96x96/cccccc/ffffff?text=Member'; this.nextElementSibling.style.display='block';">
                                  <span class="w-full h-full bg-gradient-to-b from-blue-400 to-blue-600 hidden"></span>` :
                                 '<span class="w-full h-full bg-gradient-to-b from-blue-400 to-blue-600"></span>'
                             }
