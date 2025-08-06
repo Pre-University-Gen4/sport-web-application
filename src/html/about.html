@@ -7,6 +7,7 @@
     <title>SportHub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -30,15 +31,15 @@
         }
         
         .custom-text {
-            color: #374151;
-        }
-        
-        .post-button {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: #000249;
         }
         
         .khmer-text {
-            font-family: 'Khmer OS', sans-serif;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
         }
     </style>
 </head>
@@ -47,38 +48,18 @@
     <!-- Header -->
     <header class="custom-bg shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
+            <div class="flex justify-center items-center py-4 relative">
                 <!-- Logo -->
-                <div class="flex items-center">
+                <div class="absolute left-0 flex items-center">
                     <img src="../img-about/logo.png" alt="Logo" class="h-12">
                 </div>
 
                 <!-- Navigation -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="../../index.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Home</a>
-                    <a href="../html/event.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Event</a>
-                    <a href="../html/about.html" class="custom-text hover:text-blue-600 transition-colors font-medium">About</a>
+                <nav class="flex space-x-8">
+                    <a href="../../index.html" class="text-[#000249] hover:text-blue-600 transition-colors font-medium">Home</a>
+                    <a href="../html/event.html" class="text-[#000249] hover:text-blue-600 transition-colors font-medium">Event</a>
+                    <a href="../html/about.html" class="text-[#000249] hover:text-blue-600 transition-colors font-medium">About</a>
                 </nav>
-
-                <!-- Right Side Icons and Button -->
-                <div class="flex items-center space-x-4">
-                    <!-- Heart/Favorite Icon -->
-                    <button id="favoriteBtn" class="p-2 text-[#000249]  hover:text-red-500 transition-colors relative">
-                        <i class="fas fa-heart text-xl"></i>
-                        <span id="favoriteCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
-                    </button>
-
-                    <!-- Account Icon -->
-                    <button id="accountBtn" class="p-2 text-[#000249]  hover:text-blue-600 transition-colors">
-                        <i class="fas fa-user-circle text-xl"></i>
-                    </button>
-
-                    <!-- Post Button -->
-                    <button id="postEventBtn" class="post-button text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
-                        <i class="fas fa-plus"></i>
-                        <span>Post</span>
-                    </button>
-                </div>
             </div>
         </div>
     </header>
@@ -97,26 +78,26 @@
                 </div>
 
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">ការផ្សព្វផ្សាយកីឡាក្នុងស្រុក</h2>
-                    <li class="flex items-start space-x-3">
-                        <span class="w-2 h-2 bg-[#000249]  rounded-full mt-2"></span>
-                        <span class="text-[#000249] ">ជំរុញការយល់ដឹងអំពីកីឡាក្នុងស្រុកនិងក្លឹបកីឡាក្នុងតំបន់</span>
+                    <h2 class="text-2xl font-bold text-[#000249] mb-6">ការផ្សព្វផ្សាយកីឡាក្នុងស្រុក</h2>
+                    <li class="flex items-start space-x-3 mb-3">
+                        <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                        <span class="text-[#000249] text-base">ជំរុញការយល់ដឹងអំពីកីឡាក្នុងស្រុកនិងក្លឹបកីឡាក្នុងតំបន់</span>
                     </li>
-                    <li class="flex items-start space-x-3">
-                        <span class="w-2 h-2 bg-[#000249]  rounded-full mt-2"></span>
-                        <span class="text-[#000249] ">ផ្តល់វេទិកាដល់ក្រុមកីឡាថ្នាក់មូលដ្ឋានដើម្បីបង្ហាញខ្លួន</span>
+                    <li class="flex items-start space-x-3 mb-3">
+                        <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                        <span class="text-[#000249] text-base">ផ្តល់វេទិកាដល់ក្រុមកីឡាថ្នាក់មូលដ្ឋានដើម្បីបង្ហាញខ្លួន</span>
                     </li>
-                    <li class="flex items-start space-x-3">
-                        <span class="w-2 h-2 bg-[#000249]  rounded-full mt-2"></span>
-                        <span class="text-[#000249] ">គាំទ្រដល់កីឡាករកម្ពុជា និងផ្សព្វផ្សាយសមិទ្ធផលរបស់ពួកគេ</span>
+                    <li class="flex items-start space-x-3 mb-3">
+                        <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                        <span class="text-[#000249] text-base">គាំទ្រដល់កីឡាករកម្ពុជា និងផ្សព្វផ្សាយសមិទ្ធផលរបស់ពួកគេ</span>
                     </li>
-                    <li class="flex items-start space-x-3">
-                        <span class="w-2 h-2 bg-[#000249]  rounded-full mt-2"></span>
-                        <span class="text-[#000249] ">មានមុខងារសម្រាប់បង្កើតប្រូហ្វាលផ្ទាល់ខ្លួន</span>
+                    <li class="flex items-start space-x-3 mb-3">
+                        <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                        <span class="text-[#000249] text-base">មានមុខងារសម្រាប់បង្កើតប្រូហ្វាលផ្ទាល់ខ្លួន</span>
                     </li>
-                    <li class="flex items-start space-x-3">
-                        <span class="w-2 h-2 bg-[#000249]  rounded-full mt-2"></span>
-                        <span class="text-[#000249] ">វេទិកាពិភាក្សាតាមប្រភេទកីឡា</span>
+                    <li class="flex items-start space-x-3 mb-3">
+                        <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                        <span class="text-[#000249] text-base">វេទិកាពិភាក្សាតាមប្រភេទកីឡា</span>
                     </li>
                     </ul>
                 </div>
@@ -128,40 +109,40 @@
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Service 1 -->
-                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
-                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-bullseye text-red-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">ឧត្តមភាព</h3>
-                    <p class="text-[#000249]  text-sm">យើងខិតខំដើម្បីភាពល្អប្រសើរនៅក្នុងអ្វីគ្រប់យ៉ាងដែលយើងធ្វើចាប់ពីអង្គការព្រឹត្តិការណ៍រហូតដល់ការគាំទ្រពីសហគមន៍។</p>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
-                    <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-user-friends text-yellow-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">សហគមន៍</h3>
-                    <p class="text-[#000249]  text-sm">ការកសាងសហគមន៍រស់រវើកនៃអ្នកចូលចិត្តកីឡាដែលចែករំលែកចំណង់ចំណូលចិត្តចំណេះដឹងនិងភាពរំភើប</p>
-                </div>
-
-                <!-- Service 3 -->
+                <!-- Service 1 - Excellence -->
                 <div class="bg-white rounded-xl p-6 shadow-lg text-center">
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-certificate text-blue-600 text-2xl"></i>
+                        <i class="fas fa-trophy text-[#000249] text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">មាតិកាគុណភាព</h3>
-                    <p class="text-[#000249]  text-sm">ការចែកចាយមាតិកាកីឡាត្រឹមត្រូវទាន់ពេលវេលានិងចូលរួមពីប្រភពដែលអាចទុកចិត្តបាននិងអ្នកវិភាគជំនាញ។</p>
+                    <h3 class="text-lg font-semibold text-[#000249] mb-2">ឧត្តមភាព</h3>
+                    <p class="text-[#000249] text-sm">យើងខិតខំដើម្បីភាពល្អប្រសើរនៅក្នុងអ្វីគ្រប់យ៉ាងដែលយើងធ្វើចាប់ពីអង្គការព្រឹត្តិការណ៍រហូតដល់ការគាំទ្រពីសហគមន៍។</p>
                 </div>
 
-                <!-- Service 4 -->
+                <!-- Service 2 - Community -->
                 <div class="bg-white rounded-xl p-6 shadow-lg text-center">
-                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-globe text-green-600 text-2xl"></i>
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-[#000249] text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">គ្របដណ្តប់សកល</h3>
-                    <p class="text-[#000249]  text-sm">គ្របដណ្តប់កីឡាពីជុំវិញពិភពលោកដោយនាំការប្រកួតប្រជែងអន្តរជាតិទៅចុងម្រាមដៃរបស់អ្នក។</p>
+                    <h3 class="text-lg font-semibold text-[#000249] mb-2">សហគមន៍</h3>
+                    <p class="text-[#000249] text-sm">ការកសាងសហគមន៍រស់រវើកនៃអ្នកចូលចិត្តកីឡាដែលចែករំលែកចំណង់ចំណូលចិត្តចំណេះដឹងនិងភាពរំភើប</p>
+                </div>
+
+                <!-- Service 3 - Quality Content -->
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star text-[#000249] text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-[#000249] mb-2">មាតិកាគុណភាព</h3>
+                    <p class="text-[#000249] text-sm">ការចែកចាយមាតិកាកីឡាត្រឹមត្រូវទាន់ពេលវេលានិងចូលរួមពីប្រភពដែលអាចទុកចិត្តបាននិងអ្នកវិភាគជំនាញ។</p>
+                </div>
+
+                <!-- Service 4 - Global Coverage -->
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-globe-americas text-[#000249] text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-[#000249] mb-2">គ្របដណ្តប់សកល</h3>
+                    <p class="text-[#000249] text-sm">គ្របដណ្តប់កីឡាពីជុំវិញពិភពលោកដោយនាំការប្រកួតប្រជែងអន្តរជាតិទៅចុងម្រាមដៃរបស់អ្នក។</p>
                 </div>
             </div>
         </div>
@@ -172,8 +153,8 @@
         <div class="container mx-auto px-4">
             <!-- Meet Our Mentors -->
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Meet Our Mentors</h2>
-                <p class="text-[#000249]  max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-[#000249] mb-4">Meet Our Mentors</h2>
+                <p class="text-[#000249] max-w-2xl mx-auto">
                     អ្នកណែនាំរបស់យើងគឺជាក្រុមអ្នកដឹកនាំគម្រោង និងអ្នកជំនាញដ៏អស្ចារ្យ ហើយពួកគាត់ម្នាក់ៗបាននាំយកចំណេះដឹង និងបទពិសោធន៍ជាច្រើនមកសម្រាប់ក្រុមយើង។
                 </p>
             </div>
@@ -185,8 +166,8 @@
 
             <!-- Meet Our Team -->
             <div class="text-center mb-12">
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">Meet Our Team</h3>
-                <p class="text-[#000249] ">ក្រុមយើងជាបណ្តុំអ្នកជំនាញចម្រុះពីច្រើនវិស័យ ដែលរួបរួមគ្នាក្រោមគោលដៅរួមតែមួយ។</p>
+                <h3 class="text-2xl font-bold text-[#000249] mb-4">Meet Our Team</h3>
+                <p class="text-[#000249]">ក្រុមយើងជាបណ្តុំអ្នកជំនាញចម្រុះពីច្រើនវិស័យ ដែលរួបរួមគ្នាក្រោមគោលដៅរួមតែមួយ។</p>
             </div>
 
             <!-- Team Members Grid - 3 on top, 4 below -->
@@ -209,7 +190,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="custom-bg text-gray-800 py-12">
+    <footer class="custom-bg text-[#000249] py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-5 gap-8">
                 <div>
@@ -224,7 +205,7 @@
 
                 <nav>
                     <h3 class="text-lg font-semibold mb-4 khmer-text">Category</h3>
-                    <ul class="space-y-2 text-[#000249] ">
+                    <ul class="space-y-2 text-[#000249]">
                         <li><a href="#" class="hover:text-blue-600 transition-colors">Football</a></li>
                         <li><a href="#" class="hover:text-blue-600 transition-colors">Basketball</a></li>
                         <li><a href="#" class="hover:text-blue-600 transition-colors">Swimming</a></li>
@@ -235,7 +216,7 @@
 
                 <nav>
                     <h3 class="text-lg font-semibold mb-4 khmer-text">Quick Links</h3>
-                    <ul class="space-y-2 text-[#000249] ">
+                    <ul class="space-y-2 text-[#000249]">
                         <li><a href="#" class="hover:text-blue-600 transition-colors">All News</a></li>
                         <li><a href="#" class="hover:text-blue-600 transition-colors">Event</a></li>
                         <li><a href="#" class="hover:text-blue-600 transition-colors">About Us</a></li>
@@ -262,7 +243,7 @@
             </div>
 
             <div class="border-t border-gray-300 mt-8 pt-8 text-center">
-                <p class="text-[#000249]  text-sm">© 2025 SportHub. All Rights Reserved.</p>
+                <p class="text-[#000249] text-sm">© 2025 SportHub. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -270,53 +251,54 @@
     <script>
         // Featured mentors data with only Facebook and GitHub
         let featuredMentors = [{
-            name: "Ms. Eung Lyzhia",
-            role: "Instructor",
-            image: "",
-            description: "Every single step, challenges make him stronger...",
+            name: "Mr. Kim Chansokpheng",
+            role: "Mentor",
+            image: "../img-about/Teacher2.jpg",
+            description: "Learning from others is my favorite.",
             socialLinks: [{
                 platform: "facebook",
-                url: "https://facebook.com/limchanratana",
+                url: "https://www.facebook.com/share/19vE4S9jre/?mibextid=wwXIfr",
                 icon: "fab fa-facebook-f"
             }, {
                 platform: "github",
-                url: "https://github.com/limchanratana",
+                url: "https://github.com/sokpheng001",
                 icon: "fab fa-github"
             }]
         }, {
-            name: "Mr. Kim Chansokpheng",
-            role: "Instructor",
-            image: "",
-            description: "If you want the best, you've gotta put up...",
+            name: "Ms. Eung Lyzhia",
+            role: "Mentor",
+            image: "../img-about/Teacher1.jpg",
+            description: "Every single step, challenges make him stronger...",
             socialLinks: [{
                 platform: "facebook",
-                url: "https://facebook.com/sokpisey",
+                url: " https://www.facebook.com/share/153E3fLo6W/?mibextid=wwXIfr",
                 icon: "fab fa-facebook-f"
             }, {
                 platform: "github",
-                url: "https://github.com/sokpisey",
+                url: "https://github.com/lyzhiaa",
                 icon: "fab fa-github"
             }]
         }];
 
         // Team members data with only Facebook and GitHub
         let members = [{
-            name: "Tak Sreylim",
-            role: "Team Leader",
-            image: "",
+            name: "Tak Sreytim",
+            role: "Member",
+            image: "../img-about/Sreytim.png",
+
             socialLinks: [{
                 platform: "facebook",
-                url: "https://facebook.com/taksreylim",
+                url: "https://www.facebook.com/share/1Cps1QHR8R/?mibextid=wwXIfr",
                 icon: "fab fa-facebook-f"
             }, {
                 platform: "github",
-                url: "https://github.com/taksreylim",
+                url: "https://github.com/sreytim",
                 icon: "fab fa-github"
             }]
         }, {
             name: "So Sampoleu",
-            role: "Sub Leader",
-            image: "",
+            role: "Member",
+            image: "../img-about/Ponlue.jpg",
             socialLinks: [{
                 platform: "facebook",
                 url: "https://facebook.com/sosamroeun",
@@ -327,48 +309,9 @@
                 icon: "fab fa-github"
             }]
         }, {
-            name: "Dy Riya",
-            role: "Member",
-            image: "",
-            socialLinks: [{
-                platform: "facebook",
-                url: "https://facebook.com/dyriya",
-                icon: "fab fa-facebook-f"
-            }, {
-                platform: "github",
-                url: "https://github.com/dyriya",
-                icon: "fab fa-github"
-            }]
-        }, {
-            name: "Oeurn Selachhari",
-            role: "Member",
-            image: "",
-            socialLinks: [{
-                platform: "facebook",
-                url: "https://facebook.com/odomsakchhert",
-                icon: "fab fa-facebook-f"
-            }, {
-                platform: "github",
-                url: "https://github.com/odomsakchhert",
-                icon: "fab fa-github"
-            }]
-        }, {
-            name: "Chhorn sengleang",
-            role: "Menber",
-            image: "",
-            socialLinks: [{
-                platform: "facebook",
-                url: "https://facebook.com/chhomsengleang",
-                icon: "fab fa-facebook-f"
-            }, {
-                platform: "github",
-                url: "https://github.com/chhomsengleang",
-                icon: "fab fa-github"
-            }]
-        }, {
             name: "Dy Chandara",
-            role: "Menber",
-            image: "",
+            role: "Member",
+            image: "../img-about/Dara.jpg",
             socialLinks: [{
                 platform: "facebook",
                 url: "https://facebook.com/dachandara",
@@ -379,16 +322,55 @@
                 icon: "fab fa-github"
             }]
         }, {
-            name: "Saing Senthay",
-            role: "Menber",
-            image: "",
+            name: "Chhorn sengleang",
+            role: "Member",
+            image: "../img-about/Leng.jpg",
             socialLinks: [{
                 platform: "facebook",
-                url: "https://facebook.com/saingsenthay",
+                url: "https://www.facebook.com/share/1BJBEwNune/?mibextid=wwXIfr",
+                icon: "fab fa-facebook-f"
+            }, {
+                platform: "github",
+                url: "https://github.com/seavleng",
+                icon: "fab fa-github"
+            }]
+        }, {
+            name: "Dy Riya",
+            role: "Member",
+            image: "../img-about/riya.jpg",
+            socialLinks: [{
+                platform: "facebook",
+                url: "https://www.facebook.com/share/15sjY61YM1/?mibextid=wwXIfr",
+                icon: "fab fa-facebook-f"
+            }, {
+                platform: "github",
+                url: " https://github.com/Dyriya/pre-uni-istad",
+                icon: "fab fa-github"
+            }]
+        }, {
+            name: "Saing Senthay",
+            role: "Member",
+            image: "../img-about/Thay.jpg",
+            socialLinks: [{
+                platform: "facebook",
+                url: "https://www.facebook.com/share/1APDaKJms6/",
                 icon: "fab fa-facebook-f"
             }, {
                 platform: "github",
                 url: "https://github.com/Saing-Sengthay",
+                icon: "fab fa-github"
+            }]
+        }, {
+            name: "Oeurn Selachhari",
+            role: "Member",
+            image: "../img-about/Chhari.jpg",
+            socialLinks: [{
+                platform: "facebook",
+                url: "https://facebook.com/odomsakchhert",
+                icon: "fab fa-facebook-f"
+            }, {
+                platform: "github",
+                url: "https://github.com/odomsakchhert",
                 icon: "fab fa-github"
             }]
         }];
@@ -403,7 +385,7 @@
                         mentorCard.className = 'bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow';
 
                         const socialLinksHTML = mentor.socialLinks.map(social =>
-                            `<a href="${social.url}" class="text-[#000249]  hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
+                            `<a href="${social.url}" class="text-[#000249] hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
                         <i class="${social.icon} text-lg"></i>
                     </a>`
                         ).join('');
@@ -413,11 +395,11 @@
                         <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 overflow-hidden">
                             ${mentor.image ? 
                                 `<img src="${mentor.image}" alt="${mentor.name}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                 <span class="w-full h-full bg-gradient-to-b from-gray-400 to-[#000249]  hidden"></span>` :
-                                `<span class="w-full h-full bg-gradient-to-b from-gray-400 to-[#000249] "></span>`
+                                 <span class="w-full h-full bg-gradient-to-b from-gray-400 to-[#000249] hidden"></span>` :
+                                `<span class="w-full h-full bg-gradient-to-b from-gray-400 to-[#000249]"></span>`
                             }
                         </div>
-                        <h3 class="font-bold text-gray-800 text-base mb-2">${mentor.name}</h3>
+                        <h3 class="font-bold text-[#000249] text-base mb-2">${mentor.name}</h3>
                         <p class="text-blue-600 font-semibold text-sm mb-4">${mentor.role}</p>
                         <div class="flex justify-center space-x-4">
                             ${socialLinksHTML}
@@ -442,7 +424,7 @@
                 memberCard.className = 'bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow';
 
                 const socialLinksHTML = member.socialLinks.map(social =>
-                    `<a href="${social.url}" class="text-[#000249]  hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
+                    `<a href="${social.url}" class="text-[#000249] hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
                         <i class="${social.icon} text-lg"></i>
                     </a>`
                 ).join('');
@@ -456,8 +438,8 @@
                                 '<span class="w-full h-full bg-gradient-to-b from-blue-400 to-blue-600"></span>'
                             }
                         </div>
-                        <h4 class="font-bold text-gray-800 text-base mb-2">${member.name}</h4>
-                        <p class="text-gray-500 text-sm mb-4">${member.role}</p>
+                        <h4 class="font-bold text-[#000249] text-base mb-2">${member.name}</h4>
+                        <p class="text-[#000249] text-sm mb-4">${member.role}</p>
                         <div class="flex justify-center space-x-4">
                             ${socialLinksHTML}
                         </div>

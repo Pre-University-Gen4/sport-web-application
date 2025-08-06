@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISTAD Sport - Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Using Roboto for both Khmer and English text -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .custom-bg {
+            background-color: #FAF9F0;
+        }
+        /* Universal text styling - Using Roboto for both Khmer and English */
+        
+        .khmer-text,
+        .english-text {
+            font-family: 'Roboto', sans-serif;
+            color: #000249;
+            letter-spacing: 0.02em;
+        }
+        
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Roboto', sans-serif;
+            color: #000249;
+        }
+        /* Image size controls - Better proportions like original */
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            max-height: none;
+            object-fit: cover;
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+        
+        .detail-image {
+            width: 100%;
+            height: auto;
+            min-height: 800px;
+            max-height: 1000px;
+            object-fit: cover;
+        }
+        
+        .logo-image {
+            height: 48px;
+            max-width: 150px;
+            object-fit: contain;
+        }
+        
+        .footer-logo {
+            width: 80px;
+            height: 60px;
+            object-fit: contain;
+        }
+        
+        .hero-slide {
+            transition: opacity 0.8s ease-in-out;
+        }
+        
+        .card-container {
+            transition: transform 0.5s ease-in-out;
+        }
+        /* Custom styles for card titles */
+        
+        .card-title {
+            font-weight: 500;
+            letter-spacing: 0.025em;
+            line-height: 1.4;
+        }
+        /* Custom button styling */
+        
+        .custom-btn {
+            background-color: #FAF9F0;
+            border: 2px solid #3B82F6;
+            color: #3B82F6;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-btn:hover {
+            background-color: #3B82F6;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="custom-bg shadow-sm border-b border-gray-200">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section class="flex justify-center items-center py-4 relative">
+                <!-- Logo -->
+                <section class="absolute left-0 flex items-center">
+                    <img src="./src/img-about/logo.png" alt="Logo" class="h-12">
+                </section>
+
+                <!-- Navigation -->
+                <nav class="flex space-x-8">
+                    <a href="./index.html" class="text-[#000249] hover:text-blue-600 transition-colors font-bold english-text">Home</a>
+                    <a href="./src/html/event.html" class="text-[#000249] hover:text-blue-600 transition-colors font-bold english-text">Event</a>
+                    <a href="./src/html/about.html" class="text-[#000249] hover:text-blue-600 transition-colors font-bold english-text">About</a>
+                </nav>
+            </section>
+        </section>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative w-full h-screen overflow-hidden">
+        <main id="hero-container" class="relative w-full h-full">
+            <!-- Hero slides will be dynamically inserted here -->
+        </main>
+
+        <button id="hero-prev" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 z-10" aria-label="Previous slide">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+
+        <button id="hero-next" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 z-10" aria-label="Next slide">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+
+        <!-- Hero indicators -->
+        <nav class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10" id="hero-indicators" aria-label="Slide navigation">
+            <!-- Indicators will be dynamically inserted here -->
+        </nav>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-10">
+        <!-- Event Detail Section -->
+        <section class="mb-12">
+            <header class="mb-6">
+                <h2 class="text-2xl mb-2 pb-1 border-b-2 border-gray-300 font-bold khmer-text">អត្ថបទលម្អិត</h2>
+            </header>
+
+            <article id="event-detail-container" class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <!-- Event detail will be dynamically inserted here -->
+            </article>
+        </section>
+
+        <!-- Related Events Section -->
+        <section class="mb-12">
+            <header class="mb-6">
+                <h2 class="text-2xl mb-2 pb-2 border-b-2 border-gray-300 font-bold khmer-text">អត្ថបទពាក់ព័ន្ធ</h2>
+            </header>
+
+            <main id="related-events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Related events cards will be dynamically inserted here -->
+            </main>
+
+            <nav class="text-center mt-8">
+                <button id="related-see-more" class="custom-btn rounded-full px-8 py-2 transition duration-300 khmer-text">
+                    មើលបន្ថែម
+                </button>
+            </nav>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="custom-bg text-[#000249] py-12">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section class="grid md:grid-cols-5 gap-8">
+                <section>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Organized By</h3>
+                    <img src="./src/img-about/istad.png" alt="ISTAD Logo" class="footer-logo mb-4">
+                </section>
+
+                <section>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Prepared By</h3>
+                    <img src="./src/img-about/logo.png" alt="sportshub Logo" class="footer-logo mb-4">
+                </section>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Category</h3>
+                    <ul class="space-y-2 text-[#000249]">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Football</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Basketball</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Swimming</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Tennis</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Golf</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Quick Links</h3>
+                    <ul class="space-y-2 text-[#000249]">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">All News</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Event</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">About Us</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Connect With Us</h3>
+                    <section class="flex space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors" aria-label="Follow us on Facebook">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors" aria-label="Follow us on Telegram">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors" aria-label="Follow us on Instagram">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors" aria-label="Follow us on YouTube">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </section>
+                </nav>
+            </section>
+
+            <section class="border-t border-gray-300 mt-8 pt-8 text-center">
+                <p class="text-[#000249] text-sm english-text">© 2025 SportHub. All Rights Reserved.</p>
+            </section>
+        </section>
+    </footer>
+
+    <script>
+        // Data for different sections
+        const heroData = [{
+            image: "./src/image/istad.png"
+        }, {
+            image: "./src/image/football.png"
+        }, {
+            image: "./src/image/vb.png"
+        }];
+
+        const relatedEventsData = [{
+            image: "./src/image/my.png",
+            title: "ប្រធានក្រុមបាល់ទាត់ផ្ការីកគ្រប់រដូវ ជម្រះមន្ទិលមហាជន លើការ ប្រកួតបាល់ទាត់មិត្ដភាព នៅកូរ៉េ។ ដើម្បីបង្កើតចំណង់មិត្តភាព​ និង...",
+            date: "Jan 25, 2025"
+        }, {
+            image: "./src/image/vbboy.png",
+            title: "ក្រុមបាល់ទះរបស់ជម្រើសជាតិឥណ្ឌូណេស៊ីទទួលបានមេដាយមាសនិង​ក្រុមបាល់ទះជម្រើសជាតិកម្ពុជា ទទួលបាន​​​មេដាយប្រាក់...",
+            date: "Jan 25, 2025"
+        }, {
+            image: "./src/image/tdon.png",
+            title: "ការប្រកួតកីឡាតេក្វាន់ដូ WT ជើងឯកថ្នាក់ជាតិ ឆ្នាំ២០២៣ មានកីឡាករ កីឡាការិនីសរុប ១២០នាក់ចូលរួម​ប្រជែង​មេដាយ មាស...",
+            date: "Jan 25, 2025"
+        }, {
+            image: "./src/image/swimon.png",
+            title: "កីឡាហែលទឹកផ្តល់អត្ថប្រយោជន៍​យ៉ាងច្រើន​ដល់សុខភាព រាងកាយ និងផ្លូវចិត្ត...",
+            date: "Jan 25, 2025"
+        }, {
+            image: "./src/image/tdon.png",
+            title: "ការប្រកួតកីឡាវាយសី វិញ្ញាសាវាយជាគូចម្រុះ (បុរស-នារី) ដែល កម្ពុជាទទួលបានមេដាយមាស កីឡា​វាយ​សី​ជួយ​បន្ថយហានិភ័យ​ពី​​...",
+            date: "Jan 25, 2025"
+        }, {
+            image: "./src/image/Boxing.png",
+            title: "កីឡាករប្រដាល់ ៣ រូបដែលធ្វើអោយពិភពលោក ស្គាល់កណ្ដាប់ដៃអ៊ុយក្រែន",
+            date: "Jan 20, 2025"
+        }];
+
+        // Hero Section Logic
+        let currentHeroIndex = 0;
+        let heroInterval;
+
+        function initHero() {
+            const container = document.getElementById('hero-container');
+            const indicators = document.getElementById('hero-indicators');
+
+            // Create hero slides
+            heroData.forEach((slide, index) => {
+                const slideElement = document.createElement('section');
+                slideElement.className = `hero-slide absolute inset-0 w-full h-full ${index === 0 ? 'opacity-100' : 'opacity-0'}`;
+                slideElement.innerHTML = `
+                    <img src="${slide.image}" alt="Hero Image" class="hero-image w-100 h-100">
+                `;
+                container.appendChild(slideElement);
+
+                // Create indicator
+                const indicator = document.createElement('button');
+                indicator.className = `w-3 h-3 rounded-full transition-all ${index === 0 ? 'bg-white' : 'bg-white/50'}`;
+                indicator.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                indicator.addEventListener('click', () => showHeroSlide(index));
+                indicators.appendChild(indicator);
+            });
+
+            startHeroRotation();
+        }
+
+        function showHeroSlide(index) {
+            const slides = document.querySelectorAll('.hero-slide');
+            const indicators = document.querySelectorAll('#hero-indicators button');
+
+            slides[currentHeroIndex].classList.remove('opacity-100');
+            slides[currentHeroIndex].classList.add('opacity-0');
+            indicators[currentHeroIndex].classList.remove('bg-white');
+            indicators[currentHeroIndex].classList.add('bg-white/50');
+
+            currentHeroIndex = index;
+
+            slides[currentHeroIndex].classList.remove('opacity-0');
+            slides[currentHeroIndex].classList.add('opacity-100');
+            indicators[currentHeroIndex].classList.remove('bg-white/50');
+            indicators[currentHeroIndex].classList.add('bg-white');
+        }
+
+        function nextHeroSlide() {
+            const nextIndex = (currentHeroIndex + 1) % heroData.length;
+            showHeroSlide(nextIndex);
+        }
+
+        function prevHeroSlide() {
+            const prevIndex = (currentHeroIndex - 1 + heroData.length) % heroData.length;
+            showHeroSlide(prevIndex);
+        }
+
+        function startHeroRotation() {
+            heroInterval = setInterval(nextHeroSlide, 8000);
+        }
+
+        function stopHeroRotation() {
+            clearInterval(heroInterval);
+        }
+
+        // Event Detail Section Logic
+        function initEventDetail() {
+            const container = document.getElementById('event-detail-container');
+
+            // Debug: Check what's in localStorage
+            console.log('All localStorage keys:', Object.keys(localStorage));
+            console.log('selectedEvent from localStorage:', localStorage.getItem('selectedEvent'));
+
+            // Try to get data from localStorage (THIS IS WHERE IT GETS DATA FROM HOME PAGE)
+            let selectedEvent = null;
+            try {
+                const storedData = localStorage.getItem('selectedEvent');
+                if (storedData && storedData !== 'null' && storedData !== 'undefined') {
+                    selectedEvent = JSON.parse(storedData);
+                    console.log('Parsed selectedEvent:', selectedEvent);
+                }
+            } catch (error) {
+                console.error('Error parsing selectedEvent from localStorage:', error);
+            }
+
+            // Alternative: Check for other possible keys or URL parameters
+            if (!selectedEvent) {
+                // Check if data is passed via URL parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                const eventId = urlParams.get('id');
+                const title = urlParams.get('title');
+                const image = urlParams.get('image');
+                const date = urlParams.get('date');
+
+                if (eventId || title) {
+                    selectedEvent = {
+                        id: eventId,
+                        title: decodeURIComponent(title || 'Default Title'),
+                        image: decodeURIComponent(image || './src/imag-about/default.png'),
+                        date: decodeURIComponent(date || 'Jan 25, 2025'),
+                        description: 'Event details will be loaded here.'
+                    };
+                    console.log('Created selectedEvent from URL params:', selectedEvent);
+                }
+            }
+
+            if (selectedEvent && selectedEvent.title) {
+                container.innerHTML = `
+                    <header class="mb-6">
+                        <h1 class="text-3xl lg:text-4xl font-bold mb-4 leading-tight khmer-text" style="color: #000249;">${selectedEvent.title}</h1>
+                        <time class="text-gray-500 text-base english-text mb-6 block">${selectedEvent.date}</time>
+                    </header>
+                    <figure class="mb-6">
+                        <img src="${selectedEvent.image}" alt="${selectedEvent.title}" class="detail-image w-full rounded-lg shadow-lg" onerror="this.src='./src/img-about/default.png'">
+                    </figure>
+                    <section class="prose max-w-none">
+                        <p class="text-lg leading-relaxed text-justify khmer-text" style="color: #000249; line-height: 2;">${selectedEvent.description || selectedEvent.title}</p>
+                    </section>
+                `;
+            } else {
+                console.log('No selectedEvent found, showing default message');
+                container.innerHTML = `
+                    <section class="text-center py-12">
+                        <h1 class="text-2xl font-bold mb-4 khmer-text" style="color: #000249;">មិនមានព័ត៌មានលម្អិត</h1>
+                        <p class="text-gray-600 khmer-text">សូមត្រលប់ទៅកាន់ទំព័រដើម ហើយជ្រើសរើសអត្ថបទម្ដង។</p>
+                        <a href="./index.html" class="custom-btn inline-block mt-4 px-6 py-2 rounded-full transition duration-300 khmer-text">ត្រលប់ទៅកាន់ទំព័រដើម</a>
+                    </section>
+                `;
+            }
+        }
+
+        // Related Events Section Logic
+        let relatedEventsVisible = 3;
+
+        function initRelatedEvents() {
+            renderRelatedEvents();
+        }
+
+        function renderRelatedEvents() {
+            const container = document.getElementById('related-events-grid');
+            const seeMoreBtn = document.getElementById('related-see-more');
+
+            container.innerHTML = '';
+
+            for (let i = 0; i < Math.min(relatedEventsVisible, relatedEventsData.length); i++) {
+                const event = relatedEventsData[i];
+                const eventElement = document.createElement('article');
+                eventElement.className = 'bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300';
+                eventElement.innerHTML = `
+                    <img src="${event.image}" class="card-image w-full" alt="${event.title}">
+                    <section class="p-4">
+                        <h3 class="text-lg card-title mb-2 leading-tight khmer-text" style="color: #000249;">${event.title}</h3>
+                        <time class="text-gray-400 text-xs english-text">${event.date}</time>
+                    </section>
+                `;
+                container.appendChild(eventElement);
+            }
+
+            // Hide/show "See More" button
+            if (relatedEventsVisible >= relatedEventsData.length) {
+                seeMoreBtn.style.display = 'none';
+            } else {
+                seeMoreBtn.style.display = 'inline-block';
+            }
+        }
+
+        function showMoreRelatedEvents() {
+            relatedEventsVisible += 3;
+            renderRelatedEvents();
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Debug data flow first
+            debugDataFlow();
+
+            // Initialize all sections
+            initHero();
+            initEventDetail();
+            initRelatedEvents();
+
+            // Hero navigation
+            document.getElementById('hero-prev').addEventListener('click', () => {
+                stopHeroRotation();
+                prevHeroSlide();
+                startHeroRotation();
+            });
+
+            document.getElementById('hero-next').addEventListener('click', () => {
+                stopHeroRotation();
+                nextHeroSlide();
+                startHeroRotation();
+            });
+
+            // See more button
+            document.getElementById('related-see-more').addEventListener('click', showMoreRelatedEvents);
+        });
+
+        // Make debugging functions available globally (for testing)
+        window.debugDataFlow = debugDataFlow;
+        window.setTestData = setTestData;
+
+        // Debug function to test data flow and help troubleshoot
+        function debugDataFlow() {
+            console.log('=== DEBUG DATA FLOW ===');
+            console.log('Current URL:', window.location.href);
+            console.log('URL Parameters:', window.location.search);
+            console.log('All localStorage keys:', Object.keys(localStorage));
+            console.log('selectedEvent raw:', localStorage.getItem('selectedEvent'));
+
+            // Try to parse selectedEvent
+            try {
+                const parsed = JSON.parse(localStorage.getItem('selectedEvent'));
+                console.log('selectedEvent parsed:', parsed);
+            } catch (e) {
+                console.log('Error parsing selectedEvent:', e);
+            }
+
+            console.log('========================');
+        }
+
+        // Function to manually set test data (for debugging)
+        function setTestData() {
+            const testEvent = {
+                title: "Test Event Title",
+                image: "./../img-about/logo.png",
+                date: "Jan 25, 2025",
+                description: "This is a test event description to check if the data flow works correctly."
+            };
+            localStorage.setItem('selectedEvent', JSON.stringify(testEvent));
+            console.log('Test data set:', testEvent);
+            location.reload(); // Reload to see the changes
+        }
+    </script>
+</body>
+
+</html>

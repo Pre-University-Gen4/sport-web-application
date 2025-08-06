@@ -6,17 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ISTAD Sport</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Koulen&family=Noto+Sans+Khmer:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            color: #000249;
-        }
-        
         .custom-bg {
             background-color: #FAF9F0;
+        }
+        /* Khmer text styling */
+        
+        .khmer-text {
+            font-family: 'Noto Sans Khmer', sans-serif;
+            color: #000249;
+            letter-spacing: 0.02em;
+            /* Added letter spacing for better readability */
+        }
+        /* English text styling */
+        
+        .english-text {
+            font-family: 'Roboto', sans-serif;
+            color: #000249;
+            letter-spacing: 0.02em;
+            /* Added letter spacing for better readability */
         }
         
         h1,
@@ -25,7 +38,7 @@
         h4,
         h5,
         h6 {
-            font-family: 'Khmer OS', 'Roboto', sans-serif;
+            font-family: 'Noto Sans Khmer', sans-serif;
             color: #000249;
         }
         
@@ -36,69 +49,72 @@
         .card-container {
             transition: transform 0.5s ease-in-out;
         }
+        /* Custom styles for card titles */
+        
+        .card-title {
+            font-weight: 500;
+            /* Less bold than font-bold */
+            letter-spacing: 0.025em;
+            /* Better letter spacing */
+            line-height: 1.4;
+            /* Better line height for readability */
+        }
+        /* Custom button styling */
+        
+        .custom-btn {
+            background-color: #FAF9F0;
+            border: 2px solid #3B82F6;
+            color: #3B82F6;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-btn:hover {
+            background-color: #3B82F6;
+            color: white;
+        }
     </style>
 </head>
 
 <body class="bg-gray-50">
     <!-- Header -->
     <header class="custom-bg shadow-sm border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section class="flex justify-center items-center py-4 relative">
                 <!-- Logo -->
-                <div class="flex items-center">
+                <section class="absolute left-0 flex items-center">
                     <img src="./src/img-about/logo.png" alt="Logo" class="h-12">
-                </div>
+                </section>
 
                 <!-- Navigation -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="./index.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Home</a>
-                    <a href="./src/html/event.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Event</a>
-                    <a href="./src/html/about.html" class="custom-text hover:text-blue-600 transition-colors font-medium">About</a>
+                <nav class="flex space-x-8">
+                    <a href="./index.html" class="text-[#000249] hover:text-blue-600 transition-colors font-bold english-text">Home</a>
+                    <a href="./src/html/event.html" class="text-[#000249] hover:text-blue-600 transition-colors font-bold english-text">Event</a>
+                    <a href="./src/html/about.html" class="text-[#000249] hover:text-blue-600 transition-colors font-bold english-text">About</a>
                 </nav>
-
-                <!-- Right Side Icons and Button -->
-                <div class="flex items-center space-x-4">
-                    <!-- Heart/Favorite Icon -->
-                    <button id="favoriteBtn" class="p-2 text-[#000249]  hover:text-red-500 transition-colors relative">
-                        <i class="fas fa-heart text-xl"></i>
-                        <span id="favoriteCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
-                    </button>
-
-                    <!-- Account Icon -->
-                    <button id="accountBtn" class="p-2 text-[#000249]  hover:text-blue-600 transition-colors">
-                        <i class="fas fa-user-circle text-xl"></i>
-                    </button>
-
-                    <!-- Post Button -->
-                    <button id="postEventBtn" class="post-button text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
-                        <i class="fas fa-plus"></i>
-                        <span>Post</span>
-                    </button>
-                </div>
-            </div>
-        </div>
+            </section>
+        </section>
     </header>
 
     <!-- Hero Section -->
     <section class="relative w-full h-screen overflow-hidden">
-        <article id="hero-container" class="relative w-full h-full">
+        <main id="hero-container" class="relative w-full h-full">
             <!-- Hero slides will be dynamically inserted here -->
-        </article>
+        </main>
 
-        <button id="hero-prev" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 z-10">
+        <button id="hero-prev" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 z-10" aria-label="Previous slide">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
         </button>
 
-        <button id="hero-next" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 z-10">
+        <button id="hero-next" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 z-10" aria-label="Next slide">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
         </button>
 
         <!-- Hero indicators -->
-        <nav class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10" id="hero-indicators">
+        <nav class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10" id="hero-indicators" aria-label="Slide navigation">
             <!-- Indicators will be dynamically inserted here -->
         </nav>
     </section>
@@ -108,41 +124,41 @@
         <!-- New Events Section -->
         <section class="mb-12">
             <header class="mb-6">
-                <h2 class="text-2xl mb-2 pb-1 border-b-2 border-gray-300">អត្ថបទថ្មីៗ</h2>
+                <h2 class="text-2xl mb-2 pb-1 border-b-2 border-gray-300 font-bold khmer-text">អត្ថបទថ្មីៗ</h2>
             </header>
 
-            <article class="relative">
-                <div id="new-events-container" class="overflow-hidden">
+            <section class="relative px-12">
+                <main id="new-events-container" class="overflow-hidden">
                     <!-- New events cards will be dynamically inserted here -->
-                </div>
+                </main>
 
-                <button id="new-events-prev" class="absolute top-1/2 left-2 -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-all duration-300 z-10">
+                <button id="new-events-prev" class="absolute top-1/2 -left-6 -translate-y-1/2 bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-all duration-300 z-10 shadow-lg" aria-label="Previous event">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
 
-                <button id="new-events-next" class="absolute top-1/2 right-2 -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-all duration-300 z-10">
+                <button id="new-events-next" class="absolute top-1/2 -right-6 -translate-y-1/2 bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-all duration-300 z-10 shadow-lg" aria-label="Next event">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </button>
-            </article>
+            </section>
         </section>
 
         <!-- Popular Events Section -->
         <section class="mb-12">
             <header class="mb-6">
-                <h2 class="text-2xl mb-2 pb-2 border-b-2 border-gray-300">អត្ថបទពេញនិយម</h2>
+                <h2 class="text-2xl mb-2 pb-2 border-b-2 border-gray-300 font-bold khmer-text">អត្ថបទពេញនិយម</h2>
             </header>
 
-            <article id="popular-events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <main id="popular-events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Popular events cards will be dynamically inserted here -->
-            </article>
+            </main>
 
             <nav class="text-center mt-8">
-                <button id="popular-see-more" class="text-blue-600 font-semibold border-2 border-blue-600 rounded-full px-8 py-2 hover:bg-blue-600 hover:text-white transition duration-300">
-                    អានបន្ថែម
+                <button id="popular-see-more" class="custom-btn rounded-full px-8 py-2 transition duration-300 khmer-text">
+                    មើលបន្ថែម
                 </button>
             </nav>
         </section>
@@ -150,15 +166,15 @@
         <!-- Sports Categories Section -->
         <section>
             <header class="mb-6">
-                <h2 class="text-2xl mb-2 pb-2 border-b-2 border-gray-300">ប្រភេទកីឡា</h2>
+                <h2 class="text-2xl mb-2 pb-2 border-b-2 border-gray-300 font-bold khmer-text">ប្រភេទកីឡា</h2>
             </header>
 
-            <article id="sports-categories-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <main id="sports-categories-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Sports categories cards will be dynamically inserted here -->
-            </article>
+            </main>
 
             <nav class="text-center mt-8">
-                <button id="sports-see-more" class="text-blue-600 font-semibold border-2 border-blue-600 rounded-full px-8 py-2 hover:bg-blue-600 hover:text-white transition duration-300">
+                <button id="sports-see-more" class="custom-btn rounded-full px-8 py-2 transition duration-300 khmer-text">
                     មើលបន្ថែម
                 </button>
             </nav>
@@ -166,78 +182,72 @@
     </main>
 
     <!-- Footer -->
-    <footer class="custom-bg text-gray-800 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-5 gap-8">
-                <div>
-                    <h1 class="text-lg font-semibold mb-4 khmer-text">Organized By</h1>
+    <footer class="custom-bg text-[#000249] py-12">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section class="grid md:grid-cols-5 gap-8">
+                <section>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Organized By</h3>
                     <img src="./src/img-about/istad.png" alt="ISTAD Logo" class="w-20 h-15 mb-4">
-                </div>
+                </section>
 
-                <div>
-                    <h1 class="text-lg font-semibold mb-4 khmer-text">Prepared By</h1>
+                <section>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Prepared By</h3>
                     <img src="./src/img-about/logo.png" alt="sportshub Logo" class="w-21 h-20 mb-4">
-                </div>
+                </section>
 
                 <nav>
-                    <h3 class="text-lg font-semibold mb-4 khmer-text">Category</h3>
-                    <ul class="space-y-2 text-[#000249] ">
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Football</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Basketball</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Swimming</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Tennis</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Golf</a></li>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Category</h3>
+                    <ul class="space-y-2 text-[#000249]">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Football</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Basketball</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Swimming</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Tennis</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Golf</a></li>
                     </ul>
                 </nav>
 
                 <nav>
-                    <h3 class="text-lg font-semibold mb-4 khmer-text">Quick Links</h3>
-                    <ul class="space-y-2 text-[#000249] ">
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">All News</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Event</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">About Us</a></li>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Quick Links</h3>
+                    <ul class="space-y-2 text-[#000249]">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">All News</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Event</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">About Us</a></li>
                     </ul>
                 </nav>
 
                 <nav>
-                    <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                    <h3 class="text-lg font-semibold mb-4 english-text">Connect With Us</h3>
+                    <section class="flex space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors" aria-label="Follow us on Facebook">
                             <i class="fab fa-facebook-f text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors" aria-label="Follow us on Telegram">
                             <i class="fab fa-telegram text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors" aria-label="Follow us on Instagram">
                             <i class="fab fa-instagram text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors" aria-label="Follow us on YouTube">
                             <i class="fab fa-youtube text-xl"></i>
                         </a>
-                    </div>
+                    </section>
                 </nav>
-            </div>
+            </section>
 
-            <div class="border-t border-gray-300 mt-8 pt-8 text-center">
-                <p class="text-[#000249]  text-sm">© 2025 SportHub. All Rights Reserved.</p>
-            </div>
-        </div>
+            <section class="border-t border-gray-300 mt-8 pt-8 text-center">
+                <p class="text-[#000249] text-sm english-text">© 2025 SportHub. All Rights Reserved.</p>
+            </section>
+        </section>
     </footer>
 
     <script>
         // Data for different sections
         const heroData = [{
-            image: "./src/image/istad.png",
-            title: "ISTAD Sport Community",
-            description: "ចូលរួមជាមួយសហគមន៍កីឡារបស់យើង"
+            image: "./src/image/istad.png"
         }, {
-            image: "./src/image/football.png",
-            title: "Football Championship",
-            description: "ការប្រកួតបាល់ទាត់ថ្នាក់ជាតិ"
+            image: "./src/image/football.png"
         }, {
-            image: "./src/image/vb.png",
-            title: "Sports Excellence",
-            description: "ភាពល្អឥតខ្ចោះក្នុងកីឡា"
+            image: "./src/image/vb.png"
         }];
 
         const newEventsData = [{
@@ -245,7 +255,7 @@
             category: "Football",
             title: "កម្មវិធីលេងកីឡា សាមគ្គីភាតរភាព របស់គ្រួសារ ISTAD នៃវិទ្យាស្ថាន សាយអិនស៍ អេន ថេក ណូ ឡជី អ៊ែតវ៉ានស៍ ឌីវេឡុបម៉ិន (ISTAD)",
             date: "ISTAD - July 30, 2025",
-            description: "នាថ្ងៃសៅរ៍ ទី៥ ខែកក្កដា ឆ្នាំ២០២៥ វិទ្យាស្ថាន សាយអិនស៍ អេន ថេកណឡជី អ៊ែតវ៉ានស៍ ឌីវេឡុបម៉ិន (ISTAD) បានរៀបចំកម្មវិធីលេងកីឡា ការលេងល្បែងកម្សាន្ត សាមគ្គីភាតរភាព ដោយមានការចូលរួមពី លោកគ្រូនាយក លោកគ្រូអ្នកគ្រូ ព្រមទាំងសិស្សនិស្សិត អាហារូបករណ៍ Fullstack Web development ជំនាន់ទី ១, អាហារូបករណ៍ ព័ត៌មានវិទ្យាកម្រិតមូលដ្ឋាន(Foundation) ជំនាន់ទី ៤, អាហារូបករណ៍បច្ចេកវិទ្យាឌីជីថល (Pre-university) ជំនាន់ទី ៤ និងថ្នាក់សញ្ញាបត្របច្ចេកទេស ជាន់ខ្ពស់ (Associate)  ប្រកបដោយភាពសប្បាយរីករាយ។"
+            description: "នាថ្ងៃសៅរ៍ ទី៥ ខែកក្កដា ឆ្នាំ២០២៥ វិទ្យាស្ថាន សាយអិនស៍ អេន ថេកណឡជី អ៊ែតវ៉ានស៍ ឌីវេឡុបម៉ិន (ISTAD) បានរៀបចំកម្មវិធីលេងកីឡា ការលេងល្បែងកម្សាន្ត សាមគ្គីភាតរភាព ដោយមានការចូលរួមពី លោកគ្រូនាយក លោកគ្រូអ្នកគ្រូ ព្រមទាំងសិស្សនិស្សិត អាហារូបករណ៍ Fullstack Web development ជំនាន់ទី ១, អាហារូបករណ៍ ព័ត៌មានវិទ្យាកម្រិតមូលដ្ឋាន(Foundation) ជំនាន់ទី ៤, អាហារូបករណ៍បច្ចេកវិទ្យាឌីជីថល (Pre-university) ជំនាន់ទី ៤ និងថ្នាក់សញ្ញាបត្របច្ចេកទេស ជាន់ខ្ពស់ (Associate)  ប្រកបដោយភាពសប្បាយរីករាយ។"
         }, {
             image: "./src/image/vb.png",
             category: "Basketball",
@@ -279,10 +289,6 @@
             title: "កីឡាករប្រដាល់ ៣ រូបដែលធ្វើអោយពិភពលោក ស្គាល់កណ្ដាប់ដៃអ៊ុយក្រែន",
             date: "Jan 20, 2025"
         }, {
-            image: "https://cdn.sabay.com/cdn/media.sabay.com/media/Bun.Sophearum/Social(39)/686de51bc8a1c_1752032520_medium.jpg",
-            title: "ប្រសិនបើ Pacquiao យកឈ្នះ Barrios នឹងបំបែកកំណត់ត្រា ជាម្ចាស់ជើងឯកខ្សែក្រវ៉ាត់ WBC វ័យចំណាស់ជាងគេ",
-            date: "Jan 18, 2025"
-        }, {
             image: "https://cdn.sabay.com/cdn/media.sabay.com/media/Bun.Sophearum/Social(39)/686b71b14c08e_1751871900_medium.jpg",
             title: "ពិធីប្រណាំងទូកនៅឥណ្ឌូនេស៊ី កំពុងទទួលការចាប់អារម្មណ៍ដោយសារក្មេងប្រុសម្នាក់!",
             date: "Jan 15, 2025"
@@ -313,10 +319,6 @@
             title: "កីឡារត់ប្រណាំង",
             description: "កីឡារត់ប្រណាំងគឺជាប្រភេទ កីឡាអត្តពល កម្មដ៏ល្បីល្បាញ់..."
         }, {
-            image: "./src/image/boxing.png",
-            title: "កីឡាប្រដាល់",
-            description: "កីឡាប្រដាល់គឺជាកីឡាប្រយុទ្ធដ៏ចាស់បុរាណមួយដែលមានប្រជាប្រិយភាពនៅ..."
-        }, {
             image: "./src/image/vb.png",
             title: "កីឡាបាល់ទះ",
             description: "កីឡាបាល់ទះគឺជាកីឡាក្រុមមួយប្រភេទដែលលេងដោយក្រុមពីរ មានសមាជិក..."
@@ -324,22 +326,6 @@
             image: "./src/image/bkb.png",
             title: "កីឡាបាល់បោះ",
             description: "បាល់បោះគឺជាកីឡាក្រុមដែល​មានអ្នកលេង ៥នាក់​ក្នុងមួយ​ក្រុម។គោលបំណង..."
-        }, {
-            image: "https://khmer.rvasia.org/sites/default/files/styles/max_width_770px/public/2024-02/btmaanjaati_87_0.jpg?itok=hv8qi0FR",
-            title: "កីឡាតេនីស",
-            description: "ណាអូមី អូសាកា កំពូលកីឡាការិនីតេនីស អាជីបលេខមួយនៅលើពិភពលោក"
-        }, {
-            image: "https://image.thmeythmey.com/pictures/2023/05/20/20520231405front.jpg",
-            title: "កីឡាអត្តពលិកពិការ",
-            description: "អត្តពលិកកម្ពុជាមានពិការភាព ២៣៦នាក់ នឹងចូលរួមប្រកួតក្នុងព្រឹត្តិការណ៍អាស៊ានប៉ារ៉ា"
-        }, {
-            image: "https://cdn.sabay.com/cdn/media.sabay.com/media/sabay-news/Sport-News/E-Sport-For-Sea-Games/62124cda3b6a8_1645366440_medium.jpg",
-            title: "កីឡាអេឡិចត្រូនិក",
-            description: "BURN X PLASH ​ក្លាយ​ជា​ជើង​ឯក​ឆ្នាំ​២០២២នៅលើ​​វិញ្ញាសា Mobile Legends "
-        }, {
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9VhRAuc96AziNe0VGGHgmjbQe5gPodWGOH31SoFxd4mWvpAkmkJo8xcGPkYUPXf2JRuuOItPlOMS3ZSbsNHVjiZnMw4OQjaTeuCRjdw",
-            title: "កីឡាគុនដាវ",
-            description: "កីឡាចាក់សាប គឺជាកីឡានៃការប្រយុទ្ធដោយប្រើដាវ។"
         }];
 
         // Hero Section Logic
@@ -352,22 +338,17 @@
 
             // Create hero slides
             heroData.forEach((slide, index) => {
-                const slideElement = document.createElement('div');
+                const slideElement = document.createElement('section');
                 slideElement.className = `hero-slide absolute inset-0 w-full h-full ${index === 0 ? 'opacity-100' : 'opacity-0'}`;
                 slideElement.innerHTML = `
-                    <img src="${slide.image}" alt="${slide.title}" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                        <div class="text-center text-white px-4">
-                            <h1 class="text-4xl md:text-6xl font-bold mb-4">${slide.title}</h1>
-                            <p class="text-xl md:text-2xl">${slide.description}</p>
-                        </div>
-                    </div>
+                    <img src="${slide.image}" alt="Hero Image" class="w-full h-full object-cover">
                 `;
                 container.appendChild(slideElement);
 
                 // Create indicator
                 const indicator = document.createElement('button');
                 indicator.className = `w-3 h-3 rounded-full transition-all ${index === 0 ? 'bg-white' : 'bg-white/50'}`;
+                indicator.setAttribute('aria-label', `Go to slide ${index + 1}`);
                 indicator.addEventListener('click', () => showHeroSlide(index));
                 indicators.appendChild(indicator);
             });
@@ -418,20 +399,29 @@
             const container = document.getElementById('new-events-container');
 
             newEventsData.forEach((event, index) => {
-                const eventElement = document.createElement('div');
-                eventElement.className = `card-container ${index === 0 ? 'block' : 'hidden'}`;
+                const eventElement = document.createElement('article');
+                eventElement.className = `card-container ${index === 0 ? 'block' : 'hidden'} cursor-pointer`;
                 eventElement.innerHTML = `
-                    <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md flex flex-col md:flex-row gap-6 items-center min-h-[400px] md:min-h-[350px]">
-                        <div class="md:w-2/5 w-full">
-                            <img src="${event.image}" alt="${event.title}" class="rounded-lg w-full h-full object-cover min-h-[200px] md:min-h-[300px]">
-                        </div>
-                        <div class="md:w-3/5 w-full flex flex-col justify-center">
-                            <h3 class="text-xl font-bold lg:text-2xl my-2 leading-tight" style="color: #000249;">${event.title}</h3>
-                            <p class="text-gray-500 text-sm mb-4">${event.date}</p>
-                            <p class="text-gray-600 leading-relaxed text-justify" style="color: #000249;">${event.description}</p>
-                        </div>
-                    </div>
+                    <section class="bg-white p-4 sm:p-6 rounded-lg shadow-md flex flex-col md:flex-row gap-6 items-stretch h-[400px] hover:shadow-lg transition-shadow duration-300">
+                        <section class="md:w-2/5 w-full">
+                            <img src="${event.image}" alt="${event.title}" class="rounded-lg w-full h-full object-cover max-h-[300px]">
+                        </section>
+                        <section class="md:w-3/5 w-full flex flex-col justify-center h-full">
+                            <h3 class="text-xl font-bold lg:text-2xl my-2 leading-tight khmer-text" style="color: #000249;">${event.title}</h3>
+                            <time class="text-gray-500 text-sm mb-4 english-text">${event.date}</time>
+                            <p class="text-gray-600 leading-relaxed text-justify khmer-text flex-1 overflow-hidden" style="color: #000249;">${event.description}</p>
+                        </section>
+                    </section>
                 `;
+
+                // Add click event to navigate to detail page
+                eventElement.addEventListener('click', () => {
+                    // Store event data in localStorage for the detail page
+                    localStorage.setItem('selectedEvent', JSON.stringify(event));
+                    // Navigate to detail page
+                    window.location.href = './home_detail.html';
+                });
+
                 container.appendChild(eventElement);
             });
 
@@ -487,10 +477,10 @@
                 eventElement.className = 'bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300';
                 eventElement.innerHTML = `
                     <img src="${event.image}" class="w-full h-48 object-cover" alt="${event.title}">
-                    <div class="p-4">
-                        <h3 class="text-lg font-bold mb-2 leading-tight" style="color: #000249;">${event.title}</h3>
-                        <time class="text-gray-400 text-xs">${event.date}</time>
-                    </div>
+                    <section class="p-4">
+                        <h3 class="text-lg card-title mb-2 leading-tight khmer-text" style="color: #000249;">${event.title}</h3>
+                        <time class="text-gray-400 text-xs english-text">${event.date}</time>
+                    </section>
                 `;
                 container.appendChild(eventElement);
             }
@@ -527,10 +517,10 @@
                 sportElement.className = 'bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300';
                 sportElement.innerHTML = `
                     <img src="${sport.image}" class="w-full h-48 object-cover" alt="${sport.title}">
-                    <div class="p-4">
-                        <h3 class="text-lg font-bold mb-2 leading-tight" style="color: #000249;">${sport.title}</h3>
-                        <p class="text-sm" style="color: #000249;">${sport.description}</p>
-                    </div>
+                    <section class="p-4">
+                        <h3 class="text-lg card-title mb-2 leading-tight khmer-text" style="color: #000249;">${sport.title}</h3>
+                        <p class="text-sm khmer-text" style="color: #000249;">${sport.description}</p>
+                    </section>
                 `;
                 container.appendChild(sportElement);
             }
