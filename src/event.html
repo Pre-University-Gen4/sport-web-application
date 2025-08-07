@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sportshub - ស្ថាប័ន</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./../css/event.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="custom-bg shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="../img-about/logo.png" alt="Logo" class="h-10">
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="../../index.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Home</a>
+                    <a href="../html/event.html" class="text-blue-600 font-medium border-b-2 border-blue-600 pb-1">Event</a>
+                    <a href="../html/about.html" class="custom-text hover:text-blue-600 transition-colors font-medium">About</a>
+                </nav>
+
+                <!-- Right Side Icons and Button -->
+                <div class="flex items-center space-x-4">
+                    <!-- Heart/Favorite Icon -->
+                    <button id="favoriteBtn" class="p-2 text-gray-600 hover:text-red-500 transition-colors relative">
+                        <i class="fas fa-heart text-xl"></i>
+                        <span id="favoriteCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+
+                    <!-- Account Icon -->
+                    <button class="p-2 text-gray-600 hover:text-blue-600 transition-colors">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </button>
+
+                    <!-- Post Button -->
+                    <button id="postEventBtn" class="post-button text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+                        <i class="fas fa-plus"></i>
+                        <span>Post</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="border-b border-gray-200"></div>
+
+    <!-- Post New Event Modal -->
+    <div id="postEventModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="p-6">
+                <!-- Modal Header -->
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold custom-text">Post New Event</h2>
+                    <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Event Form -->
+                <form id="eventForm" class="space-y-4">
+                    <!-- Event Title -->
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2">Event Title *</label>
+                        <input type="text" id="eventTitle" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter event title">
+                    </div>
+
+                    <!-- Event Description -->
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2">Event Description</label>
+                        <textarea id="eventDescription" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Describe your event"></textarea>
+                    </div>
+
+                    <!-- Date -->
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2">Date *</label>
+                        <input type="date" id="eventDate" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Location -->
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2">Location *</label>
+                        <input type="text" id="eventLocation" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Event location">
+                    </div>
+
+                    <!-- Location Link -->
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2">Location Map Link (iframe src)</label>
+                        <textarea id="eventLocationLink" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="2" placeholder='Paste iframe src here: https://www.google.com/maps/embed?pb=...'></textarea>
+                        <p class="text-xs text-gray-500 mt-1">Get this from Google Maps → Share → Embed a map → Copy the src attribute from iframe</p>
+                    </div>
+
+                    <!-- Category -->
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2">Category *</label>
+                        <select id="eventCategory" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Select category</option>
+                            <option value="football">Football</option>
+                            <option value="basketball">Basketball</option>
+                            <option value="swimming">Swimming</option>
+                            <option value="running">Running</option>
+                            <option value="tennis">Tennis</option>
+                            <option value="golf">Golf</option>
+                        </select>
+                    </div>
+
+                    <!-- Event Image Upload -->
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2">Event Image</label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-400 transition-colors">
+                            <input type="file" id="eventImage" accept="image/*" class="hidden">
+                            <label for="eventImage" class="cursor-pointer">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                <p class="text-sm text-gray-500">Click to upload image</p>
+                            </label>
+                            <img id="imagePreview" class="image-preview hidden mx-auto">
+                        </div>
+                    </div>
+
+                    <!-- Form Buttons -->
+                    <div class="flex space-x-3 pt-4">
+                        <button type="button" id="cancelBtn" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" class="flex-1 px-4 py-2 post-button text-white rounded-lg transition-colors">
+                            Post Event
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative">
+        <figure class="h-screen relative overflow-hidden">
+            <button id="prevBtn" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-3 z-10 transition-all duration-200 shadow-lg">
+                <i class="fas fa-chevron-left text-gray-700 text-xl"></i>
+            </button>
+
+            <img id="heroImage1" class="hero-image fade-in" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&h=1080&fit=crop" alt="Group Photo 1">
+            <img id="heroImage2" class="hero-image fade-out" src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1920&h=1080&fit=crop" alt="Group Photo 2">
+            <img id="heroImage3" class="hero-image fade-out" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&h=1080&fit=crop" alt="Group Photo 3">
+
+            <button id="nextBtn" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-3 z-10 transition-all duration-200 shadow-lg">
+                <i class="fas fa-chevron-right text-gray-700 text-xl"></i>
+            </button>
+
+            <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+        </figure>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Events -->
+        <section class="mb-12">
+            <header class="flex items-center justify-between mb-6 filter-divider">
+                <h2 class="text-3xl font-bold custom-text khmer-text">ព្រឹត្តិការណ៍</h2>
+
+                <!-- Filter Controls -->
+                <nav class="flex items-center space-x-4">
+                    <!-- Category Filter -->
+                    <div class="flex items-center space-x-2">
+                        <p class="text-sm font-medium custom-text">Category:</p>
+                        <div class="relative">
+                            <select id="categoryFilter" class="appearance-none custom-bg border border-gray-300 rounded-lg px-4 py-2 pr-8 custom-text focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-w-32">
+                                <option value="">All Sports</option>
+                                <option value="football">Football</option>
+                                <option value="basketball">Basketball</option>
+                                <option value="swimming">Swimming</option>
+                                <option value="running">Running</option>
+                                <option value="tennis">Tennis</option>
+                                <option value="golf">Golf</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="Search events..." class="custom-bg border border-gray-300 rounded-lg px-4 py-2 pl-10 custom-text focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-64">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </nav>
+            </header>
+
+            <div id="eventsContainer" class="grid md:grid-cols-3 gap-6">
+                <!-- Event cards will be generated by JavaScript -->
+            </div>
+
+            <!-- See More Button -->
+            <div class="text-center mt-8">
+                <button id="seeMoreBtn" class="custom-btn rounded-lg px-4 py-2 transition duration-300 khmer-text">
+                    មើលបន្ថែម
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="custom-bg text-[#000249] py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-5 gap-8">
+                <div>
+                    <h1 class="text-lg font-semibold mb-4 khmer-text">Organized By</h1>
+                    <img src="../img-about/istad.png" alt="ISTAD Logo" class="w-20 h-15 mb-4">
+                </div>
+
+                <div>
+                    <h1 class="text-lg font-semibold mb-4 khmer-text">Prepared By</h1>
+                    <img src="../img-about/logo.png" alt="sportshub Logo" class="w-21 h-20 mb-4">
+                </div>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 khmer-text">Category</h3>
+                    <ul class="space-y-2 text-[#000249]">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Football</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Basketball</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Swimming</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Tennis</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Golf</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 khmer-text">Quick Links</h3>
+                    <ul class="space-y-2 text-[#000249]">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">All News</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">Event</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">About Us</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="border-t border-gray-300 mt-8 pt-8 text-center">
+                <p class="text-[#000249] text-sm">© 2025 SportHub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./../js/event.js"></script>
+</body>
+
+</html>

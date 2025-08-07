@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISTAD Sport</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Koulen&family=Noto+Sans+Khmer:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body class="bg-gray-50">
+    <header class="custom-bg shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <img src="./src/img-about/logo.png" alt="Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/100x40/ffffff/000000?text=Logo';">
+                </div>
+
+                <nav class="hidden md:flex space-x-8">
+                    <a href="./index.html" class="text-blue-600 font-medium border-b-2 border-blue-600 pb-1">Home</a>
+                    <a href="./src/html/event.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Event</a>
+                    <a href="./src/html/about.html" class="custom-text hover:text-blue-600 transition-colors font-medium">About</a>
+                </nav>
+
+                <div class="flex items-center space-x-4">
+                    <button id="favoriteBtn" class="p-2 text-gray-600 hover:text-red-500 transition-colors relative">
+                        <i class="fas fa-heart text-xl"></i>
+                        <span id="favoriteCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+
+                    <button class="p-2 text-gray-600 hover:text-blue-600 transition-colors">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </button>
+
+                    <button id="postEventBtn" class="bg-[#007AFF] hover:bg-[#0056CC] text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+                        <i class="fas fa-plus"></i>
+                        <span>Post</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative w-full h-screen overflow-hidden">
+        <main id="hero-container" class="relative w-full h-full">
+        </main>
+
+        <button id="hero-prev" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 z-10" aria-label="Previous slide">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+
+        <button id="hero-next" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 z-10" aria-label="Next slide">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+
+        <nav class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10" id="hero-indicators" aria-label="Slide navigation">
+        </nav>
+    </section>
+
+    <main class="container mx-auto px-4 py-10">
+        <section class="mb-12">
+            <header class="mb-6">
+                <h2 class="text-3xl mb-2 pb-4 border-b-2 border-gray-100 font-bold khmer-text">អត្ថបទថ្មីៗ</h2>
+            </header>
+
+            <section class="relative px-12">
+                <main id="new-events-container" class="overflow-hidden">
+                </main>
+
+                <button id="new-events-prev" class="absolute top-1/2 -left-6 -translate-y-1/2 bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-all duration-300 z-10 shadow-lg" aria-label="Previous event">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+
+                <button id="new-events-next" class="absolute top-1/2 -right-6 -translate-y-1/2 bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-all duration-300 z-10 shadow-lg" aria-label="Next event">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </section>
+        </section>
+
+        <section class="mb-12">
+            <header class="mb-6">
+                <h2 class="text-3xl mb-2 pb-4 border-b-2 border-gray-100 font-bold khmer-text">អត្ថបទពេញនិយម</h2>
+            </header>
+
+            <main id="popular-events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            </main>
+
+            <nav class="text-center mt-8">
+                <button id="popular-see-more" class="custom-btn rounded-full px-8 py-2 transition duration-300 khmer-text">
+                    មើលបន្ថែម
+                </button>
+            </nav>
+        </section>
+
+    </main>
+
+    <footer class="custom-bg text-[#000249] py-12">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section class="grid md:grid-cols-5 gap-8">
+                <section>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Organized By</h3>
+                    <img src="./src/img-about/istad.png" alt="ISTAD Logo" class="w-20 h-15 mb-4">
+                </section>
+
+                <section>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Prepared By</h3>
+                    <img src="./src/img-about/logo.png" alt="sportshub Logo" class="w-21 h-20 mb-4">
+                </section>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Category</h3>
+                    <ul class="space-y-2 text-[#000249]">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Football</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Basketball</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Swimming</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Tennis</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Golf</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Quick Links</h3>
+                    <ul class="space-y-2 text-[#000249]">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">All News</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">Event</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors english-text">About Us</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Connect With Us</h3>
+                    <section class="flex space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors" aria-label="Follow us on Facebook">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors" aria-label="Follow us on Telegram">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors" aria-label="Follow us on Instagram">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors" aria-label="Follow us on YouTube">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </section>
+                </nav>
+            </section>
+
+            <section class="border-t border-gray-300 mt-8 pt-8 text-center">
+                <p class="text-[#000249] text-sm english-text">© 2025 SportHub. All Rights Reserved.</p>
+            </section>
+        </section>
+    </footer>
+
+    <script src="home.js"></script>
+</body>
+
+</html>
