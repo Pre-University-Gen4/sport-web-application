@@ -7,12 +7,13 @@
     <title>SportHub - About</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Updated Google Fonts link to include Inter and Noto Sans Khmer -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Noto+Sans+Khmer:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
+            darkMode: 'class', // Enable dark mode
             theme: {
                 extend: {
                     colors: {
@@ -45,41 +46,40 @@
         /* Set Inter as the default font for the body */
         body {
             font-family: 'Inter', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scrollbar from AOS animations */
         }
     </style>
 </head>
 
-<body class="bg-white">
-    <!-- Header -->
-    <header class="custom-bg shadow-sm border-b border-gray-200">
+<body class="bg-white dark:bg-gray-900">
+    <header class="custom-bg dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
-                <!-- Logo -->
                 <div class="flex items-center">
                     <img src="../img-about/logo.png" alt="Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/100x40/ffffff/000000?text=Logo';">
-                </div>
+                </div>gu
 
-                <!-- Navigation -->
                 <nav class="hidden md:flex space-x-8">
-                    <a href="../../index.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Home</a>
-                    <a href="../html/event.html" class="custom-text hover:text-blue-600 transition-colors font-medium">Event</a>
-                    <a href="../html/about.html" class="text-blue-600 font-medium border-b-2 border-blue-600 pb-1">About</a>
+                    <a href="../../index.html" class="custom-text dark:text-gray-300 hover:text-blue-600 dark:hover:text-white transition-colors font-medium">Home</a>
+                    <a href="../html/event.html" class="custom-text dark:text-gray-300 hover:text-blue-600 dark:hover:text-white transition-colors font-medium">Event</a>
+                    <a href="../html/about.html" class="text-blue-600 dark:text-blue-400 font-medium border-b-2 border-blue-600 dark:border-blue-400 pb-1">About</a>
                 </nav>
 
-                <!-- Right Side Icons and Button -->
                 <div class="flex items-center space-x-4">
-                    <!-- Heart/Favorite Icon -->
-                    <button id="favoriteBtn" class="p-2 text-gray-600 hover:text-red-500 transition-colors relative">
+                    <button id="darkModeToggle" class="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">
+                        <i class="fas fa-moon text-xl" id="moonIcon"></i>
+                        <i class="fas fa-sun text-xl hidden" id="sunIcon"></i>
+                    </button>
+
+                    <button id="favoriteBtn" class="p-2 text-gray-600 dark:text-gray-400 hover:text-red-500 transition-colors relative">
                         <i class="fas fa-heart text-xl"></i>
                         <span id="favoriteCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
                     </button>
 
-                    <!-- Account Icon -->
-                    <button class="p-2 text-gray-600 hover:text-blue-600 transition-colors">
+                    <button class="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">
                         <i class="fas fa-user-circle text-xl"></i>
                     </button>
 
-                    <!-- Post Button -->
                     <button id="postEventBtn" class="bg-[#007AFF] hover:bg-[#0056CC] text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
                         <i class="fas fa-plus"></i>
                         <span>Post</span>
@@ -89,41 +89,39 @@
         </div>
     </header>
 
-    <!-- Hero Section with Full Viewport Image -->
     <section class="relative w-full h-screen overflow-hidden">
         <img src="../img-about/about.png" alt="Sports Arena Background" class="w-full h-full object-cover" id="heroImage" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/cccccc/ffffff?text=Hero+Image';">
     </section>
 
-    <!-- Stadium Section -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-white dark:bg-gray-900">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <img src="../img-about/hmm.jpg" alt="Sports Stadium" class="w-full h-full object-cover rounded-2xl shadow-2xl" id="stadiumImage" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Stadium';">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <img src="../img-about/hmm.jpg" alt="Sports Stadium" class="w-full h-full object-cover rounded-2xl border border-gray-200 dark:border-gray-700" id="stadiumImage" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Stadium';">
                 </div>
 
-                <div>
-                    <h2 class="text-3xl font-bold text-[#000249] mb-6 khmer-text">ការផ្សព្វផ្សាយកីឡាក្នុងស្រុក</h2>
+                <div data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <h2 class="text-3xl font-bold text-[#000249] dark:text-gray-100 mb-6 khmer-text">ការផ្សព្វផ្សាយកីឡាក្នុងស្រុក</h2>
                     <ul>
                         <li class="flex items-start space-x-5 mb-5">
-                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
-                            <span class="text-[#000249] text-2xl khmer-text">ជំរុញការយល់ដឹងអំពីកីឡាក្នុងស្រុកនិងក្លឹបកីឡាក្នុងតំបន់</span>
+                            <span class="w-2 h-2 bg-[#000249] dark:bg-gray-100 rounded-full mt-2"></span>
+                            <span class="text-[#000249] dark:text-gray-100 text-2xl khmer-text">ជំរុញការយល់ដឹងអំពីកីឡាក្នុងស្រុកនិងក្លឹបកីឡាក្នុងតំបន់</span>
                         </li>
                         <li class="flex items-start space-x-5 mb-5">
-                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
-                            <span class="text-[#000249] text-2xl khmer-text">ផ្តល់វេទិកាដល់ក្រុមកីឡាថ្នាក់មូលដ្ឋានដើម្បីបង្ហាញខ្លួន</span>
+                            <span class="w-2 h-2 bg-[#000249] dark:bg-gray-100 rounded-full mt-2"></span>
+                            <span class="text-[#000249] dark:text-gray-100 text-2xl khmer-text">ផ្តល់វេទិកាដល់ក្រុមកីឡាថ្នាក់មូលដ្ឋានដើម្បីបង្ហាញខ្លួន</span>
                         </li>
                         <li class="flex items-start space-x-5 mb-5">
-                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
-                            <span class="text-[#000249] text-2xl khmer-text">គាំទ្រដល់កីឡាករកម្ពុជា និងផ្សព្វផ្សាយសមិទ្ធផលរបស់ពួកគេ</span>
+                            <span class="w-2 h-2 bg-[#000249] dark:bg-gray-100 rounded-full mt-2"></span>
+                            <span class="text-[#000249] dark:text-gray-100 text-2xl khmer-text">គាំទ្រដល់កីឡាករកម្ពុជា និងផ្សព្វផ្សាយសមិទ្ធផលរបស់ពួកគេ</span>
                         </li>
                         <li class="flex items-start space-x-5 mb-5">
-                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
-                            <span class="text-[#000249] text-2xl khmer-text">មានមុខងារសម្រាប់បង្កើតប្រូហ្វាលផ្ទាល់ខ្លួន</span>
+                            <span class="w-2 h-2 bg-[#000249] dark:bg-gray-100 rounded-full mt-2"></span>
+                            <span class="text-[#000249] dark:text-gray-100 text-2xl khmer-text">មានមុខងារសម្រាប់បង្កើតប្រូហ្វាលផ្ទាល់ខ្លួន</span>
                         </li>
                         <li class="flex items-start space-x-5 mb-5">
-                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
-                            <span class="text-[#000249] text-2xl khmer-text">វេទិកាពិភាក្សាតាមប្រភេទកីឡា</span>
+                            <span class="w-2 h-2 bg-[#000249] dark:bg-gray-100 rounded-full mt-2"></span>
+                            <span class="text-[#000249] dark:text-gray-100 text-2xl khmer-text">វេទិកាពិភាក្សាតាមប្រភេទកីឡា</span>
                         </li>
                     </ul>
                 </div>
@@ -131,148 +129,177 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="py-16 bg-gray-50">
+    <section class="py-16 bg-gray-50 dark:bg-black">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Service 1 - Excellence -->
-                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-trophy text-[#000249] text-2xl"></i>
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 text-center" data-aos="fade-up" data-aos-duration="600">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-trophy text-[#000249] dark:text-blue-300 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-[#000249] mb-2 khmer-text">ឧត្តមភាព</h3>
-                    <p class="text-[#000249] text-lg khmer-text">យើងខិតខំដើម្បីភាពល្អប្រសើរនៅក្នុងអ្វីគ្រប់យ៉ាងដែលយើងធ្វើចាប់ពីអង្គការព្រឹត្តិការណ៍រហូតដល់ការគាំទ្រពីសហគមន៍។</p>
+                    <h3 class="text-xl font-bold text-[#000249] dark:text-gray-100 mb-2 khmer-text">ឧត្តមភាព</h3>
+                    <p class="text-[#000249] dark:text-gray-300 text-lg khmer-text">យើងខិតខំដើម្បីភាពល្អប្រសើរនៅក្នុងអ្វីគ្រប់យ៉ាងដែលយើងធ្វើចាប់ពីអង្គការព្រឹត្តិការណ៍រហូតដល់ការគាំទ្រពីសហគមន៍។</p>
                 </div>
 
-                <!-- Service 2 - Community -->
-                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-users text-[#000249] text-2xl"></i>
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 text-center" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-[#000249] dark:text-blue-300 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-[#000249] mb-2 khmer-text">សហគមន៍</h3>
-                    <p class="text-[#000249] text-lg khmer-text">ការកសាងសហគមន៍រស់រវើកនៃអ្នកចូលចិត្តកីឡាដែលចែករំលែកចំណង់ចំណូលចិត្តចំណេះដឹងនិងភាពរំភើប</p>
+                    <h3 class="text-xl font-bold text-[#000249] dark:text-gray-100 mb-2 khmer-text">សហគមន៍</h3>
+                    <p class="text-[#000249] dark:text-gray-300 text-lg khmer-text">ការកសាងសហគមន៍រស់រវើកនៃអ្នកចូលចិត្តកីឡាដែលចែករំលែកចំណង់ចំណូលចិត្តចំណេះដឹងនិងភាពរំភើប</p>
                 </div>
 
-                <!-- Service 3 - Quality Content -->
-                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-star text-[#000249] text-2xl"></i>
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 text-center" data-aos="fade-up" data-aos-duration="600" data-aos-delay="400">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star text-[#000249] dark:text-blue-300 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-[#000249] mb-2 khmer-text">មាតិកាគុណភាព</h3>
-                    <p class="text-[#000249] text-lg khmer-text">ការចែកចាយមាតិកាកីឡាត្រឹមត្រូវទាន់ពេលវេលានិងចូលរួមពីប្រភពដែលអាចទុកចិត្តបាននិងអ្នកវិភាគជំនាញ។</p>
+                    <h3 class="text-xl font-bold text-[#000249] dark:text-gray-100 mb-2 khmer-text">មាតិកាគុណភាព</h3>
+                    <p class="text-[#000249] dark:text-gray-300 text-lg khmer-text">ការចែកចាយមាតិកាកីឡាត្រឹមត្រូវទាន់ពេលវេលានិងចូលរួមពីប្រភពដែលអាចទុកចិត្តបាននិងអ្នកវិភាគជំនាញ។</p>
                 </div>
 
-                <!-- Service 4 - Global Coverage -->
-                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-globe-americas text-[#000249] text-2xl"></i>
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 text-center" data-aos="fade-up" data-aos-duration="600" data-aos-delay="600">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-globe-americas text-[#000249] dark:text-blue-300 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-[#000249] mb-2 khmer-text">គ្របដណ្តប់សកល</h3>
-                    <p class="text-[#000249] text-lg khmer-text">គ្របដណ្តប់កីឡាពីជុំវិញពិភពលោកដោយនាំការប្រកួតប្រជែងអន្តរជាតិទៅចុងម្រាមដៃរបស់អ្នក។</p>
+                    <h3 class="text-xl font-bold text-[#000249] dark:text-gray-100 mb-2 khmer-text">គ្របដណ្តប់សកល</h3>
+                    <p class="text-[#000249] dark:text-gray-300 text-lg khmer-text">គ្របដណ្តប់កីឡាពីជុំវិញពិភពលោកដោយនាំការប្រកួតប្រជែងអន្តរជាតិទៅចុងម្រាមដៃរបស់អ្នក។</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Our Members Section -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-white dark:bg-gray-900">
         <div class="container mx-auto px-4">
-            <!-- Meet Our Mentors -->
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-[#000249] mb-4">Meet Our Mentors</h2>
-                <p class="text-[#000249] max-w-2xl mx-auto khmer-text"></p>
+            <div class="text-center mb-12" data-aos="zoom-in">
+                <h2 class="text-3xl font-bold text-[#000249] dark:text-gray-100 mb-4">Meet Our Mentors</h2>
+                <p class="text-[#000249] dark:text-gray-300 max-w-2xl mx-auto khmer-text"></p>
             </div>
 
-            <!-- Featured Mentors - 2 columns with same size as team cards -->
             <div id="featuredMentors" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-16">
-                <!-- Featured mentors will be populated by JavaScript -->
+                </div>
+
+            <div class="text-center mb-12" data-aos="zoom-in">
+                <h3 class="text-2xl font-bold text-[#000249] dark:text-gray-100 mb-4">Meet Our Team</h3>
             </div>
 
-            <!-- Meet Our Team -->
-            <div class="text-center mb-12">
-                <h3 class="text-2xl font-bold text-[#000249] mb-4">Meet Our Team</h3>
-                <p class="text-[#000249] khmer-text">ក្រុមយើងជាបណ្តុំអ្នកជំនាញចម្រុះពីច្រើនវិស័យ ដែលរួបរួមគ្នាក្រោមគោលដៅរួមតែមួយ។</p>
-            </div>
-
-            <!-- Team Members Grid - 3 on top, 4 below -->
             <div class="max-w-6xl mx-auto">
-                <!-- First row: 3 cards centered -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto">
                     <div id="membersRow1" class="contents">
-                        <!-- First 3 members will be populated here -->
-                    </div>
+                        </div>
                 </div>
 
-                <!-- Second row: 4 cards -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div id="membersRow2" class="contents">
-                        <!-- Last 4 members will be populated here -->
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="custom-bg text-[#000249] py-12">
+    <footer class="custom-bg dark:bg-gray-800 text-[#000249] dark:text-gray-300 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-5 gap-8">
-                <div>
+                <div data-aos="fade-up">
                     <h1 class="text-lg font-semibold mb-4 khmer-text">Organized By</h1>
                     <img src="../img-about/istad.png" alt="ISTAD Logo" class="w-20 h-15 mb-4" onerror="this.onerror=null;this.src='https://placehold.co/80x60/ffffff/000000?text=ISTAD';">
                 </div>
 
-                <div>
+                <div data-aos="fade-up" data-aos-delay="100">
                     <h1 class="text-lg font-semibold mb-4 khmer-text">Prepared By</h1>
                     <img src="../img-about/logo.png" alt="sportshub Logo" class="w-21 h-20 mb-4" onerror="this.onerror=null;this.src='https://placehold.co/84x80/ffffff/000000?text=Logo';">
                 </div>
 
-                <nav>
+                <nav data-aos="fade-up" data-aos-delay="200">
                     <h3 class="text-lg font-semibold mb-4 khmer-text">Category</h3>
-                    <ul class="space-y-2 text-[#000249]">
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Football</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Basketball</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Swimming</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Tennis</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Golf</a></li>
+                    <ul class="space-y-2 text-[#000249] dark:text-gray-300">
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-white transition-colors">Football</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-white transition-colors">Basketball</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-white transition-colors">Swimming</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-white transition-colors">Tennis</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-white transition-colors">Golf</a></li>
                     </ul>
                 </nav>
 
-                <nav>
+                <nav data-aos="fade-up" data-aos-delay="300">
                     <h3 class="text-lg font-semibold mb-4 khmer-text">Quick Links</h3>
-                    <ul class="space-y-2 text-[#000249]">
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">All News</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Event</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">About Us</a></li>
+                    <ul class="space-y-2 text-[#000249] dark:text-gray-300">
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-white transition-colors">All News</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-white transition-colors">Event</a></li>
+                        <li><a href="#" class="hover:text-blue-600 dark:hover:text-white transition-colors">About Us</a></li>
                     </ul>
                 </nav>
 
-                <nav>
+                <nav data-aos="fade-up" data-aos-delay="400">
                     <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">
                             <i class="fab fa-facebook-f text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">
                             <i class="fab fa-telegram text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">
                             <i class="fab fa-instagram text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">
                             <i class="fab fa-youtube text-xl"></i>
                         </a>
                     </div>
                 </nav>
             </div>
 
-            <div class="border-t border-gray-300 mt-8 pt-8 text-center">
-                <p class="text-[#000249] text-sm">© 2025 SportHub. All Rights Reserved.</p>
+            <div class="border-t border-gray-300 dark:border-gray-600 mt-8 pt-8 text-center">
+                <p class="text-[#000249] dark:text-gray-300 text-sm">© 2025 SportHub. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
+        // DARK MODE TOGGLE SCRIPT
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const moonIcon = document.getElementById('moonIcon');
+        const sunIcon = document.getElementById('sunIcon');
+
+        // Function to apply theme
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+            } else {
+                document.documentElement.classList.remove('dark');
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+            }
+        };
+
+        // Check for saved theme in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        // Check for user's OS preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Apply theme on initial load
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        } else {
+            applyTheme(prefersDark ? 'dark' : 'light');
+        }
+
+        // Event listener for the toggle button
+        darkModeToggle.addEventListener('click', () => {
+            const isDarkMode = document.documentElement.classList.contains('dark');
+            const newTheme = isDarkMode ? 'light' : 'dark';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
+        });
+
+        // Initialize AOS
+        AOS.init({
+             once: true, // Whether animation should happen only once - while scrolling down
+             mirror: false, // Whether elements should animate out while scrolling past them
+        });
+
         // Featured mentors data with only Facebook and GitHub
         let featuredMentors = [{
             name: "Mr. Kim Chansokpheng",
@@ -325,11 +352,11 @@
             image: "../img-about/Ponlue.jpg",
             socialLinks: [{
                 platform: "facebook",
-                url: "https://facebook.com/sosamroeun",
+                url: "https://www.facebook.com/share/1ApxsYhmPm/?mibextid=wwXIfr",
                 icon: "fab fa-facebook-f"
             }, {
                 platform: "github",
-                url: "https://github.com/sosamroeun",
+                url: "https://github.com/SoSamponleu",
                 icon: "fab fa-github"
             }]
         }, {
@@ -405,16 +432,19 @@
             featuredMentorsContainer.innerHTML = '';
 
             featuredMentors.forEach((mentor, index) => {
-                        const mentorCard = document.createElement('div');
-                        mentorCard.className = 'bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow';
+                const mentorCard = document.createElement('div');
+                // Add AOS attributes here
+                mentorCard.setAttribute('data-aos', 'fade-up');
+                mentorCard.setAttribute('data-aos-delay', index * 100);
+                mentorCard.className = 'bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 transition-shadow';
 
-                        const socialLinksHTML = mentor.socialLinks.map(social =>
-                            `<a href="${social.url}" class="text-[#000249] hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
+                const socialLinksHTML = mentor.socialLinks.map(social =>
+                    `<a href="${social.url}" class="text-[#000249] dark:text-gray-300 hover:text-blue-600 dark:hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
                         <i class="${social.icon} text-lg"></i>
                     </a>`
-                        ).join('');
+                ).join('');
 
-                        mentorCard.innerHTML = `
+                mentorCard.innerHTML = `
                     <div class="text-center">
                         <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 overflow-hidden">
                             ${mentor.image ? 
@@ -423,8 +453,8 @@
                                 `<span class="w-full h-full bg-gradient-to-b from-gray-400 to-[#000249]"></span>`
                             }
                         </div>
-                        <h3 class="font-bold text-[#000249] text-base mb-2">${mentor.name}</h3>
-                        <p class="text-blue-600 font-semibold text-sm mb-4">${mentor.role}</p>
+                        <h3 class="font-bold text-[#000249] dark:text-gray-100 text-base mb-2">${mentor.name}</h3>
+                        <p class="text-blue-600 dark:text-blue-400 font-semibold text-sm mb-4">${mentor.role}</p>
                         <div class="flex justify-center space-x-4">
                             ${socialLinksHTML}
                         </div>
@@ -445,10 +475,13 @@
 
             members.forEach((member, index) => {
                 const memberCard = document.createElement('div');
-                memberCard.className = 'bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow';
+                // Add AOS attributes here
+                memberCard.setAttribute('data-aos', 'zoom-in-up');
+                memberCard.setAttribute('data-aos-delay', index * 50);
+                memberCard.className = 'bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 transition-shadow';
 
                 const socialLinksHTML = member.socialLinks.map(social =>
-                    `<a href="${social.url}" class="text-[#000249] hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
+                    `<a href="${social.url}" class="text-[#000249] dark:text-gray-300 hover:text-blue-600 dark:hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
                         <i class="${social.icon} text-lg"></i>
                     </a>`
                 ).join('');
@@ -462,8 +495,8 @@
                                 '<span class="w-full h-full bg-gradient-to-b from-blue-400 to-blue-600"></span>'
                             }
                         </div>
-                        <h4 class="font-bold text-[#000249] text-base mb-2">${member.name}</h4>
-                        <p class="text-[#000249] text-sm mb-4">${member.role}</p>
+                        <h4 class="font-bold text-[#000249] dark:text-gray-100 text-base mb-2">${member.name}</h4>
+                        <p class="text-[#000249] dark:text-gray-300 text-sm mb-4">${member.role}</p>
                         <div class="flex justify-center space-x-4">
                             ${socialLinksHTML}
                         </div>
@@ -544,6 +577,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             renderFeaturedMentors();
             renderMembers();
+            // Re-initialize AOS after dynamic content is loaded
+            AOS.refresh();
         });
     </script>
 </body>
