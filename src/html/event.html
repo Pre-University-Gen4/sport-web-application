@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sportshub - ព្រឹត្តិការណ៍</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <header class="custom-bg shadow-sm border-b border-gray-200 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <img src="../../image/logo/logo.png" alt="Logo" class="h-10">
+                </div>
+
+                <nav class="hidden md:flex space-x-8">
+                    <a href="../../index.html" class="custom-text hover:text-accent transition-colors font-medium english-text">Home</a>
+                    <a href="../html/event.html" class="text-accent font-medium border-b-2 border-accent pb-1 english-text">Event</a>
+                    <a href="../html/about.html" class="custom-text hover:text-accent transition-colors font-medium english-text">About</a>
+                </nav>
+
+                <div class="flex items-center space-x-4">
+                    <button id="favoriteBtn" class="p-2 text-gray-600 hover:text-red-500 transition-colors relative">
+                        <i class="fas fa-heart text-xl"></i>
+                        <span id="favoriteCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+
+                    <button class="p-2 text-gray-600 hover:text-accent transition-colors">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </button>
+
+                    <button id="postEventBtn" class="post-button text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                        <i class="fas fa-plus"></i>
+                        <span class="english-text">Post</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="postEventModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold custom-text english-text">Post New Event</h2>
+                    <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <form id="eventForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2 english-text">Event Title *</label>
+                        <input type="text" id="eventTitle" required class="form-input" placeholder="Enter event title">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2 english-text">Event Description</label>
+                        <textarea id="eventDescription" rows="3" class="form-textarea" placeholder="Describe your event"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2 english-text">Date *</label>
+                        <input type="date" id="eventDate" required class="form-input">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2 english-text">Location *</label>
+                        <input type="text" id="eventLocation" required class="form-input" placeholder="Event location">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2 english-text">Latitude *</label>
+                        <input type="number" id="eventLatitude" step="any" required class="form-input" placeholder="e.g., 11.57828">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2 english-text">Longitude *</label>
+                        <input type="number" id="eventLongitude" step="any" required class="form-input" placeholder="e.g., 104.90178">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2 english-text">Category *</label>
+                        <select id="eventCategory" required class="form-select">
+                            <option value="">Select category</option>
+                            <option value="football">Football</option>
+                            <option value="basketball">Basketball</option>
+                            <option value="swimming">Swimming</option>
+                            <option value="running">Running</option>
+                            <option value="tennis">Tennis</option>
+                            <option value="golf">Golf</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium custom-text mb-2 english-text">Event Image</label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-accent transition-colors">
+                            <input type="file" id="eventImage" accept="image/*" class="hidden">
+                            <label for="eventImage" class="cursor-pointer">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                <p class="text-sm text-gray-500 english-text">Click to upload image</p>
+                            </label>
+                            <img id="imagePreview" class="image-preview hidden mx-auto">
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-3 pt-4">
+                        <button type="button" id="cancelBtn" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors english-text">
+                            Cancel
+                        </button>
+                        <button type="submit" class="flex-1 px-4 py-2 post-button text-white rounded-lg english-text">
+                            Post Event
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <section class="relative">
+        <figure class="h-[990px] relative overflow-hidden">
+            <button id="prevBtn" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-3 z-10 transition-all duration-200 shadow-lg">
+                <i class="fas fa-chevron-left text-gray-700 text-xl"></i>
+            </button>
+
+            <img id="heroImage1" class="hero-image fade-in" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&h=1080&fit=crop" alt="Sports Event 1" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/cccccc/ffffff?text=Sports+Event+1';">
+            <img id="heroImage2" class="hero-image fade-out" src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1920&h=1080&fit=crop" alt="Sports Event 2" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/cccccc/ffffff?text=Sports+Event+2';">
+            <img id="heroImage3" class="hero-image fade-out" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&h=1080&fit=crop" alt="Sports Event 3" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/cccccc/ffffff?text=Sports+Event+3';">
+
+            <button id="nextBtn" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-3 z-10 transition-all duration-200 shadow-lg">
+                <i class="fas fa-chevron-right text-gray-700 text-xl"></i>
+            </button>
+
+            <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+        </figure>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <section class="mb-12">
+            <header class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4 border-b-2 border-gray-300 pb-4">
+                <h2 class="text-3xl font-bold custom-text khmer-text">ព្រឹត្តិការណ៍</h2>
+
+                <nav class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="relative">
+                            <select id="categoryFilter" class="filter-select border border-gray-300 rounded-lg px-4 py-2 pr-8 custom-text focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent min-w-32">
+                                <!-- category options get from api in js -->
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="Search events..." class="search-input border border-gray-300 rounded-lg px-4 py-2 pl-10 custom-text focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent w-full sm:w-64">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </nav>
+            </header>
+
+            <div id="eventsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- events get from api in js -->
+            </div>
+
+            <div class="text-center mt-8">
+                <button id="seeMoreBtn" class="see-more-btn rounded-lg px-4 py-2 khmer-text font-medium">
+                    មើលបន្ថែម
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="custom-bg py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Organized By</h3>
+                    <img src="../../image/logo/istad.png" alt="ISTAD Logo" class="w-20 h-15 mb-4" onerror="this.onerror=null;this.src='https://placehold.co/80x60/000249/ffffff?text=ISTAD';">
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Prepared By</h3>
+                    <img src="../../image/logo/logo.png" alt="sportshub Logo" class="w-21 h-20 mb-4" onerror="this.onerror=null;this.src='https://placehold.co/84x80/000249/ffffff?text=Logo';">
+                </div>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Category</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="custom-text hover:text-accent transition-colors english-text">Football</a></li>
+                        <li><a href="#" class="custom-text hover:text-accent transition-colors english-text">Basketball</a></li>
+                        <li><a href="#" class="custom-text hover:text-accent transition-colors english-text">Swimming</a></li>
+                        <li><a href="#" class="custom-text hover:text-accent transition-colors english-text">Tennis</a></li>
+                        <li><a href="#" class="custom-text hover:text-accent transition-colors english-text">Golf</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../../index.html" class="custom-text hover:text-accent transition-colors english-text">All News</a></li>
+                        <li><a href="../html/event.html" class="custom-text hover:text-accent transition-colors english-text">Event</a></li>
+                        <li><a href="../html/about.html" class="custom-text hover:text-accent transition-colors english-text">About Us</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <h3 class="text-lg font-semibold mb-4 english-text">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-accent transition-colors" aria-label="Follow us on Facebook">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-accent transition-colors" aria-label="Follow us on Telegram">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-accent transition-colors" aria-label="Follow us on Instagram">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-accent transition-colors" aria-label="Follow us on YouTube">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="border-t border-gray-300 mt-8 pt-8 text-center">
+                <p class="custom-text text-sm english-text">© 2025 SportHub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/event.js"></script>
+</body>
+
+</html>

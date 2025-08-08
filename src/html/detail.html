@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Detail - Sportshub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <header id="header"></header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <article>
+            <section class="bg-white rounded-lg shadow-sm overflow-hidden mb-6">
+                <figure class="relative">
+                    <img id="eventMainImage" src="https://via.placeholder.com/800x400" alt="Event Image" class="event-image">
+                    <section class="absolute top-4 right-4 heart-circle">
+                        <i id="mainHeartBtn" class="fas fa-heart text-gray-300 cursor-pointer text-lg hover:text-red-500 transition-colors"></i>
+                    </section>
+                    <aside id="categoryBadge" class="category-badge">Loading...</aside>
+                </figure>
+
+                <section class="p-6">
+                    <header class="flex items-start justify-between mb-4">
+                        <section>
+                            <h1 id="eventTitle" class="text-3xl font-bold custom-text mb-2 khmer-text">Loading Event...</h1>
+                            <section class="grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-600">
+                                <section class="flex items-center space-x-2">
+                                    <i class="fas fa-calendar-alt text-blue-600"></i>
+                                    <span id="eventDate">Loading...</span>
+                                </section>
+                                <section class="flex items-center space-x-2">
+                                    <i class="fas fa-map-marker-alt text-blue-600"></i>
+                                    <span id="eventLocation">Loading...</span>
+                                </section>
+                            </section>
+                        </section>
+                    </header>
+
+                    <section class="prose max-w-none">
+                        <h3 class="text-lg font-semibold custom-text mb-3 khmer-text">អំពីព្រឹត្តិការណ៍នេះ</h3>
+                        <p class="text-gray-600 mb-4" id="eventDescription">
+                            Loading event description...
+                        </p>
+                    </section>
+                </section>
+                <section class=" rounded-lg shadow-sm p-6 mb-6">
+                    <h3 class="text-lg font-semibold custom-text mb-4 khmer-text">ចែករំលែកព្រឹត្តិការណ៍</h3>
+                    <section class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <button onclick="shareToFacebook()" class="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors social-share">
+                        <i class="fab fa-facebook-f mr-2"></i>
+                        Facebook
+                    </button>
+                        <button onclick="shareToTelegram()" class="bg-sky-500 text-white p-3 rounded-lg hover:bg-sky-600 transition-colors social-share">
+                        <i class="fab fa-telegram mr-2"></i>
+                        Telegram
+                    </button>
+                        <button onclick="shareToInstagram()" class="bg-pink-500 text-white p-3 rounded-lg hover:bg-pink-600 transition-colors social-share">
+                        <i class="fab fa-instagram mr-2"></i>
+                        Instagram
+                    </button>
+                        <button onclick="copyEventLink()" class="bg-gray-600 text-white p-3 rounded-lg hover:bg-gray-700 transition-colors social-share">
+                        <i class="fas fa-link mr-2"></i>
+                        Copy Link
+                    </button>
+                    </section>
+                </section>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                <h3 class="text-lg font-semibold custom-text mb-4 khmer-text">ទីតាំង</h3>
+                <figure class="aspect-video rounded-lg overflow-hidden mb-4">
+                    <iframe id="locationMap" src="https://maps.google.com/maps?output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </figure>
+                <section class="flex items-center justify-between">
+                    <section class="flex items-center space-x-2 text-gray-600">
+                        <i class="fas fa-map-marker-alt text-blue-600"></i>
+                        <span id="mapLocation">Loading location...</span>
+                    </section>
+                    <button id="openMapBtn" class="text-blue-600 hover:text-blue-800 transition-colors text-sm font-medium">
+                        <i class="fas fa-external-link-alt mr-1"></i>
+                        Open in Maps
+                    </button>
+                </section>
+            </section>
+        </article>
+
+        <section class="mt-12">
+            <section class="bg-white rounded-lg shadow-sm p-6">
+                <h3 class="text-lg font-semibold custom-text mb-6 khmer-text">មតិយោបល់ និងសំណួរ</h3>
+
+                <section class="mb-6">
+                    <section class="flex space-x-3">
+                        <figure class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-gray-600"></i>
+                        </figure>
+                        <section class="flex-1">
+                            <textarea id="commentText" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Ask a question or leave a comment..."></textarea>
+                            <section class="flex justify-end mt-2">
+                                <button id="postCommentBtn" class="post-button text-white px-4 py-2 rounded-lg transition-colors text-sm">
+                                    Post Comment
+                                </button>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+
+                <section id="commentsContainer" class="space-y-6">
+                </section>
+            </section>
+        </section>
+    </main>
+
+    <footer id="footer"></footer>
+
+    <script src="../js/detail.js"></script>
+</body>
+
+</html>

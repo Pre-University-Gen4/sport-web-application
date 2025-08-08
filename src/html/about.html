@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportHub - About</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="bg-white">
+    <header class="custom-bg shadow-sm border-b border-gray-200 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <img src="../../image/logo/logo.png" alt="Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/100x40/000249/ffffff?text=Logo';">
+                </div>
+
+                <nav class="hidden md:flex space-x-8">
+                    <a href="../../index.html" class="custom-text hover:text-accent transition-colors font-medium english-text">Home</a>
+                    <a href="../html/event.html" class="custom-text hover:text-accent transition-colors font-medium english-text">Event</a>
+                    <a href="../html/about.html" class="text-accent font-medium border-b-2 border-accent pb-1 english-text">About</a>
+                </nav>
+
+                <div class="flex items-center space-x-4">
+                    <button id="favoriteBtn" class="p-2 text-gray-600 hover:text-red-500 transition-colors relative">
+                        <i class="fas fa-heart text-xl"></i>
+                        <span id="favoriteCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+
+                    <button class="p-2 text-gray-600 hover:text-accent transition-colors">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </button>
+
+                    <button id="postEventBtn" class="post-button text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                        <i class="fas fa-plus"></i>
+                        <span class="english-text">Post</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative w-full h-[990px] overflow-hidden">
+        <img src="../../image/logo/banner.png" alt="Sports Arena Background" class="w-full h-full object-cover" id="heroImage" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/cccccc/ffffff?text=Hero+Image';">
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <img src="../../image/logo/banner.jpg" alt="Sports Stadium" class="w-full h-full object-cover rounded-2xl border border-gray-200" id="stadiumImage" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Stadium';">
+                </div>
+
+                <div data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <h2 class="text-3xl font-bold custom-text mb-6 khmer-text">ការផ្សព្វផ្សាយកីឡាក្នុងស្រុក</h2>
+                    <ul>
+                        <li class="flex items-start space-x-5 mb-5">
+                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                            <span class="custom-text text-2xl khmer-text">ជំរុញការយល់ដឹងអំពីកីឡាក្នុងស្រុកនិងក្លឹបកីឡាក្នុងតំបន់</span>
+                        </li>
+                        <li class="flex items-start space-x-5 mb-5">
+                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                            <span class="custom-text text-2xl khmer-text">ផ្តល់វេទិកាដល់ក្រុមកីឡាថ្នាក់មូលដ្ឋានដើម្បីបង្ហាញខ្លួន</span>
+                        </li>
+                        <li class="flex items-start space-x-5 mb-5">
+                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                            <span class="custom-text text-2xl khmer-text">គាំទ្រដល់កីឡាករកម្ពុជា និងផ្សព្វផ្សាយសមិទ្ធផលរបស់ពួកគេ</span>
+                        </li>
+                        <li class="flex items-start space-x-5 mb-5">
+                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                            <span class="custom-text text-2xl khmer-text">មានមុខងារសម្រាប់បង្កើតប្រូហ្វាលផ្ទាល់ខ្លួន</span>
+                        </li>
+                        <li class="flex items-start space-x-5 mb-5">
+                            <span class="w-2 h-2 bg-[#000249] rounded-full mt-2"></span>
+                            <span class="custom-text text-2xl khmer-text">វេទិកាពិភាក្សាតាមប្រភេទកីឡា</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl p-6 border border-gray-200 text-center card-hover" data-aos="fade-up" data-aos-duration="600" data-aos-delay="600">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-globe-americas custom-text text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold custom-text mb-2 khmer-text">គ្របដណ្តប់សកល</h3>
+                    <p class="custom-text text-lg khmer-text">គ្របដណ្តប់កីឡាពីជុំវិញពិភពលោកដោយនាំការប្រកួតប្រជែងអន្តរជាតិទៅចុងម្រាមដៃរបស់អ្នក។</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 border border-gray-200 text-center card-hover" data-aos="fade-up" data-aos-duration="600" data-aos-delay="600">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-trophy custom-text text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold custom-text mb-2 khmer-text">ឧត្តមភាព</h3>
+                    <p class="custom-text text-lg khmer-text">យើងខិតខំដើម្បីភាពល្អប្រសើរនៅក្នុងអ្វីគ្រប់យ៉ាងដែលយើងធ្វើចាប់ពីអង្គការព្រឹត្តិការណ៍រហូតដល់ការគាំទ្រពីសហគមន៍។</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border border-gray-200 text-center card-hover" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users custom-text text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold custom-text mb-2 khmer-text">សហគមន៍</h3>
+                    <p class="custom-text text-lg khmer-text">ការកសាងសហគមន៍រស់រវើកនៃអ្នកចូលចិត្តកីឡាដែលចែករំលែកចំណង់ចំណូលចិត្តចំណេះដឹងនិងភាពរំភើប</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border border-gray-200 text-center card-hover" data-aos="fade-up" data-aos-duration="600" data-aos-delay="400">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star custom-text text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold custom-text mb-2 khmer-text">មាតិកាគុណភាព</h3>
+                    <p class="custom-text text-lg khmer-text">ការចែកចាយមាតិកាកីឡាត្រឹមត្រូវទាន់ពេលវេលានិងចូលរួមពីប្រភពដែលអាចទុកចិត្តបាននិងអ្នកវិភាគជំនាញ។</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="zoom-in">
+                <h2 class="text-3xl font-bold custom-text mb-4">Meet Our Mentors</h2>
+                <p class="custom-text max-w-2xl mx-auto khmer-text"></p>
+            </div>
+
+            <div id="featuredMentors" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-16">
+            </div>
+
+            <div class="text-center mb-12" data-aos="zoom-in">
+                <h3 class="text-2xl font-bold custom-text mb-4">Meet Our Team</h3>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto">
+                    <div id="membersRow1" class="contents">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div id="membersRow2" class="contents">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="custom-bg py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-5 gap-8">
+                <div data-aos="fade-up">
+                    <h1 class="text-lg font-semibold mb-4 english-text">Organized By</h1>
+                    <img src="../../image/logo/istad.png" alt="ISTAD Logo" class="w-20 h-15 mb-4" onerror="this.onerror=null;this.src='https://placehold.co/80x60/ffffff/000000?text=ISTAD';">
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <h1 class="text-lg font-semibold mb-4 english-text">Prepared By</h1>
+                    <img src="../../image/logo/logo.png" alt="sportshub Logo" class="w-21 h-20 mb-4" onerror="this.onerror=null;this.src='https://placehold.co/84x80/ffffff/000000?text=Logo';">
+                </div>
+
+                <nav data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-lg font-semibold mb-4 english-text">Category</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="custom-text hover:text-accent transition-colors english-text">Football</a></li>
+                        <li><a href="#" class="custom-text hover:text-accent transition-colors english-text">Basketball</a></li>
+                        <li><a href="#" class="custom-text hover:text-accent transition-colors english-text">Swimming</a></li>
+                        <li><a href="#" class="custom-text hover:text-accent transition-colors english-text">Tennis</a></li>
+                        <li><a href="#" class="custom-text hover:text-accent transition-colors english-text">Golf</a></li>
+                    </ul>
+                </nav>
+
+                <nav data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-lg font-semibold mb-4 english-text">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../../index.html" class="custom-text hover:text-accent transition-colors english-text">News</a></li>
+                        <li><a href="../html/event.html" class="custom-text hover:text-accent transition-colors english-text">Event</a></li>
+                        <li><a href="../html/about.html" class="custom-text hover:text-accent transition-colors english-text">About Us</a></li>
+                    </ul>
+                </nav>
+
+                <nav data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-lg font-semibold mb-4 english-text">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-accent transition-colors">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-accent transition-colors">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-accent transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-accent transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="border-t border-gray-300 mt-8 pt-8 text-center">
+                <p class="custom-text text-sm english-text">© 2025 SportHub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/about.js"></script>
+</body>
+
+</html>

@@ -8,7 +8,7 @@ AOS.init({
 let featuredMentors = [{
     name: "Mr. Kim Chansokpheng",
     role: "Mentor",
-    image: "../img-about/Teacher2.jpg",
+    image: "../../image/photo/Teacher2.jpg",
     description: "Learning from others is my favorite.",
     socialLinks: [{
         platform: "facebook",
@@ -22,7 +22,7 @@ let featuredMentors = [{
 }, {
     name: "Ms. Eung Lyzhia",
     role: "Mentor",
-    image: "../img-about/Teacher1.jpg",
+    image: "../../image/photo//Teacher1.jpg",
     description: "Every single step, challenges make him stronger...",
     socialLinks: [{
         platform: "facebook",
@@ -38,8 +38,8 @@ let featuredMentors = [{
 // Team members data with only Facebook and GitHub
 let members = [{
     name: "Tak Sreytim",
-    role: "Member",
-    image: "../img-about/Sreytim.png",
+    role: "Team Leader",
+    image: "../../image/photo/Sreytim.png",
 
     socialLinks: [{
         platform: "facebook",
@@ -52,8 +52,8 @@ let members = [{
     }]
 }, {
     name: "So Sampoleu",
-    role: "Member",
-    image: "../img-about/Ponlue.jpg",
+    role: "Sub Leader",
+    image: "../../image/photo/Ponlue.jpg",
     socialLinks: [{
         platform: "facebook",
         url: "https://www.facebook.com/share/1ApxsYhmPm/?mibextid=wwXIfr",
@@ -66,7 +66,7 @@ let members = [{
 }, {
     name: "Dy Chandara",
     role: "Member",
-    image: "../img-about/Dara.jpg",
+    image: "../../image/photo/Dara.jpg",
     socialLinks: [{
         platform: "facebook",
         url: "https://facebook.com/dachandara",
@@ -79,7 +79,7 @@ let members = [{
 }, {
     name: "Chhorn sengleang",
     role: "Member",
-    image: "../img-about/Leng.jpg",
+    image: "../../image/photo/Leng.jpg",
     socialLinks: [{
         platform: "facebook",
         url: "https://www.facebook.com/share/1BJBEwNune/?mibextid=wwXIfr",
@@ -92,7 +92,7 @@ let members = [{
 }, {
     name: "Dy Riya",
     role: "Member",
-    image: "../img-about/riya.jpg",
+    image: "../../image/photo/riya.jpg",
     socialLinks: [{
         platform: "facebook",
         url: "https://www.facebook.com/share/15sjY61YM1/?mibextid=wwXIfr",
@@ -105,7 +105,7 @@ let members = [{
 }, {
     name: "Saing Senthay",
     role: "Member",
-    image: "../img-about/Thay.jpg",
+    image: "../../image/photo/Thay.jpg",
     socialLinks: [{
         platform: "facebook",
         url: "https://www.facebook.com/share/1APDaKJms6/",
@@ -118,7 +118,7 @@ let members = [{
 }, {
     name: "Oeurn Selachhari",
     role: "Member",
-    image: "../img-about/Chhari.jpg",
+    image: "../../image/photo/Chhari.jpg",
     socialLinks: [{
         platform: "facebook",
         url: "https://facebook.com/odomsakchhert",
