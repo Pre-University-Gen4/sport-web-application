@@ -7,6 +7,11 @@
     <title>ISTAD Sport</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .slide {
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
     <link rel="stylesheet" href="./src/css/style.css">
 </head>
 
@@ -15,7 +20,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
-                    <img src="./image/logo/logo.png" alt="Logo" class="h-10">
+                    <img src="./image/logo/logo.png" alt="Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/40x40/3b82f6/ffffff?text=Logo';">
                 </div>
 
                 <nav class="hidden md:flex space-x-8">
@@ -43,34 +48,34 @@
         </div>
     </header>
 
+    <!-- Image slider with manual images -->
     <section class="relative w-full h-[990px] overflow-hidden">
-        <main id="hero-container" class="relative w-full h-full">
-        </main>
+        <figure class="h-[890px] relative overflow-hidden">
+            <button id="prevBtn" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-3 z-10 transition-all duration-200 shadow-lg">
+                <i class="fas fa-chevron-left text-gray-700 text-xl"></i>
+            </button>
 
-        <button id="hero-prev" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 z-10" aria-label="Previous slide">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-        </button>
+            <img id="heroImage1" class="hero-image fade-in" src="./image/img/flag.jpg" alt="Sports Event 1" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/cccccc/ffffff?text=Sports+Event+1';">
+            <img id="heroImage2" class="hero-image fade-out" src="./image/img/golf.jpg" alt="Sports Event 2" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/cccccc/ffffff?text=Sports+Event+2';">
+            <img id="heroImage3" class="hero-image fade-out" src="./image/img/team.jpg" alt="Sports Event 3" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/cccccc/ffffff?text=Sports+Event+3';">
 
-        <button id="hero-next" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 z-10" aria-label="Next slide">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-        </button>
+            <button id="nextBtn" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-3 z-10 transition-all duration-200 shadow-lg">
+                <i class="fas fa-chevron-right text-gray-700 text-xl"></i>
+            </button>
 
-        <nav class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10" id="hero-indicators" aria-label="Slide navigation">
-        </nav>
+            <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+        </figure>
     </section>
 
     <main class="container mx-auto px-4 py-10">
         <section class="mb-12">
             <header class="mb-6">
-                <h2 class="text-3xl mb-2 pb-4 border-b-2 border-gray-300 font-bold khmer-text">អត្ថបទថ្មីៗ</h2>
+                <h2 class="text-3xl mb-2 pb-4 border-b-2 border-gray-300 font-bold custom-text">អត្ថបទថ្មីៗ</h2>
             </header>
 
             <section class="relative px-12">
-                <main id="new-events-container" class="overflow-hidden">
+                <main id="new-events-container" class="h-[500px]overflow-hidden">
+                    <p class="text-center text-gray-500">Loading new events...</p>
                 </main>
 
                 <button id="new-events-prev" class="absolute top-1/2 -left-6 -translate-y-1/2 bg-accent text-white p-3 rounded-full hover:bg-accent-hover transition-all duration-300 z-10 shadow-lg" aria-label="Previous event">
@@ -89,14 +94,16 @@
 
         <section class="mb-12">
             <header class="mb-6">
-                <h2 class="text-3xl mb-2 pb-4 border-b-2 border-gray-300 font-bold khmer-text">អត្ថបទពេញនិយម</h2>
+                <h2 class="text-3xl mb-2 pb-4 border-b-2 border-gray-300 font-bold custom-text">អត្ថបទពេញនិយម</h2>
             </header>
 
-            <main id="popular-events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Container where sport cards will be injected by JavaScript -->
+            <main id="sports-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+                <p class="text-center col-span-full text-gray-500">Loading sports...</p>
             </main>
 
             <nav class="text-center mt-8">
-                <button id="popular-see-more" class="see-more-btn rounded-full px-8 py-2 khmer-text font-medium">
+                <button id="popular-see-more" class="see-more-btn rounded-full px-8 py-2 font-medium">
                     មើលបន្ថែម
                 </button>
             </nav>

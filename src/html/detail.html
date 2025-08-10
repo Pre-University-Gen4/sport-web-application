@@ -8,16 +8,93 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Custom color variables */
+        
+        .custom-bg {
+            background-color: #f8fafc;
+        }
+        
+        .custom-text {
+            color: #000249;
+        }
+        
+        .text-accent {
+            color: #3b82f6;
+        }
+        
+        .bg-accent {
+            background-color: #3b82f6;
+        }
+        
+        .post-button {
+            background-color: #3b82f6;
+        }
+        
+        .post-button:hover {
+            background-color: #2563eb;
+        }
+        /* Event image styling */
+        
+        .event-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        /* Category badge */
+        
+        .category-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(59, 130, 246, 0.9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: capitalize;
+            backdrop-filter: blur(4px);
+        }
+        /* Heart circle for favorites */
+        
+        .heart-circle {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+        
+        .heart-circle:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+        }
+        /* Social share buttons */
+        
+        .social-share {
+            transition: all 0.3s ease;
+        }
+        
+        .social-share:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+    </style>
 </head>
 
-<body>
+<body class="bg-gray-50">
     <header id="header"></header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <article>
             <section class="bg-white rounded-lg shadow-sm overflow-hidden mb-6">
                 <figure class="relative">
-                    <img id="eventMainImage" src="https://via.placeholder.com/800x400" alt="Event Image" class="event-image">
+                    <img id="eventMainImage" src="https://placehold.co/800x400/3b82f6/ffffff?text=Loading..." alt="Event Image" class="event-image">
                     <section class="absolute top-4 right-4 heart-circle">
                         <i id="mainHeartBtn" class="fas fa-heart text-gray-300 cursor-pointer text-lg hover:text-red-500 transition-colors"></i>
                     </section>
@@ -28,13 +105,13 @@
                     <header class="flex items-start justify-between mb-4">
                         <section>
                             <h1 id="eventTitle" class="text-3xl font-bold custom-text mb-2 khmer-text">Loading Event...</h1>
-                            <section class="grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-600">
+                            <section class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 mt-4">
                                 <section class="flex items-center space-x-2">
-                                    <i class="fas fa-calendar-alt text-blue-600"></i>
-                                    <span id="eventDate">Loading...</span>
+                                    <i class="fas fa-calendar-alt text-accent"></i>
+                                    <span id="eventDate" class="english-text">Loading...</span>
                                 </section>
                                 <section class="flex items-center space-x-2">
-                                    <i class="fas fa-map-marker-alt text-blue-600"></i>
+                                    <i class="fas fa-map-marker-alt text-accent"></i>
                                     <span id="eventLocation">Loading...</span>
                                 </section>
                             </section>
@@ -43,30 +120,31 @@
 
                     <section class="prose max-w-none">
                         <h3 class="text-lg font-semibold custom-text mb-3 khmer-text">អំពីព្រឹត្តិការណ៍នេះ</h3>
-                        <p class="text-gray-600 mb-4" id="eventDescription">
+                        <p class="text-gray-600 mb-4 leading-relaxed" id="eventDescription">
                             Loading event description...
                         </p>
                     </section>
                 </section>
-                <section class=" rounded-lg shadow-sm p-6 mb-6">
+
+                <section class="bg-gray-50 rounded-lg shadow-sm p-6 mb-6">
                     <h3 class="text-lg font-semibold custom-text mb-4 khmer-text">ចែករំលែកព្រឹត្តិការណ៍</h3>
                     <section class="grid grid-cols-2 md:grid-cols-4 gap-3">
                         <button onclick="shareToFacebook()" class="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors social-share">
-                        <i class="fab fa-facebook-f mr-2"></i>
-                        Facebook
-                    </button>
+                            <i class="fab fa-facebook-f mr-2"></i>
+                            <span class="english-text">Facebook</span>
+                        </button>
                         <button onclick="shareToTelegram()" class="bg-sky-500 text-white p-3 rounded-lg hover:bg-sky-600 transition-colors social-share">
-                        <i class="fab fa-telegram mr-2"></i>
-                        Telegram
-                    </button>
+                            <i class="fab fa-telegram mr-2"></i>
+                            <span class="english-text">Telegram</span>
+                        </button>
                         <button onclick="shareToInstagram()" class="bg-pink-500 text-white p-3 rounded-lg hover:bg-pink-600 transition-colors social-share">
-                        <i class="fab fa-instagram mr-2"></i>
-                        Instagram
-                    </button>
+                            <i class="fab fa-instagram mr-2"></i>
+                            <span class="english-text">Instagram</span>
+                        </button>
                         <button onclick="copyEventLink()" class="bg-gray-600 text-white p-3 rounded-lg hover:bg-gray-700 transition-colors social-share">
-                        <i class="fas fa-link mr-2"></i>
-                        Copy Link
-                    </button>
+                            <i class="fas fa-link mr-2"></i>
+                            <span class="english-text">Copy Link</span>
+                        </button>
                     </section>
                 </section>
             </section>
@@ -74,15 +152,15 @@
             <section class="bg-white rounded-lg shadow-sm p-6 mb-6">
                 <h3 class="text-lg font-semibold custom-text mb-4 khmer-text">ទីតាំង</h3>
                 <figure class="aspect-video rounded-lg overflow-hidden mb-4">
-                    <iframe id="locationMap" src="https://maps.google.com/maps?output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    <iframe id="locationMap" src="https://maps.google.com/maps?q=Phnom+Penh,+Cambodia&output=embed&z=12" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </figure>
                 <section class="flex items-center justify-between">
                     <section class="flex items-center space-x-2 text-gray-600">
-                        <i class="fas fa-map-marker-alt text-blue-600"></i>
+                        <i class="fas fa-map-marker-alt text-accent"></i>
                         <span id="mapLocation">Loading location...</span>
                     </section>
-                    <button id="openMapBtn" class="text-blue-600 hover:text-blue-800 transition-colors text-sm font-medium">
+                    <button id="openMapBtn" class="text-accent hover:text-blue-800 transition-colors text-sm font-medium english-text">
                         <i class="fas fa-external-link-alt mr-1"></i>
                         Open in Maps
                     </button>
@@ -100,9 +178,9 @@
                             <i class="fas fa-user text-gray-600"></i>
                         </figure>
                         <section class="flex-1">
-                            <textarea id="commentText" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Ask a question or leave a comment..."></textarea>
+                            <textarea id="commentText" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent transition-colors" rows="3" placeholder="Ask a question or leave a comment..."></textarea>
                             <section class="flex justify-end mt-2">
-                                <button id="postCommentBtn" class="post-button text-white px-4 py-2 rounded-lg transition-colors text-sm">
+                                <button id="postCommentBtn" class="post-button text-white px-4 py-2 rounded-lg transition-colors text-sm english-text">
                                     Post Comment
                                 </button>
                             </section>
@@ -111,6 +189,7 @@
                 </section>
 
                 <section id="commentsContainer" class="space-y-6">
+                    <!-- Comments will be loaded here by JavaScript -->
                 </section>
             </section>
         </section>
