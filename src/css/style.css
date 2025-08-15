@@ -1,6 +1,135 @@
         /* ===== FONTS ===== */
         
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap');
+        /* ===== DARK MODE STYLES ===== */
+/* This section automatically activates dark mode based on the user's system settings. */
+
+@media (prefers-color-scheme: dark) {
+     :root {
+        /* Invert primary and secondary colors for dark mode */
+        --primary-color: #000249;
+        --secondary-color: #FAF9F0;
+
+        /* Define new dark-mode specific colors */
+        --theme-bg: #111827;
+        /* A dark background for the main body */
+        --component-bg: #1f2937;
+        /* A slightly lighter dark color for cards, headers, etc. */
+        --border-color: #374151;
+        /* A subtle border color for dark backgrounds */
+        --text-primary-dark: #f9fafb;
+        /* Main text color for dark backgrounds */
+        --text-secondary-dark: #d1d5db;
+        /* Secondary text color */
+
+        /* Adjust shadows for better visibility on dark surfaces */
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.15);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.15);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.25), 0 4px 6px -4px rgb(0 0 0 / 0.2);
+        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.25);
+    }
+    /* ===== General Body and Typography ===== */
+    body {
+        background-color: var(--theme-bg);
+        color: var(--text-primary-dark);
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .khmer-text,
+    .english-text,
+    .custom-text {
+        color: var(--text-primary-dark);
+    }
+    a.custom-text:hover {
+        color: var(--accent-color);
+    }
+    /* ===== Header, Navigation, and Footer ===== */
+    .header,
+    .footer {
+        background-color: var(--component-bg);
+        border-color: var(--border-color);
+    }
+    .nav-link,
+    .footer-link {
+        color: var(--text-primary-dark);
+    }
+    .nav-link:hover,
+    .footer-link:hover,
+    .nav-link.active {
+        color: var(--accent-color);
+    }
+    .social-link {
+        color: var(--text-secondary-dark);
+    }
+    .social-link:hover {
+        color: var(--accent-color);
+    }
+    /* ===== Cards ===== */
+    .card {
+        background-color: var(--component-bg);
+        box-shadow: var(--shadow-sm);
+    }
+    .card:hover {
+        box-shadow: var(--shadow-xl);
+    }
+    /* ===== Buttons ===== */
+    .see-more-btn {
+        background-color: var(--border-color);
+        color: var(--text-primary-dark);
+        border-color: var(--component-bg);
+    }
+    .see-more-btn:hover {
+        background-color: #4b5563;
+        /* A slightly lighter gray from your original palette */
+    }
+    .btn-secondary {
+        color: var(--accent-color);
+        border-color: var(--accent-color);
+        background-color: transparent;
+    }
+    .btn-secondary:hover {
+        background-color: var(--accent-color);
+        color: var(--white);
+    }
+    /* ===== Forms ===== */
+    .form-input,
+    .form-select,
+    .form-textarea {
+        background-color: var(--border-color);
+        color: var(--text-primary-dark);
+        border-color: var(--component-bg);
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+    }
+    .search-input,
+    .filter-select {
+        background-color: var(--component-bg);
+    }
+    /* ===== Modal ===== */
+    .modal-overlay {
+        background-color: rgba(10, 10, 20, 0.7);
+    }
+    .modal-content {
+        background: var(--component-bg);
+    }
+    /* ===== Hero Section ===== */
+    .hero-nav-btn {
+        background-color: rgba(31, 41, 55, 0.8);
+        color: var(--text-primary-dark);
+    }
+    .hero-nav-btn:hover {
+        background-color: var(--component-bg);
+    }
+}
+          
         /* ===== CSS VARIABLES ===== */
         
          :root {
@@ -933,4 +1062,22 @@
         .fade-out {
             opacity: 0;
             z-index: 1;
+        }
+        /* Event image styling */
+        
+        .event-image {
+            width: 100%;
+            height: 800px;
+            object-fit: cover;
+        }
+        
+        /* Social share buttons */
+        
+        .social-share {
+            transition: all 0.3s ease;
+        }
+        
+        .social-share:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
