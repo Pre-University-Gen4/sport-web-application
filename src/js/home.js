@@ -130,114 +130,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /**
-   * Initialize hero image slider with auto-rotation and manual controls (Legacy support)
-   */
-  function initHeroSlider() {
-    const heroImages = [
-      document.getElementById("heroImage1"),
-      document.getElementById("heroImage2"),
-      document.getElementById("heroImage3"),
-    ];
-
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-
-    let currentImageIndex = 0;
-    let slideInterval;
-
-    // Function to show a specific image
-    function showImage(index) {
-      // Hide all images
-      heroImages.forEach((img, i) => {
-        if (img) {
-          img.classList.remove("fade-in");
-          img.classList.add("fade-out");
-          img.style.opacity = "0";
-          img.style.zIndex = "1";
-        }
-      });
-
-      // Show current image
-      if (heroImages[index]) {
-        heroImages[index].classList.remove("fade-out");
-        heroImages[index].classList.add("fade-in");
-        heroImages[index].style.opacity = "1";
-        heroImages[index].style.zIndex = "2";
-      }
-
-      currentImageIndex = index;
-    }
-
-    // Function to go to next image
-    function nextImage() {
-      const nextIndex = (currentImageIndex + 1) % heroImages.length;
-      showImage(nextIndex);
-    }
-
-    // Function to go to previous image
-    function prevImage() {
-      const prevIndex =
-        (currentImageIndex - 1 + heroImages.length) % heroImages.length;
-      showImage(prevIndex);
-    }
-
-    // Function to start auto-rotation
-    function startAutoRotation() {
-      slideInterval = setInterval(() => {
-        nextImage();
-      }, 10000); // 10 seconds
-    }
-
-    // Function to reset auto-rotation
-    function resetAutoRotation() {
-      clearInterval(slideInterval);
-      startAutoRotation();
-    }
-
-    // Initialize - show first image
-    if (heroImages.some((img) => img)) {
-      showImage(0);
-
-      // Add event listeners for buttons
-      if (nextBtn) {
-        nextBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          nextImage();
-          resetAutoRotation();
-        });
-      }
-
-      if (prevBtn) {
-        prevBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          prevImage();
-          resetAutoRotation();
-        });
-      }
-
-      // Start auto-rotation
-      startAutoRotation();
-
-      // Pause auto-rotation when user hovers over the slider
-      const heroSection = document.getElementById("hero-section");
-      if (heroSection) {
-        heroSection.addEventListener("mouseenter", () => {
-          clearInterval(slideInterval);
-        });
-
-        heroSection.addEventListener("mouseleave", () => {
-          startAutoRotation();
-        });
-      }
-    }
-  }
-
-  /**
    * Fetches sports data from the API and populates the page with sport cards.
    */
   async function fetchSportsData() {
     // Display a loading message while fetching data
     if (sportsContainer) {
+      sportsContainer.innerHTML =
+        '<p class="text-center col-span-full text-gray-500 custom-text">Loading sports...</p>';
+    }
+    if (newEventsContainer) {
+      newEventsContainer.innerHTML =
+        '<p class="text-center text-gray-500 custom-text">Loading new events...</p>';
     }
 
     try {
@@ -261,9 +164,9 @@ document.addEventListener("DOMContentLoaded", () => {
         allSports = sports;
 
         // Initialize new events with some items
-        initNewEvents(sports.slice(0, 2));
+        initNewEvents(sports.slice(0, 5)); // Show 5 new events initially
 
-        // Display first 8 sports cards
+        // Display first page of sports cards
         displaySportsPage(0);
       } else {
         // If the array is empty, display a "not found" message
@@ -295,34 +198,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const endIndex = startIndex + sportsPerPage;
     const sportsToShow = allSports.slice(startIndex, endIndex);
 
-    // Clear the container
-    if (sportsContainer) {
+    // Clear the container only on the first page load
+    if (page === 0 && sportsContainer) {
       sportsContainer.innerHTML = "";
-
-      // Add sports cards for this page
-      sportsToShow.forEach((sport) => {
-        createSportCard(sport);
-      });
-
-      // Update see more button visibility
-      updateSeeMoreButton(page);
     }
+
+    // Add sports cards for this page
+    sportsToShow.forEach((sport) => {
+      createSportCard(sport);
+    });
+
+    // Update see more button visibility
+    updateSeeMoreButton();
   }
 
   /**
    * Update see more button state
    */
-  function updateSeeMoreButton(page) {
+  function updateSeeMoreButton() {
     const seeMoreBtn = document.getElementById("popular-see-more");
-    const totalPages = Math.ceil(allSports.length / sportsPerPage);
+    if (!seeMoreBtn) return;
 
-    if (seeMoreBtn) {
-      if (page + 1 >= totalPages) {
-        seeMoreBtn.style.display = "none";
-      } else {
-        seeMoreBtn.style.display = "inline-block";
-        seeMoreBtn.textContent = "មើលបន្ថែម";
-      }
+    const currentlyDisplayed = sportsContainer.children.length;
+    if (currentlyDisplayed >= allSports.length) {
+      seeMoreBtn.style.display = "none";
+    } else {
+      seeMoreBtn.style.display = "inline-block";
     }
   }
 
@@ -333,12 +234,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Prepare event data for detail page
     const eventData = {
       id: sport.id || Date.now(),
+      // *** FIX: Added uuid to ensure it's passed to the detail page ***
+      uuid: sport.uuid,
       title: sport.name || "Untitled Event",
       description:
         sport.description || "No description available for this event.",
       date: sport.createdAt || new Date().toISOString(),
       location: sport.location || "Location not specified",
-      category: sport.category || "Sports",
+      category: sport.category ? sport.category.name : "Sports",
       image:
         sport.imageUrls && sport.imageUrls.length > 0
           ? sport.imageUrls[0]
@@ -360,9 +263,10 @@ document.addEventListener("DOMContentLoaded", () => {
    * @param {object} sport - The sport object containing details like name, description, and imageUrls.
    */
   function createSportCard(sport) {
+    if (!sportsContainer) return;
+
     // Create the main <article> element for the card
     const card = document.createElement("article");
-    // MODIFIED: Removed 'shadow-md' and added 'border border-gray-200'
     card.className =
       "bg-white rounded-lg border border-gray-200 overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 max-w-sm w-full cursor-pointer";
 
@@ -371,121 +275,31 @@ document.addEventListener("DOMContentLoaded", () => {
       navigateToDetail(sport);
     });
 
-    // --- Card Image ---
-    const img = document.createElement("img");
-    // Use the first image URL from the array. If the array is empty or doesn't exist, use a placeholder.
-    img.src =
+    const imageUrl =
       sport.imageUrls && sport.imageUrls.length > 0
         ? sport.imageUrls[0]
         : "https://placehold.co/600x400/f0f0f0/ccc?text=No+Image";
-    img.alt = sport.name || "Sport image";
-    img.className = "w-full h-48 object-cover";
-    // Add an error handler in case the image link is broken
-    img.onerror = () => {
-      img.src = "https://placehold.co/600x400/f0f0f0/ccc?text=Image+Error";
-      img.alt = `Error loading image for ${sport.name}`;
-    };
 
-    // --- Card Content ---
-    const contentSection = document.createElement("section");
-    contentSection.className = "p-4";
-
-    // --- Card Title (h3) ---
-    const title = document.createElement("h3");
-    title.className =
-      "text-22px font-bold mb-2 leading-tight text-[#000249] truncate";
-    title.textContent = sport.name || "Untitled Sport";
-    title.title = sport.name || "Untitled Sport"; // Show full name on hover if truncated
-
-    // --- Card Description (p) ---
-    const description = document.createElement("p");
-    description.className = "text-16px text-[#000249]";
-    // Use the description if available, otherwise show a default message.
-    // Truncate the text to 100 characters to keep cards a consistent size.
-    description.textContent = sport.description
-      ? sport.description.substring(0, 100) +
-        (sport.description.length > 100 ? "..." : "")
-      : "No description available.";
-
-    // Append title and description to the content section
-    contentSection.appendChild(title);
-    contentSection.appendChild(description);
-
-    // Append the image and content section to the main card element
-    card.appendChild(img);
-    card.appendChild(contentSection);
+    card.innerHTML = `
+        <figure class="h-48 overflow-hidden">
+            <img src="${imageUrl}" alt="${
+      sport.name || "Sport image"
+    }" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/600x400/f0f0f0/ccc?text=Image+Error';">
+        </figure>
+        <section class="p-4">
+            <h3 class="text-lg font-bold mb-2 custom-text truncate" title="${
+              sport.name || "Untitled Sport"
+            }">${sport.name || "Untitled Sport"}</h3>
+            <p class="text-sm text-gray-600 line-clamp-3">${
+              sport.description
+                ? sport.description
+                : "No description available."
+            }</p>
+        </section>
+    `;
 
     // Append the completed card to the main container on the webpage
-    if (sportsContainer) {
-      sportsContainer.appendChild(card);
-    }
-  }
-
-  /**
-   * Initialize manual hero slider (Legacy support)
-   */
-  function initManualHeroSlider() {
-    const slides = document.querySelectorAll(".slide");
-    const indicators = document.querySelectorAll("#hero-indicators button");
-    let currentSlide = 0;
-    let slideInterval;
-
-    if (slides.length === 0) return;
-
-    // Function to show a specific slide
-    function goToSlide(slideIndex) {
-      if (indicators.length > 0) {
-        slides[currentSlide].classList.add("opacity-0");
-        indicators[currentSlide].classList.remove("bg-white");
-        indicators[currentSlide].classList.add("bg-white/50");
-
-        currentSlide = slideIndex;
-
-        slides[currentSlide].classList.remove("opacity-0");
-        indicators[currentSlide].classList.add("bg-white");
-        indicators[currentSlide].classList.remove("bg-white/50");
-      }
-    }
-
-    // Function to reset the auto-slide interval
-    function resetInterval() {
-      clearInterval(slideInterval);
-      slideInterval = setInterval(() => {
-        const nextIndex = (currentSlide + 1) % slides.length;
-        goToSlide(nextIndex);
-      }, 5000);
-    }
-
-    // Event listeners for indicators
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener("click", () => {
-        goToSlide(index);
-        resetInterval();
-      });
-    });
-
-    // Event listeners for next and previous buttons
-    const nextButton = document.getElementById("hero-next");
-    const prevButton = document.getElementById("hero-prev");
-
-    if (nextButton && prevButton) {
-      nextButton.addEventListener("click", () => {
-        const nextIndex = (currentSlide + 1) % slides.length;
-        goToSlide(nextIndex);
-        resetInterval();
-      });
-
-      prevButton.addEventListener("click", () => {
-        const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
-        goToSlide(prevIndex);
-        resetInterval();
-      });
-    }
-
-    // Start the auto-sliding
-    if (slides.length > 1) {
-      resetInterval();
-    }
+    sportsContainer.appendChild(card);
   }
 
   /**
@@ -508,10 +322,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     eventsData.forEach((event, index) => {
       const eventElement = document.createElement("article");
-      eventElement.className = "card-container hidden cursor-pointer";
-      if (index === 0) {
-        eventElement.classList.remove("hidden");
-        eventElement.classList.add("block");
+      // Use flexbox for layout and manage visibility with a custom class
+      eventElement.className =
+        "new-event-card w-full flex-shrink-0 cursor-pointer";
+      if (index !== 0) {
+        eventElement.classList.add("hidden");
       }
 
       // Add click event to navigate to detail page
@@ -524,47 +339,54 @@ document.addEventListener("DOMContentLoaded", () => {
           ? event.imageUrls[0]
           : "https://placehold.co/400x300/3b82f6/ffffff?text=Event+Image";
       const eventDate = event.createdAt
-        ? new Date(event.createdAt).toLocaleDateString()
+        ? new Date(event.createdAt).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
         : "No date";
 
-      // Create responsive event card
-      // MODIFIED: Removed 'shadow-md' and 'hover:shadow-lg', added 'border border-gray-200'
       eventElement.innerHTML = `
-                <section class="bg-white p-4 sm:p-6 rounded-lg border border-gray-200 flex flex-col md:flex-row gap-6 items-stretch w-full h-auto md:h-[350px] transition-shadow duration-300">
-                       <section class="md:w-2/5 w-full h-64 md:h-full">
-                        <img src="${imageUrl}" alt="${event.name || "Event"}" 
-                             class="rounded-lg w-full h-full object-cover"
-                             onerror="this.onerror=null;this.src='https://placehold.co/400x300/3b82f6/ffffff?text=Image+Error';">
-                    </section>
-                    <section class="md:w-3/5 w-full flex flex-col justify-center">
-                        <h3 class="text-[22px] font-bold lg:text-2xl my-2 leading-tight custom-text">${
-                          event.name || "Untitled Event"
-                        }</h3>
-                        <time class="text-gray-500 text-18px mb-4 english-text">${eventDate}</time>
-                        <p class="text-gray-600 leading-relaxed text-[18px] custom-text flex-1 overflow-hidden">${
-                          event.description || "No description available."
-                        }</p>
-                    </section>
-                </section>
-            `;
+          <section class="bg-white p-4 sm:p-6 rounded-lg border border-gray-200 flex flex-col md:flex-row gap-6 items-stretch w-full h-auto md:h-[350px] transition-shadow duration-300">
+              <figure class="md:w-2/5 w-full h-64 md:h-full">
+                  <img src="${imageUrl}" alt="${event.name || "Event"}" 
+                       class="rounded-lg w-full h-full object-cover"
+                       onerror="this.onerror=null;this.src='https://placehold.co/400x300/3b82f6/ffffff?text=Image+Error';">
+              </figure>
+              <section class="md:w-3/5 w-full flex flex-col justify-center">
+                  <h3 class="text-xl font-bold lg:text-2xl my-2 leading-tight custom-text">${
+                    event.name || "Untitled Event"
+                  }</h3>
+                  <time class="text-gray-500 text-sm mb-4 english-text">${eventDate}</time>
+                  <p class="text-gray-600 leading-relaxed text-base custom-text flex-1 overflow-hidden line-clamp-4">${
+                    event.description || "No description available."
+                  }</p>
+              </section>
+          </section>
+      `;
 
       newEventsContainer.appendChild(eventElement);
     });
 
+    // Make the container a flex container
+    newEventsContainer.classList.add(
+      "flex",
+      "transition-transform",
+      "duration-500",
+      "ease-in-out"
+    );
+
     // Function to show a specific event
     function showNewEvent(index) {
-      const events = document.querySelectorAll(
-        "#new-events-container .card-container"
-      );
+      const events = document.querySelectorAll(".new-event-card");
       if (events.length === 0) return;
 
-      events[currentEventIndex].classList.add("hidden");
-      events[currentEventIndex].classList.remove("block");
+      // Hide all cards
+      events.forEach((card) => card.classList.add("hidden"));
 
+      // Show the target card
+      events[index].classList.remove("hidden");
       currentEventIndex = index;
-
-      events[currentEventIndex].classList.remove("hidden");
-      events[currentEventIndex].classList.add("block");
     }
 
     // Auto-rotation for events
@@ -609,17 +431,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (seeMoreBtn) {
     seeMoreBtn.addEventListener("click", () => {
       currentPage++;
-      const startIndex = currentPage * sportsPerPage;
-      const endIndex = startIndex + sportsPerPage;
-      const sportsToShow = allSports.slice(startIndex, endIndex);
-
-      // Add new sports cards to existing ones
-      sportsToShow.forEach((sport) => {
-        createSportCard(sport);
-      });
-
-      // Update see more button
-      updateSeeMoreButton(currentPage);
+      displaySportsPage(currentPage);
     });
   }
 
@@ -628,12 +440,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize modern hero slider
   initModernHeroSlider();
-
-  // Initialize legacy hero slider (keeping for compatibility)
-  initHeroSlider();
-
-  // Initialize manual hero slider (keeping for compatibility)
-  initManualHeroSlider();
 
   // Call the main function to start the process of fetching and displaying the sports data
   fetchSportsData();

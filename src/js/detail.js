@@ -1,40 +1,14 @@
-// Sample comments data
-let commentsData = [
-  {
-    name: "សុភា ចាន់",
-    avatar: "SC",
-    time: "២ ម៉ោងមុន",
-    comment: "ព្រឹត្តិការណ៍នេះគួរឱ្យចាប់អារម្មណ៍ណាស់! តើនៅមានកន្លែងទំនេរទេ?",
-    likes: 5,
-    liked: false,
-  },
-  {
-    name: "វុទ្ធី រ៉ា",
-    avatar: "VR",
-    time: "៤ ម៉ោងមុន",
-    comment:
-      "អរគុណសម្រាប់ការរៀបចំព្រឹត្តិការណ៍ល្អបែបនេះ។ ខ្ញុំនឹងចូលរួមដោយប្រាកដ!",
-    likes: 3,
-    liked: false,
-  },
-  {
-    name: "ស្រីមុំ កែវ",
-    avatar: "SK",
-    time: "៦ ម៉ោងមុន",
-    comment: "តើមានការផ្សាយផ្ទាល់ទេ? សម្រាប់អ្នកដែលមិនអាចចូលរួមបាន។",
-    likes: 2,
-    liked: false,
-  },
-];
-
-// Current event data and related events
+// Global state for the current event and related events
 let currentEvent = null;
 let favoriteEvents = new Set();
 let relatedEventsData = [];
+
+// Carousel state
 let currentCarouselIndex = 0;
-let totalCarouselItems = 0;
 let isCarouselAnimating = false;
-const eventsPerPage = 4; // Adjusted to match new responsive layout (lg:w-1/4)
+let carouselAutoSwap = null;
+const CAROUSEL_INTERVAL = 5000; // 5 seconds for auto-swap
+const eventsPerPage = 4; // Number of events visible at once
 
 /**
  * Initializes the hamburger menu for mobile view.
@@ -50,7 +24,11 @@ function initHamburgerMenu() {
   }
 }
 
-// Format date to English for display
+/**
+ * Formats a date string into a more readable English format.
+ * @param {string} dateStr - The date string to format.
+ * @returns {string} - The formatted date.
+ */
 function formatDateToEnglish(dateStr) {
   if (!dateStr) return "Date not available";
   const date = new Date(dateStr);
@@ -63,67 +41,68 @@ function formatDateToEnglish(dateStr) {
   return date.toLocaleDateString("en-US", options);
 }
 
-// Load event data
+/**
+ * Loads the main event data from localStorage and updates the UI.
+ */
 function loadEventData() {
-  // Try to get event data from localStorage
   const savedEventData = localStorage.getItem("selectedEvent");
 
   if (savedEventData) {
     currentEvent = JSON.parse(savedEventData);
-    console.log("Loaded event data:", currentEvent);
-    // Clear the localStorage after loading
-    localStorage.removeItem("selectedEvent");
+  } else {
+    console.warn("No event data found, using fallback data.");
+    const container = document.getElementById("event-detail-container");
+    if (container) {
+      container.innerHTML = `
+        <p class="text-center text-red-500">Could not load event details. Please go back and select an event.</p>
+      `;
+    }
+    return;
   }
 
-  if (!currentEvent) {
-    // Fallback to sample data if no event is selected
-    console.warn("No event data found, using fallback data");
-    currentEvent = {
-      id: 1,
-      title: "Sample Sports Event",
-      description:
-        "This is a sample sports event. Please navigate from the events page to see real event data.",
-      date: new Date().toISOString(),
-      location: "Sample Location",
-      latitude: 11.5564,
-      longitude: 104.9282,
-      category: "Sample Category",
-      image:
-        "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&h=400&fit=crop",
-      locationLink:
-        "https://maps.google.com/maps?q=11.5564,104.9282&output=embed&z=15",
-    };
-  }
-
-  // Update DOM elements with event data
+  // Update the page with the loaded event data
   updateEventDisplay();
 
-  // Fetch related events after loading current event
+  // Fetch comments using the event's UUID
+  if (currentEvent && currentEvent.uuid) {
+    fetchComments(currentEvent.uuid);
+  } else {
+    console.error("Cannot fetch comments: Event UUID is missing.");
+    const commentsContainer = document.getElementById("commentsContainer");
+    if (commentsContainer) {
+      commentsContainer.innerHTML =
+        '<p class="text-red-500">Could not load comments: Event ID missing.</p>';
+    }
+  }
+
+  // Fetch related events
   fetchRelatedEvents();
 }
 
-// Fetch related events from API (same as popular events from home page)
+/**
+ * Fetches related events from the sports API.
+ */
 async function fetchRelatedEvents() {
   try {
-    const apiUrl = "https://sport-hub.eunglyzhia.social/api/v1/sports";
-    const response = await fetch(apiUrl);
-
-    if (!response.ok) {
+    const response = await fetch(
+      "https://sport-hub.eunglyzhia.social/api/v1/sports"
+    );
+    if (!response.ok)
       throw new Error(
         `Network response was not ok. Status: ${response.status}`
       );
-    }
 
     const sports = await response.json();
 
     if (Array.isArray(sports) && sports.length > 0) {
-      // Filter out current event and get random related events
+      // Filter out the current event and get a random selection of others
       relatedEventsData = sports
-        .filter((sport) => sport.id !== currentEvent.id)
-        .sort(() => 0.5 - Math.random()) // Shuffle array
-        .slice(0, 8); // Get up to 8 related events
+        .filter((sport) => sport.uuid !== currentEvent.uuid)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 12); // Get up to 12 related events for a smoother carousel
 
       initializeRelatedEventsCarousel();
+      startCarouselAutoSwap();
     } else {
       displayNoRelatedEvents();
     }
@@ -133,19 +112,27 @@ async function fetchRelatedEvents() {
   }
 }
 
-// Display message when no related events are available
+/**
+ * Displays a message when no related events are available.
+ */
 function displayNoRelatedEvents() {
   const carousel = document.getElementById("relatedEventsCarousel");
   if (carousel) {
-    carousel.innerHTML = `
-              <section class="flex justify-center items-center w-full h-64">
-                  <p class="text-gray-500">No related events available.</p>
-              </section>
-          `;
+    carousel.innerHTML = `<div class="flex justify-center items-center w-full h-64">
+      <p class="text-gray-500">No related events available.</p>
+    </div>`;
   }
+
+  // Hide navigation buttons if no events
+  const prevBtn = document.getElementById("relatedPrevBtn");
+  const nextBtn = document.getElementById("relatedNextBtn");
+  if (prevBtn) prevBtn.style.display = "none";
+  if (nextBtn) nextBtn.style.display = "none";
 }
 
-// Initialize related events carousel with infinite loop
+/**
+ * Initializes the related events carousel.
+ */
 function initializeRelatedEventsCarousel() {
   if (relatedEventsData.length === 0) {
     displayNoRelatedEvents();
@@ -153,211 +140,39 @@ function initializeRelatedEventsCarousel() {
   }
 
   const carousel = document.getElementById("relatedEventsCarousel");
-  const indicators = document.getElementById("relatedIndicators");
-  const prevBtn = document.getElementById("relatedPrevBtn");
-  const nextBtn = document.getElementById("relatedNextBtn");
+  if (!carousel) return;
 
-  if (!carousel || !indicators) return;
+  carousel.innerHTML = ""; // Clear previous content
 
-  carousel.innerHTML = "";
-  indicators.innerHTML = "";
-
-  const minEventsForLoop = eventsPerPage * 3;
-  let eventsToDisplay = [...relatedEventsData];
-
-  while (
-    eventsToDisplay.length < minEventsForLoop &&
-    relatedEventsData.length > 0
-  ) {
-    eventsToDisplay = [...eventsToDisplay, ...relatedEventsData];
-  }
-
-  const firstClones = eventsToDisplay.slice(0, eventsPerPage);
-  const lastClones = eventsToDisplay.slice(-eventsPerPage);
-
-  const infiniteEvents = [...lastClones, ...eventsToDisplay, ...firstClones];
-  totalCarouselItems = infiniteEvents.length;
-
-  infiniteEvents.forEach((event) => {
-    const eventCard = createRelatedEventCard(event);
+  // Create cards for all events
+  relatedEventsData.forEach((event, index) => {
+    const eventCard = createRelatedEventCard(event, index);
     carousel.appendChild(eventCard);
   });
 
-  // Check if cards are rendered before calculating width
-  if (!carousel.querySelector("article")) return;
+  // Update carousel display
+  updateCarouselDisplay();
 
-  const totalPages = Math.ceil(eventsToDisplay.length / eventsPerPage);
+  // Show navigation buttons
+  const prevBtn = document.getElementById("relatedPrevBtn");
+  const nextBtn = document.getElementById("relatedNextBtn");
+  if (prevBtn) prevBtn.style.display = "block";
+  if (nextBtn) nextBtn.style.display = "block";
 
-  for (let i = 0; i < totalPages; i++) {
-    const indicator = document.createElement("button");
-    indicator.className = `w-3 h-3 rounded-full transition-colors duration-300 ${
-      i === 0 ? "bg-accent" : "bg-gray-300"
-    }`;
-    indicator.addEventListener("click", () => goToCarouselPage(i));
-    indicators.appendChild(indicator);
-  }
-
-  currentCarouselIndex = eventsPerPage;
-
-  const cardElement = carousel.querySelector("article");
-  const cardWidth = cardElement.offsetWidth;
-
-  carousel.style.transform = `translateX(-${
-    currentCarouselIndex * cardWidth
-  }px)`;
-  carousel.style.transition = "none";
-
-  if (prevBtn && nextBtn) {
-    prevBtn.addEventListener("click", () => {
-      if (isCarouselAnimating) return;
-      moveToPrevious();
-    });
-
-    nextBtn.addEventListener("click", () => {
-      if (isCarouselAnimating) return;
-      moveToNext();
-    });
-  }
-
-  setInterval(() => {
-    if (!isCarouselAnimating) {
-      moveToNext();
-    }
-  }, 4000);
-
-  setTimeout(() => {
-    carousel.style.transition = "transform 0.5s ease-in-out";
-  }, 50);
+  // Create indicators
+  createCarouselIndicators();
 }
 
-// Move to next slide with infinite loop
-function moveToNext() {
-  if (isCarouselAnimating) return;
-
-  const carousel = document.getElementById("relatedEventsCarousel");
-  if (!carousel || !carousel.querySelector("article")) return;
-
-  isCarouselAnimating = true;
-
-  const cardElement = carousel.querySelector("article");
-  const cardWidth = cardElement.offsetWidth;
-
-  currentCarouselIndex++;
-  carousel.style.transform = `translateX(-${
-    currentCarouselIndex * cardWidth
-  }px)`;
-
-  const originalEventsLength = relatedEventsData.length;
-  const eventsToDisplay =
-    originalEventsLength >= 9
-      ? originalEventsLength
-      : originalEventsLength * Math.ceil(9 / originalEventsLength);
-
-  setTimeout(() => {
-    if (currentCarouselIndex >= eventsPerPage + eventsToDisplay) {
-      carousel.style.transition = "none";
-      currentCarouselIndex = eventsPerPage;
-      carousel.style.transform = `translateX(-${
-        currentCarouselIndex * cardWidth
-      }px)`;
-
-      setTimeout(() => {
-        carousel.style.transition = "transform 0.5s ease-in-out";
-        isCarouselAnimating = false;
-      }, 50);
-    } else {
-      isCarouselAnimating = false;
-    }
-
-    updateIndicators();
-  }, 500);
-}
-
-// Move to previous slide with infinite loop
-function moveToPrevious() {
-  if (isCarouselAnimating) return;
-
-  const carousel = document.getElementById("relatedEventsCarousel");
-  if (!carousel || !carousel.querySelector("article")) return;
-
-  isCarouselAnimating = true;
-
-  const cardElement = carousel.querySelector("article");
-  const cardWidth = cardElement.offsetWidth;
-
-  currentCarouselIndex--;
-
-  if (currentCarouselIndex < eventsPerPage) {
-    carousel.style.transition = "none";
-    const originalEventsLength = relatedEventsData.length;
-    const eventsToDisplay =
-      originalEventsLength >= 9
-        ? originalEventsLength
-        : originalEventsLength * Math.ceil(9 / originalEventsLength);
-    currentCarouselIndex = eventsPerPage + eventsToDisplay - 1;
-    carousel.style.transform = `translateX(-${
-      currentCarouselIndex * cardWidth
-    }px)`;
-
-    setTimeout(() => {
-      carousel.style.transition = "transform 0.5s ease-in-out";
-      currentCarouselIndex--;
-      carousel.style.transform = `translateX(-${
-        currentCarouselIndex * cardWidth
-      }px)`;
-
-      setTimeout(() => {
-        isCarouselAnimating = false;
-        updateIndicators();
-      }, 500);
-    }, 50);
-  } else {
-    carousel.style.transform = `translateX(-${
-      currentCarouselIndex * cardWidth
-    }px)`;
-
-    setTimeout(() => {
-      isCarouselAnimating = false;
-      updateIndicators();
-    }, 500);
-  }
-}
-
-// Update indicators based on current position
-function updateIndicators() {
-  const indicators = document.querySelectorAll("#relatedIndicators button");
-  if (indicators.length === 0) return;
-
-  const originalEventsLength = relatedEventsData.length;
-  const eventsToDisplay =
-    originalEventsLength >= 9
-      ? originalEventsLength
-      : originalEventsLength * Math.ceil(9 / originalEventsLength);
-
-  let adjustedIndex = currentCarouselIndex - eventsPerPage;
-  if (adjustedIndex < 0) adjustedIndex = 0;
-  if (adjustedIndex >= eventsToDisplay) adjustedIndex = eventsToDisplay - 1;
-
-  const currentPage = Math.floor(adjustedIndex / eventsPerPage);
-  const activeIndicator = Math.min(currentPage, indicators.length - 1);
-
-  indicators.forEach((indicator, index) => {
-    if (index === activeIndicator) {
-      indicator.classList.remove("bg-gray-300");
-      indicator.classList.add("bg-accent");
-    } else {
-      indicator.classList.remove("bg-accent");
-      indicator.classList.add("bg-gray-300");
-    }
-  });
-}
-
-// Create related event card
-function createRelatedEventCard(event) {
+/**
+ * Creates an HTML card for a related event.
+ * @param {object} event - The event data.
+ * @param {number} index - The index of the event.
+ * @returns {HTMLElement} - The created card element.
+ */
+function createRelatedEventCard(event, index) {
   const card = document.createElement("article");
-  // **UPDATED** - Using responsive width classes and padding for spacing
-  card.className =
-    "flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2 cursor-pointer";
+  card.className = "flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-2";
+  card.setAttribute("data-index", index);
 
   card.addEventListener("click", () => {
     navigateToEvent(event);
@@ -367,102 +182,214 @@ function createRelatedEventCard(event) {
     event.imageUrls && event.imageUrls.length > 0
       ? event.imageUrls[0]
       : "https://placehold.co/320x200/3b82f6/ffffff?text=Event+Image";
-
   const eventDate = event.createdAt
     ? new Date(event.createdAt).toLocaleDateString()
     : "No date";
 
-  // **UPDATED** - Card content is wrapped in a new div for styling and a card-image class is added.
   card.innerHTML = `
-          <div class="bg-white rounded-lg border border-gray-200 overflow-hidden h-full transform hover:-translate-y-1 transition-transform duration-300">
-              <figure class="h-48 overflow-hidden">
-                  <img src="${imageUrl}" alt="${event.name || "Related Event"}" 
-                       class="w-full h-full object-cover transition-transform duration-300 hover:scale-105 card-image"
-                       onerror="this.onerror=null;this.src='https://placehold.co/320x200/3b82f6/ffffff?text=Image+Error';">
-              </figure>
-              <section class="p-4">
-                  <h4 class="text-lg font-bold mb-2 custom-text line-clamp-2">${
-                    event.name || "Untitled Event"
-                  }</h4>
-                  <time class="text-sm text-gray-500 mb-2 block english-text">${eventDate}</time>
-                  <p class="text-gray-600 text-sm line-clamp-3">${
-                    event.description
-                      ? event.description.substring(0, 100) +
-                        (event.description.length > 100 ? "..." : "")
-                      : "No description available."
-                  }</p>
-              </section>
-          </div>
-      `;
-
+    <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden h-full transform hover:-translate-y-1 transition-transform duration-300 shadow-lg hover:shadow-xl">
+      <figure class="h-48 overflow-hidden">
+        <img src="${imageUrl}" alt="${event.name || "Related Event"}"
+             class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+             onerror="this.onerror=null;this.src='https://placehold.co/320x200/3b82f6/ffffff?text=Image+Error';">
+      </figure>
+      <section class="p-4">
+        <h4 class="text-lg font-bold mb-2 custom-text line-clamp-2">${
+          event.name || "Untitled Event"
+        }</h4>
+        <time class="text-sm text-gray-500 dark:text-gray-400 mb-2 block">${eventDate}</time>
+        <p class="text-gray-600 dark:text-gray-300 text-sm line-clamp-3">${
+          event.description
+            ? event.description.substring(0, 100) + "..."
+            : "No description."
+        }</p>
+      </section>
+    </div>`;
   return card;
 }
 
-// Navigate to selected event
+/**
+ * Creates carousel indicators (dots).
+ */
+function createCarouselIndicators() {
+  const indicatorsContainer = document.getElementById("relatedIndicators");
+  if (!indicatorsContainer || relatedEventsData.length === 0) return;
+
+  const totalPages = Math.ceil(relatedEventsData.length / eventsPerPage);
+  indicatorsContainer.innerHTML = "";
+
+  for (let i = 0; i < totalPages; i++) {
+    const indicator = document.createElement("button");
+    indicator.className = `w-2 h-2 rounded-full transition-all duration-300 ${
+      i === currentCarouselIndex ? "bg-accent" : "bg-gray-300 dark:bg-gray-600"
+    }`;
+    indicator.addEventListener("click", () => goToCarouselPage(i));
+    indicatorsContainer.appendChild(indicator);
+  }
+}
+
+/**
+ * Updates the carousel display position.
+ */
+function updateCarouselDisplay() {
+  if (isCarouselAnimating) return;
+
+  const carousel = document.getElementById("relatedEventsCarousel");
+  if (!carousel || relatedEventsData.length === 0) return;
+
+  const cardWidth = 100 / eventsPerPage; // Percentage width per card
+  const translateX = -(currentCarouselIndex * cardWidth * eventsPerPage);
+
+  carousel.style.transform = `translateX(${translateX}%)`;
+
+  // Update indicators
+  updateCarouselIndicators();
+}
+
+/**
+ * Updates carousel indicators to show current page.
+ */
+function updateCarouselIndicators() {
+  const indicators = document.querySelectorAll("#relatedIndicators button");
+  indicators.forEach((indicator, index) => {
+    if (index === currentCarouselIndex) {
+      indicator.className =
+        "w-2 h-2 rounded-full transition-all duration-300 bg-accent";
+    } else {
+      indicator.className =
+        "w-2 h-2 rounded-full transition-all duration-300 bg-gray-300 dark:bg-gray-600";
+    }
+  });
+}
+
+/**
+ * Goes to a specific carousel page.
+ * @param {number} pageIndex - The page index to go to.
+ */
+function goToCarouselPage(pageIndex) {
+  if (isCarouselAnimating) return;
+
+  const totalPages = Math.ceil(relatedEventsData.length / eventsPerPage);
+  if (pageIndex < 0 || pageIndex >= totalPages) return;
+
+  currentCarouselIndex = pageIndex;
+  updateCarouselDisplay();
+
+  // Reset auto-swap timer
+  stopCarouselAutoSwap();
+  startCarouselAutoSwap();
+}
+
+/**
+ * Moves carousel to the next page.
+ */
+function nextCarouselPage() {
+  if (isCarouselAnimating || relatedEventsData.length === 0) return;
+
+  const totalPages = Math.ceil(relatedEventsData.length / eventsPerPage);
+  currentCarouselIndex = (currentCarouselIndex + 1) % totalPages;
+  updateCarouselDisplay();
+}
+
+/**
+ * Moves carousel to the previous page.
+ */
+function prevCarouselPage() {
+  if (isCarouselAnimating || relatedEventsData.length === 0) return;
+
+  const totalPages = Math.ceil(relatedEventsData.length / eventsPerPage);
+  currentCarouselIndex =
+    currentCarouselIndex === 0 ? totalPages - 1 : currentCarouselIndex - 1;
+  updateCarouselDisplay();
+}
+
+/**
+ * Starts the automatic carousel swapping.
+ */
+function startCarouselAutoSwap() {
+  if (relatedEventsData.length <= eventsPerPage) return; // Don't auto-swap if all events fit in one page
+
+  stopCarouselAutoSwap(); // Clear any existing interval
+  carouselAutoSwap = setInterval(() => {
+    nextCarouselPage();
+  }, CAROUSEL_INTERVAL);
+}
+
+/**
+ * Stops the automatic carousel swapping.
+ */
+function stopCarouselAutoSwap() {
+  if (carouselAutoSwap) {
+    clearInterval(carouselAutoSwap);
+    carouselAutoSwap = null;
+  }
+}
+
+/**
+ * Navigates to a new event detail page from the related events section.
+ * @param {object} event - The event to navigate to.
+ */
 function navigateToEvent(event) {
   const eventData = {
-    id: event.id || Date.now(),
+    id: event.id,
+    uuid: event.uuid,
     title: event.name || "Untitled Event",
-    description:
-      event.description || "No description available for this event.",
+    description: event.description || "No description available.",
     date: event.createdAt || new Date().toISOString(),
     location: event.location || "Location not specified",
-    category: event.category || "Sports",
+    category: event.category ? event.category.name : "Sports",
     image:
       event.imageUrls && event.imageUrls.length > 0
         ? event.imageUrls[0]
         : "https://placehold.co/800x400/3b82f6/ffffff?text=Event+Image",
-    latitude: event.latitude || null,
-    longitude: event.longitude || null,
-    locationLink: event.locationLink || null,
+    latitude: event.latitude,
+    longitude: event.longitude,
   };
 
   localStorage.setItem("selectedEvent", JSON.stringify(eventData));
-  window.location.reload();
+  window.location.reload(); // Reload the page to show the new event
 }
 
-// Go to specific carousel page
-function goToCarouselPage(pageIndex) {
-  if (isCarouselAnimating) return;
-
-  const carousel = document.getElementById("relatedEventsCarousel");
-  if (!carousel || !carousel.querySelector("article")) return;
-
-  isCarouselAnimating = true;
-
-  const cardElement = carousel.querySelector("article");
-  const cardWidth = cardElement.offsetWidth;
-
-  const targetIndex = eventsPerPage + pageIndex * eventsPerPage;
-  currentCarouselIndex = targetIndex;
-
-  carousel.style.transform = `translateX(-${
-    currentCarouselIndex * cardWidth
-  }px)`;
-
-  setTimeout(() => {
-    isCarouselAnimating = false;
-    updateIndicators();
-  }, 500);
-}
-
-// Update the display with current event data
+/**
+ * Updates the main event display elements with data.
+ */
 function updateEventDisplay() {
   if (!currentEvent) return;
 
-  document.getElementById("eventTitle").textContent =
-    currentEvent.title || "Event Title";
-  document.getElementById("eventDescription").textContent =
-    currentEvent.description || "No description available for this event.";
-  document.getElementById("eventDate").textContent = formatDateToEnglish(
-    currentEvent.date
-  );
-  document.getElementById("eventLocation").textContent =
-    currentEvent.location || "Location not specified";
-  document.getElementById("mapLocation").textContent =
-    currentEvent.location || "Location not specified";
-  document.getElementById("categoryBadge").textContent =
-    currentEvent.category || "Category";
+  document.title = `${currentEvent.title || "Event"} - SportsHub`;
+
+  const titleElement = document.getElementById("eventTitle");
+  if (titleElement) {
+    titleElement.textContent = currentEvent.title || "Event Title";
+  }
+
+  const descriptionElement = document.getElementById("eventDescription");
+  if (descriptionElement) {
+    descriptionElement.textContent =
+      currentEvent.description || "No description available.";
+  }
+
+  const dateElement = document.getElementById("eventDate");
+  if (dateElement) {
+    dateElement.textContent = formatDateToEnglish(currentEvent.date);
+  }
+
+  const locationElement = document.getElementById("eventLocation");
+  if (locationElement) {
+    locationElement.textContent =
+      currentEvent.location || "Location not specified";
+  }
+
+  const mapLocationElement = document.getElementById("mapLocation");
+  if (mapLocationElement) {
+    mapLocationElement.textContent =
+      currentEvent.location || "Location not specified";
+  }
+
+  const categoryElement = document.getElementById("categoryBadge");
+  if (categoryElement) {
+    categoryElement.textContent = currentEvent.category || "Category";
+  }
 
   const eventImage = document.getElementById("eventMainImage");
   if (eventImage) {
@@ -470,291 +397,293 @@ function updateEventDisplay() {
       currentEvent.image ||
       "https://placehold.co/800x400/3b82f6/ffffff?text=Event+Image";
     eventImage.alt = currentEvent.title || "Event Image";
-    eventImage.onerror = function () {
-      this.onerror = null;
-      this.src = "https://placehold.co/800x400/3b82f6/ffffff?text=Event+Image";
-    };
   }
 
   updateMapDisplay();
-  updateHeartButtonState();
-  document.title = `${currentEvent.title || "Event"} - Sportshub`;
 }
 
-// Update map display
+/**
+ * Updates the embedded map source.
+ */
 function updateMapDisplay() {
   const locationMap = document.getElementById("locationMap");
   if (!locationMap) return;
 
-  if (currentEvent.locationLink) {
-    locationMap.src = currentEvent.locationLink;
-  } else if (currentEvent.latitude && currentEvent.longitude) {
+  if (currentEvent.latitude && currentEvent.longitude) {
     locationMap.src = `https://maps.google.com/maps?q=${currentEvent.latitude},${currentEvent.longitude}&output=embed&z=15`;
   } else if (currentEvent.location) {
-    const encodedLocation = encodeURIComponent(currentEvent.location);
-    locationMap.src = `https://maps.google.com/maps?q=${encodedLocation}&output=embed&z=15`;
+    locationMap.src = `https://maps.google.com/maps?q=${encodeURIComponent(
+      currentEvent.location
+    )}&output=embed&z=15`;
   } else {
     locationMap.src =
       "https://maps.google.com/maps?q=Phnom+Penh,+Cambodia&output=embed&z=12";
   }
 }
 
-// Update heart button state
-function updateHeartButtonState() {
-  const mainHeartBtn = document.getElementById("mainHeartBtn");
-  if (!mainHeartBtn || !currentEvent) return;
-
-  if (favoriteEvents.has(currentEvent.id)) {
-    mainHeartBtn.classList.remove("text-gray-300");
-    mainHeartBtn.classList.add("text-red-500");
-  } else {
-    mainHeartBtn.classList.remove("text-red-500");
-    mainHeartBtn.classList.add("text-gray-300");
-  }
-}
-
-// Create comments
-function createComments() {
+/**
+ * Fetches comments from the API for a specific event.
+ * @param {string} eventUuid The UUID of the event to fetch comments for.
+ */
+async function fetchComments(eventUuid) {
   const commentsContainer = document.getElementById("commentsContainer");
   if (!commentsContainer) return;
 
-  const commentsHtml = commentsData
-    .map(
-      (comment, index) => `
-          <section class="flex space-x-3">
-              <figure class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-medium text-sm flex-shrink-0">
-                  <span>${comment.avatar}</span>
-              </figure>
-              <section class="flex-1">
-                  <section class="bg-gray-50 rounded-lg p-3">
-                      <section class="flex items-center space-x-2 mb-1">
-                          <span class="font-medium custom-text">${
-                            comment.name
-                          }</span>
-                          <span class="text-xs text-gray-500">${
-                            comment.time
-                          }</span>
-                      </section>
-                      <p class="text-gray-700 text-sm">${comment.comment}</p>
-                  </section>
-                  <section class="flex items-center space-x-4 mt-2 text-sm text-gray-500">
-                      <button class="hover:text-accent transition-colors like-btn" onclick="likeComment(this, ${index})" ${
-        comment.liked ? "disabled" : ""
-      }>
-                          <i class="fas fa-thumbs-up mr-1 ${
-                            comment.liked ? "text-accent" : ""
-                          }"></i> 
-                          Like (<span class="like-count">${
-                            comment.likes
-                          }</span>)
-                      </button>
-                      <button class="hover:text-accent transition-colors">Reply</button>
-                  </section>
-              </section>
-          </section>
-      `
-    )
-    .join("");
-
-  commentsContainer.innerHTML = commentsHtml;
-}
-
-// Navigation functions
-function goBackToHome() {
-  window.location.href = "../../index.html";
-}
-
-// Share functions
-function shareToFacebook() {
-  if (!currentEvent) return;
-  const url = encodeURIComponent(window.location.href);
-  const title = encodeURIComponent(currentEvent.title);
-  window.open(
-    `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`,
-    "_blank"
-  );
-}
-
-function shareToTelegram() {
-  if (!currentEvent) return;
-  const url = encodeURIComponent(window.location.href);
-  const text = encodeURIComponent(
-    `${currentEvent.title} - ${currentEvent.location}`
-  );
-  window.open(`https://t.me/share/url?url=${url}&text=${text}`, "_blank");
-}
-
-function shareToInstagram() {
-  copyEventLink();
-  alert("Event link copied! You can paste it in your Instagram post or story.");
-}
-
-function copyEventLink() {
-  const eventLink = window.location.href;
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard
-      .writeText(eventLink)
-      .then(() => {
-        showNotification("Event link copied to clipboard!", "success");
-      })
-      .catch(() => {
-        fallbackCopyToClipboard(eventLink);
-      });
-  } else {
-    fallbackCopyToClipboard(eventLink);
-  }
-}
-
-// Fallback copy function for older browsers
-function fallbackCopyToClipboard(text) {
-  const textArea = document.createElement("textarea");
-  textArea.value = text;
-  textArea.style.position = "fixed";
-  textArea.style.left = "-999999px";
-  textArea.style.top = "-999999px";
-  document.body.appendChild(textArea);
-  textArea.focus();
-  textArea.select();
+  commentsContainer.innerHTML =
+    '<p class="text-gray-500">Loading comments...</p>';
 
   try {
-    document.execCommand("copy");
-    showNotification("Event link copied to clipboard!", "success");
-  } catch (err) {
-    console.error("Fallback: Oops, unable to copy", err);
-    showNotification(
-      "Unable to copy link. Please copy manually: " + text,
-      "error"
+    const response = await fetch(
+      `https://sport-hub.eunglyzhia.social/api/v1/comments/events/${eventUuid}`
     );
+    if (!response.ok) {
+      if (response.status === 404) {
+        renderComments([]); // Render an empty state
+        return;
+      }
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const comments = await response.json();
+    renderComments(Array.isArray(comments) ? comments : []);
+  } catch (error) {
+    console.error("Could not fetch comments:", error);
+    commentsContainer.innerHTML =
+      '<p class="text-red-500">Failed to load comments.</p>';
   }
-
-  document.body.removeChild(textArea);
 }
 
-// Show notification function
+/**
+ * Renders comments into the comments container.
+ * @param {Array} commentsData The array of comment objects.
+ */
+function renderComments(commentsData) {
+  const commentsContainer = document.getElementById("commentsContainer");
+  if (!commentsContainer) return;
+
+  if (!commentsData || commentsData.length === 0) {
+    commentsContainer.innerHTML =
+      '<p class="text-gray-500">Be the first to comment!</p>';
+    return;
+  }
+
+  const sortedComments = [...commentsData].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+
+  commentsContainer.innerHTML = sortedComments
+    .map((comment) => {
+      const commentTime = new Date(comment.createdAt).toLocaleString();
+      const userName = comment.user?.name || "Anonymous";
+      const userAvatarInitial = userName.substring(0, 2).toUpperCase();
+      const commentContent = comment.comment || "No content";
+
+      return `
+        <section class="flex space-x-3">
+          <figure class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-medium text-sm flex-shrink-0">
+            <span>${userAvatarInitial}</span>
+          </figure>
+          <section class="flex-1">
+            <section class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+              <div class="flex items-center space-x-2 mb-1">
+                <span class="font-medium custom-text">${userName}</span>
+                <span class="text-xs text-gray-500 dark:text-gray-400">${commentTime}</span>
+              </div>
+              <p class="text-gray-700 dark:text-gray-300 text-sm">${commentContent}</p>
+            </section>
+          </section>
+        </section>
+      `;
+    })
+    .join("");
+}
+
+/**
+ * Posts a new comment to the API.
+ * @param {string} eventUuid - The UUID of the event.
+ * @param {string} commentContent - The text of the comment.
+ */
+async function postComment(eventUuid, commentContent) {
+  if (commentContent.trim() === "") {
+    showNotification("Please enter a comment before posting.", "error");
+    return;
+  }
+
+  const apiUrl = "https://sport-hub.eunglyzhia.social/api/v1/comments";
+  const requestBody = {
+    eventUuid: eventUuid,
+    comment: commentContent,
+  };
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        `Failed to post comment: ${errorData.message || response.statusText}`
+      );
+    }
+
+    showNotification("Comment posted successfully!", "success");
+    fetchComments(eventUuid);
+  } catch (error) {
+    console.error("Error posting comment:", error);
+    showNotification(error.message, "error");
+  }
+}
+
+/**
+ * Shows a temporary notification message.
+ * @param {string} message - The message to display.
+ * @param {string} type - 'success', 'error', or 'info'.
+ */
 function showNotification(message, type = "success") {
   const notification = document.createElement("div");
-  notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 text-white font-medium ${
-    type === "success" ? "bg-green-500" : "bg-red-500"
-  }`;
+  const bgColor =
+    type === "success"
+      ? "bg-green-500"
+      : type === "error"
+      ? "bg-red-500"
+      : "bg-blue-500";
+  notification.className = `fixed top-5 right-5 px-6 py-3 rounded-lg shadow-lg z-50 text-white font-medium ${bgColor}`;
   notification.textContent = message;
 
   document.body.appendChild(notification);
 
   setTimeout(() => {
-    if (notification.parentNode) {
-      notification.parentNode.removeChild(notification);
-    }
+    notification.remove();
   }, 3000);
 }
 
-// Interactive functions
-function toggleHeart(heartElement) {
-  if (!currentEvent) return;
-
-  if (favoriteEvents.has(currentEvent.id)) {
-    favoriteEvents.delete(currentEvent.id);
-    heartElement.classList.remove("text-red-500");
-    heartElement.classList.add("text-gray-300");
-    showNotification("Removed from favorites", "success");
-  } else {
-    favoriteEvents.add(currentEvent.id);
-    heartElement.classList.add("text-red-500");
-    heartElement.classList.remove("text-gray-300");
-    showNotification("Added to favorites", "success");
-  }
-}
-
-function likeComment(button, commentIndex) {
-  if (
-    commentIndex >= 0 &&
-    commentIndex < commentsData.length &&
-    !commentsData[commentIndex].liked
-  ) {
-    commentsData[commentIndex].likes++;
-    commentsData[commentIndex].liked = true;
-
-    const countSpan = button.querySelector(".like-count");
-    const icon = button.querySelector(".fas");
-
-    countSpan.textContent = commentsData[commentIndex].likes;
-    button.classList.add("text-accent");
-    icon.classList.add("text-accent");
-    button.disabled = true;
-
-    showNotification("Comment liked!", "success");
-  }
-}
-
-// Initialize page
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("Detail page loading...");
-  initHamburgerMenu();
-
-  loadEventData();
-  createComments();
-
-  const mainHeartBtn = document.getElementById("mainHeartBtn");
-  if (mainHeartBtn) {
-    mainHeartBtn.addEventListener("click", function () {
-      toggleHeart(this);
-    });
-  }
-
-  const openMapBtn = document.getElementById("openMapBtn");
-  if (openMapBtn) {
-    openMapBtn.addEventListener("click", function () {
-      if (currentEvent.locationLink) {
-        window.open(
-          currentEvent.locationLink.replace("output=embed", "output=maps"),
-          "_blank"
-        );
-      } else if (currentEvent.latitude && currentEvent.longitude) {
-        window.open(
-          `https://maps.google.com/maps?q=11.5862081419765,104.885882453093`,
-          "_blank"
-        );
-      } else if (currentEvent.locationName) {
-        const encodedLocation = encodeURIComponent(currentEvent.locationName);
-        window.open(
-          `https://maps.google.com/maps?q=${encodedLocation}`,
-          "_blank"
-        );
-      }
-    });
-  }
-
+// --- Event Listeners Setup ---
+function setupEventListeners() {
+  // Post comment button
   const postCommentBtn = document.getElementById("postCommentBtn");
   if (postCommentBtn) {
-    postCommentBtn.addEventListener("click", function () {
-      const commentText = document.getElementById("commentText");
-      if (commentText && commentText.value.trim()) {
-        const newComment = {
-          name: "អ្នកប្រើប្រាស់",
-          avatar: "AP",
-          time: "ទើបតែ",
-          comment: commentText.value.trim(),
-          likes: 0,
-          liked: false,
-        };
-        commentsData.unshift(newComment);
-        createComments();
-        commentText.value = "";
-        showNotification("Comment posted successfully!", "success");
-      } else {
+    postCommentBtn.addEventListener("click", () => {
+      const commentTextElement = document.getElementById("commentText");
+      const commentContent = commentTextElement
+        ? commentTextElement.value.trim()
+        : "";
+
+      if (commentContent && currentEvent && currentEvent.uuid) {
+        postComment(currentEvent.uuid, commentContent);
+        commentTextElement.value = "";
+      } else if (!commentContent) {
         showNotification("Please write a comment first.", "error");
+      } else {
+        showNotification("Cannot post comment: Event ID is missing.", "error");
       }
     });
   }
 
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-      goBackToHome();
-    }
-    if ((e.ctrlKey || e.metaKey) && e.key === "s") {
-      e.preventDefault();
-      copyEventLink();
-    }
-  });
+  // Carousel navigation
+  const prevBtn = document.getElementById("relatedPrevBtn");
+  const nextBtn = document.getElementById("relatedNextBtn");
 
-  console.log("Detail page loaded successfully");
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      prevCarouselPage();
+      // Reset auto-swap timer when user manually navigates
+      stopCarouselAutoSwap();
+      startCarouselAutoSwap();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      nextCarouselPage();
+      // Reset auto-swap timer when user manually navigates
+      stopCarouselAutoSwap();
+      startCarouselAutoSwap();
+    });
+  }
+
+  // Pause auto-swap on hover
+  const carouselContainer = document.querySelector(".relative");
+  if (carouselContainer) {
+    carouselContainer.addEventListener("mouseenter", stopCarouselAutoSwap);
+    carouselContainer.addEventListener("mouseleave", startCarouselAutoSwap);
+  }
+
+  // Open map button
+  const openMapBtn = document.getElementById("openMapBtn");
+  if (openMapBtn) {
+    openMapBtn.addEventListener("click", () => {
+      if (currentEvent.latitude && currentEvent.longitude) {
+        window.open(
+          `https://maps.google.com/maps?q=${currentEvent.latitude},${currentEvent.longitude}`,
+          "_blank"
+        );
+      } else if (currentEvent.location) {
+        window.open(
+          `https://maps.google.com/maps?q=${encodeURIComponent(
+            currentEvent.location
+          )}`,
+          "_blank"
+        );
+      }
+    });
+  }
+}
+
+// --- Global Navigation Functions ---
+function goBackToHome() {
+  window.location.href = "../../index.html";
+}
+
+// Social sharing functions
+function shareToFacebook() {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent(
+    currentEvent?.title || "Check out this event!"
+  );
+  window.open(
+    `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`,
+    "_blank"
+  );
+}
+
+function shareToTelegram() {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent(
+    currentEvent?.title || "Check out this event!"
+  );
+  window.open(`https://t.me/share/url?url=${url}&text=${text}`, "_blank");
+}
+
+function shareToInstagram() {
+  // Instagram doesn't support direct URL sharing, so copy to clipboard instead
+  copyEventLink();
+  showNotification(
+    "Link copied! You can paste it in your Instagram post or story.",
+    "info"
+  );
+}
+
+function copyEventLink() {
+  navigator.clipboard
+    .writeText(window.location.href)
+    .then(() => {
+      showNotification("Event link copied to clipboard!", "success");
+    })
+    .catch(() => {
+      showNotification("Failed to copy link to clipboard.", "error");
+    });
+}
+
+// --- Page Initialization ---
+document.addEventListener("DOMContentLoaded", () => {
+  initHamburgerMenu();
+  loadEventData();
+  setupEventListeners();
+});
+
+// Clean up on page unload
+window.addEventListener("beforeunload", () => {
+  stopCarouselAutoSwap();
 });

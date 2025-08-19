@@ -8,6 +8,10 @@ function initPostEventModal() {
   const eventImage = document.getElementById("eventImage");
   const imagePreview = document.getElementById("imagePreview");
 
+  // --- NEW: Get elements for the success modal ---
+  const successModal = document.getElementById("successPostModal");
+  const successOkBtn = document.getElementById("successOkBtn");
+
   // Show modal when post button is clicked
   if (postEventBtn) {
     postEventBtn.addEventListener("click", function () {
@@ -21,6 +25,13 @@ function initPostEventModal() {
     postEventModal.classList.remove("active");
     document.body.style.overflow = ""; // Restore scrolling
     resetForm();
+  }
+
+  // --- NEW: Function to hide the success modal ---
+  function hideSuccessModal() {
+    if (successModal) {
+      successModal.classList.remove("active");
+    }
   }
 
   // Close modal when X button is clicked
@@ -40,10 +51,27 @@ function initPostEventModal() {
     }
   });
 
+  // --- NEW: Event listeners for the success modal ---
+  if (successModal) {
+    successModal.addEventListener("click", function (e) {
+      if (e.target === successModal) {
+        hideSuccessModal();
+      }
+    });
+  }
+  if (successOkBtn) {
+    successOkBtn.addEventListener("click", hideSuccessModal);
+  }
+
   // Close modal with Escape key
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && postEventModal.classList.contains("active")) {
-      hideModal();
+    if (e.key === "Escape") {
+      if (postEventModal.classList.contains("active")) {
+        hideModal();
+      }
+      if (successModal && successModal.classList.contains("active")) {
+        hideSuccessModal();
+      }
     }
   });
 
@@ -75,7 +103,7 @@ function initPostEventModal() {
       try {
         let uploadedImageUrl = "";
 
-        // 1️⃣ If there's an image, upload it first
+        // 1. If there's an image, upload it first
         const imageFile = document.getElementById("eventImage").files[0];
         if (imageFile) {
           const imgFormData = new FormData();
@@ -94,11 +122,11 @@ function initPostEventModal() {
           }
 
           const uploadData = await uploadResponse.json();
-          console.log(uploadData.uri)
+          console.log(uploadData.uri);
           uploadedImageUrl = uploadData?.uri; // adjust if your API returns a different field
         }
 
-        // 2️⃣ Prepare JSON payload for event creation
+        // 2. Prepare JSON payload for event creation
         const payload = {
           name: document.getElementById("eventTitle").value,
           description: document.getElementById("eventDescription").value,
@@ -112,7 +140,7 @@ function initPostEventModal() {
           imageUrls: uploadedImageUrl ? [uploadedImageUrl] : [],
         };
 
-        // 3️⃣ Send JSON event data
+        // 3. Send JSON event data
         const response = await fetch(
           "https://sport-hub.eunglyzhia.social/api/v1/events",
           {
@@ -134,8 +162,12 @@ function initPostEventModal() {
         }
 
         // --- Success ---
-        alert("Event posted successfully!");
-        hideModal();
+        hideModal(); // Hide the form modal
+        if (successModal) {
+          successModal.classList.add("active"); // Show the success pop-up
+        } else {
+          alert("Event posted successfully!"); // Fallback if modal isn't found
+        }
 
         console.log("Refreshing event list after posting...");
         await fetchAndInitializeData();
