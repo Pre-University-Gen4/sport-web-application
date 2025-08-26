@@ -1,71 +1,148 @@
 <!DOCTYPE html>
-<html lang="km" class=""> <head>
+<html lang="km" class="">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Detail - Sportshub</title>
+
+    <!-- 🔑 Dynamic Title & Description -->
+    <title>Sportshub – Event & News Details</title>
+    <meta name="description" content="Read full details about sports events and news in Cambodia and around the world on Sportshub. Stay updated with match highlights, schedules, and breaking stories.">
+
+    <!-- 📌 Keywords -->
+    <meta name="keywords" content="{{eventKeywords}}, Cambodia sports news, Cambodia sports events, Khmer sports, live scores, world sports">
+
+    <!-- 🌍 Language -->
+    <meta http-equiv="Content-Language" content="en, km">
+
+    <!-- 👁 Open Graph (Facebook, Telegram, etc.) -->
+    <meta property="og:title" content="{{eventTitle}} – Sportshub">
+    <meta property="og:description" content="{{eventSummary}}">
+    <meta property="og:image" content="{{eventImageUrl}}">
+    <meta property="og:url" content="https://yourdomain.com/events/{{eventSlug}}">
+    <meta property="og:type" content="article">
+
+    <!-- 📰 Structured Data (choose SportsEvent or NewsArticle based on content) -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "{{isEvent ? 'SportsEvent' : 'NewsArticle'}}",
+            "headline": "{{eventTitle}}",
+            "description": "{{eventSummary}}",
+            "image": ["{{eventImageUrl}}"],
+            "datePublished": "{{publishDate}}",
+            "dateModified": "{{modifiedDate}}",
+            "author": {
+                "@type": "Organization",
+                "name": "Sportshub Cambodia"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Sportshub Cambodia",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://yourdomain.com/images/logo.png"
+                }
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://yourdomain.com/events/{{eventSlug}}"
+            }
+        }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-
         /* **UPDATED** - Global responsive image styles */
+        
         .event-image,
         .card-image {
             width: 100%;
             height: auto;
             object-fit: cover;
         }
-
         /* Dark mode styles */
+        
         .dark body {
-            background-color: #111827; /* bg-gray-900 */
+            background-color: #111827;
+            /* bg-gray-900 */
         }
+        
         .dark .bg-white {
-            background-color: #1F2937; /* bg-gray-800 for general white backgrounds */
+            background-color: #1F2937;
+            /* bg-gray-800 for general white backgrounds */
         }
+        
         .dark .bg-gray-50 {
-            background-color: #374151; /* bg-gray-700 for lighter gray backgrounds */
+            background-color: #374151;
+            /* bg-gray-700 for lighter gray backgrounds */
         }
+        
         .dark .custom-bg {
-            background-color: #1F2937; /* bg-gray-800 */
-            border-color: #4B5563; /* border-gray-600 */
+            background-color: #1F2937;
+            /* bg-gray-800 */
+            border-color: #4B5563;
+            /* border-gray-600 */
         }
+        
         .dark .custom-text,
         .dark .english-text,
-        .dark h1, .dark h3, .dark p, .dark span,
+        .dark h1,
+        .dark h3,
+        .dark p,
+        .dark span,
         .dark a:not(.post-button) {
-            color: #D1D5DB; /* text-gray-300 */
+            color: #D1D5DB;
+            /* text-gray-300 */
         }
+        
         .dark nav a.custom-text:hover,
         .dark .hover\:text-accent:hover {
             color: #60A5FA;
         }
+        
         .dark .border-b.border-gray-200,
         .dark .border-t.border-gray-300,
         .dark .border-gray-300,
-        .dark .border.border-gray-200 { /* UPDATED to include border color for dark mode */
-            border-color: #4B5563; /* border-gray-600 */
+        .dark .border.border-gray-200 {
+            /* UPDATED to include border color for dark mode */
+            border-color: #4B5563;
+            /* border-gray-600 */
         }
+        
         .dark .text-gray-600 {
-            color: #D1D5DB; /* text-gray-300 */
+            color: #D1D5DB;
+            /* text-gray-300 */
         }
+        
         .dark .hover\:text-red-500:hover {
-            color: #EF4444; /* text-red-500 */
+            color: #EF4444;
+            /* text-red-500 */
         }
+        
         .dark #mainHeartBtn.text-gray-300 {
-            color: #4B5563; /* bg-gray-600 */
+            color: #4B5563;
+            /* bg-gray-600 */
         }
+        
         .dark .bg-gray-300 {
-            background-color: #4B5563; /* bg-gray-600 */
+            background-color: #4B5563;
+            /* bg-gray-600 */
         }
+        
         .dark .text-gray-300 {
-             color: #D1D5DB; /* text-gray-300 */
+            color: #D1D5DB;
+            /* text-gray-300 */
         }
+        
         .dark textarea {
             background-color: #374151;
             border-color: #4B5563;
         }
+        
         .dark textarea::placeholder {
             color: #9CA3AF;
         }
@@ -75,45 +152,46 @@
 
 <body class="bg-gray-50 dark:bg-gray-900">
     <header class="custom-bg shadow-sm border-b border-gray-200 sticky top-0 z-40">
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <section class="flex justify-between items-center py-4">
-                <section class="flex items-center cursor-pointer" onclick="goBackToHome()">
-                    <img src="../../image/logo/logo.png" alt="Logo" class="h-[75px]" onerror="this.onerror=null;this.src='https://placehold.co/40x40/3b82f6/ffffff?text=Logo';">
-                </section>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Left: Logo -->
+                <div class="flex items-center cursor-pointer" onclick="goBackToHome()">
+                    <img src="../../image/logo/logo.png" alt="Logo" class="h-[75px]">
+                </div>
 
+                <!-- Center: Navigation -->
                 <nav class="hidden md:flex space-x-8">
                     <a href="../../index.html" class="custom-text hover:text-accent transition-colors font-medium english-text">Home</a>
                     <a href="../html/event.html" class="custom-text hover:text-accent transition-colors font-medium english-text">Event</a>
                     <a href="../html/about.html" class="custom-text hover:text-accent transition-colors font-medium english-text">About</a>
                 </nav>
 
-                <section class="flex items-center space-x-4">
-                    <button class="p-2 text-gray-600 hover:text-accent transition-colors">
-                        <i class="fas fa-user-circle text-xl"></i>
-                    </button>
-                    
+                <!-- Right: Action buttons -->
+                <div class="flex items-center space-x-4">
+                    <!-- Placeholder for favorite button to match other pages -->
+                    <div class="w-[40px] h-[40px]"></div>
                     <button id="theme-toggle" type="button" class="p-2 text-gray-600 hover:text-accent rounded-lg text-sm">
-                        <i id="theme-toggle-dark-icon" class="fas fa-moon text-xl hidden"></i>
-                        <i id="theme-toggle-light-icon" class="fas fa-sun text-xl hidden"></i>
-                    </button>
-
+                    <i id="theme-toggle-dark-icon" class="fas fa-moon text-xl hidden"></i>
+                    <i id="theme-toggle-light-icon" class="fas fa-sun text-xl hidden"></i>
+                </button>
                     <button onclick="goBackToHome()" class="post-button text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
-                        <i class="fas fa-arrow-left"></i>
-                        <span class="english-text">Back</span>
-                    </button>
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="Back">Back</span>
+                </button>
                     <div class="md:hidden flex items-center">
                         <button id="mobile-menu-button" class="p-2 text-gray-600 hover:text-accent transition-colors">
-                            <i class="fas fa-bars text-xl"></i>
-                        </button>
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
                     </div>
-                </section>
-            </section>
-             <div id="mobile-menu" class="hidden md:hidden">
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden">
                 <a href="../../index.html" class="block py-2 px-4 text-sm custom-text hover:text-accent">Home</a>
                 <a href="../html/event.html" class="block py-2 px-4 text-sm custom-text hover:text-accent">Event</a>
                 <a href="../html/about.html" class="block py-2 px-4 text-sm custom-text hover:text-accent">About</a>
             </div>
-        </section>
+        </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -156,19 +234,19 @@
                     <section class="grid grid-cols-2 md:grid-cols-4 gap-3">
                         <button onclick="shareToFacebook()" class="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors social-share" data-aos="zoom-in" data-aos-delay="300">
                             <i class="fab fa-facebook-f mr-2"></i>
-                            <span class="english-text">Facebook</span>
+                            <span class="Facebook">Facebook</span>
                         </button>
                         <button onclick="shareToTelegram()" class="bg-sky-500 text-white p-3 rounded-lg hover:bg-sky-600 transition-colors social-share" data-aos="zoom-in" data-aos-delay="400">
                             <i class="fab fa-telegram mr-2"></i>
-                            <span class="english-text">Telegram</span>
+                            <span class="Telegram">Telegram</span>
                         </button>
                         <button onclick="shareToInstagram()" class="bg-pink-500 text-white p-3 rounded-lg hover:bg-pink-600 transition-colors social-share" data-aos="zoom-in" data-aos-delay="500">
                             <i class="fab fa-instagram mr-2"></i>
-                            <span class="english-text">Instagram</span>
+                            <span class="Instagram">Instagram</span>
                         </button>
                         <button onclick="copyEventLink()" class="bg-gray-600 text-white p-3 rounded-lg hover:bg-gray-700 transition-colors social-share" data-aos="zoom-in" data-aos-delay="600">
                             <i class="fas fa-link mr-2"></i>
-                            <span class="english-text">Copy Link</span>
+                            <span class="Copy Link">Copy Link</span>
                         </button>
                     </section>
                 </section>
@@ -202,16 +280,16 @@
                             </section>
                         </section>
                     </section>
-                    
+
                     <button id="relatedPrevBtn" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-100 rounded-full p-2 shadow-lg transition-colors z-10">
                         <i class="fas fa-chevron-left text-accent text-lg"></i>
                     </button>
                     <button id="relatedNextBtn" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-100 rounded-full p-2 shadow-lg transition-colors z-10">
                         <i class="fas fa-chevron-right text-accent text-lg"></i>
                     </button>
-                    
+
                     <section id="relatedIndicators" class="flex justify-center space-x-2 mt-4">
-                        </section>
+                    </section>
                 </section>
             </section>
         </article>
@@ -243,13 +321,13 @@
         </section>
     </main>
 
-        <footer class="custom-bg py-12">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-5 gap-8">
-                    <div data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                        <h1 class="text-lg font-semibold mb-4 english-text">Organized By</h1>
-                        <img src="../../image/logo/istad.png" alt="ISTAD Logo" class="w-20 h-15 mb-4" onerror="this.onerror=null;this.src='https://placehold.co/80x60/ffffff/000000?text=ISTAD';">
-                    </div>
+    <footer class="custom-bg py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-5 gap-8">
+                <div data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                    <h1 class="text-lg font-semibold mb-4 english-text">Organized By</h1>
+                    <img src="../../image/logo/istad.png" alt="ISTAD Logo" class="w-20 h-15 mb-4" onerror="this.onerror=null;this.src='https://placehold.co/80x60/ffffff/000000?text=ISTAD';">
+                </div>
 
                 <div data-aos="fade-up" data-aos-delay="100" data-aos-anchor-placement="top-bottom">
                     <h1 class="text-lg font-semibold mb-4 english-text">Prepared By</h1>
@@ -258,42 +336,44 @@
                 <nav data-aos="fade-up" data-aos-delay="300" data-aos-anchor-placement="top-bottom">
                     <h3 class="text-lg font-semibold mb-4 english-text">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="../../index.html" class="custom-text hover:text-accent transition-colors english-text">News</a></li>
+                        <li><a href="../../index.html" class="custom-text hover:text-accent transition-colors english-text">Home</a></li>
                         <li><a href="../html/event.html" class="custom-text hover:text-accent transition-colors english-text">Event</a></li>
-                        <li><a href="../html/about.html" class="custom-text hover:text-accent transition-colors english-text">About Us</a></li>
+                        <li><a href="../html/about.html" class="custom-text hover:text-accent transition-colors english-text">About</a></li>
                     </ul>
                 </nav>
                 <nav data-aos="fade-up" data-aos-delay="400" data-aos-anchor-placement="top-bottom">
                     <h3 class="text-lg font-semibold mb-4 english-text">Contact Us</h3>
-                    
+
                     <ul class="space-y-2">
-                        <li><a href="#" class="custom-text hover:text-accent transition-colors english-text text-gray-600 hover:text-accent transition-colors">
-                            <i class="fa-solid fa-envelope "></i> info@sportshub.com
+                        <li>
+                            <a href="#" class="custom-text hover:text-accent transition-colors english-text text-gray-600 hover:text-accent transition-colors">
+                                <i class="fa-solid fa-envelope "></i> info@sportshub.com
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="custom-text hover:text-accent transition-colors english-text text-gray-600 hover:text-accent transition-colors">
+                                <i class="fa-solid fa-location-dot "></i> #24, Street 562, Sangkat Boeung Kak I, Khan Toul Kork, Phnom Penh, Cambodia
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+
+                <nav data-aos="fade-up" data-aos-delay="400" data-aos-anchor-placement="top-bottom">
+                    <h3 class="text-lg font-semibold mb-4 english-text">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-accent transition-colors">
+                            <i class="fab fa-facebook-f text-xl"></i>
                         </a>
-                    </li>
-                    <li><a href="#" class="custom-text hover:text-accent transition-colors english-text text-gray-600 hover:text-accent transition-colors">
-                        <i class="fa-solid fa-location-dot "></i> #24, Street 562, Sangkat Boeung Kak I, Khan Toul Kork, Phnom Penh, Cambodia
-                    </a>
-                </li>
-
-                        </ul>
-                    </nav>
-
-                    <nav data-aos="fade-up" data-aos-delay="400" data-aos-anchor-placement="top-bottom">
-                        <h3 class="text-lg font-semibold mb-4 english-text">Follow Us</h3>
-                        <div class="flex space-x-4">
-                            <a href="#" class="text-gray-600 hover:text-accent transition-colors">
-                                <i class="fab fa-facebook-f text-xl"></i>
-                            </a>
-                            <a href="#" class="text-gray-600 hover:text-accent transition-colors">
-                                <i class="fab fa-telegram text-xl"></i>
-                            </a>
-                            <a href="#" class="text-gray-600 hover:text-accent transition-colors">
-                                <i class="fab fa-youtube text-xl"></i>
-                            </a>
-                        </div>
-                    </nav>
-                </div>
+                        <a href="#" class="text-gray-600 hover:text-accent transition-colors">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-accent transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </nav>
+            </div>
 
             <div class="border-t border-gray-300 mt-8 pt-8 text-center" data-aos="fade-in" data-aos-anchor-placement="top-bottom" data-duration="1000">
                 <p class="custom-text text-sm english-text">© 2025 SportsHub. All Rights Reserved.</p>

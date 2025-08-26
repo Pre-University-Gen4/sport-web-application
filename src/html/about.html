@@ -1,77 +1,152 @@
 <!DOCTYPE html>
-<html lang="en" class=""> <head>
+<html lang="en" class="">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportHub - About</title>
+
+    <!-- 🔑 Title & Description -->
+    <title>About Sportshub Cambodia – Information About Our Sports Website & Team</title>
+    <meta name="description" content="Learn about Sportshub Cambodia, a sports news and events platform created by passionate developers to bring you the latest updates, scores, and sports coverage worldwide.">
+
+    <!-- 📌 Keywords -->
+    <meta name="keywords" content="About Sportshub, Cambodia sports website, Sportshub developer, Khmer sports platform, football Cambodia, sports news team">
+
+    <!-- 🌍 Language -->
+    <meta http-equiv="Content-Language" content="en, km">
+
+    <!-- 👁 Open Graph -->
+    <meta property="og:title" content="About Sportshub Cambodia">
+    <meta property="og:description" content="Discover the story of Sportshub, a Cambodian sports news and events platform created by passionate developers.">
+    <meta property="og:image" content="https://yourdomain.com/images/about-banner.jpg">
+    <meta property="og:url" content="https://yourdomain.com/about">
+    <meta property="og:type" content="website">
+
+    <!-- 🏆 Structured Data (About Page / Organization) -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "mainEntity": {
+                "@type": "Organization",
+                "name": "Sportshub Cambodia",
+                "url": "https://yourdomain.com",
+                "logo": "https://yourdomain.com/images/logo.png",
+                "description": "Sportshub Cambodia is a sports news and events platform created by developers to deliver real-time updates, scores, and sports coverage in Cambodia and worldwide.",
+                "founder": {
+                    "@type": "Pre-evening - Student",
+                    "name": "Team Three",
+                    "url": "https://yourdomain.com/about"
+                },
+            }
+        }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         /* Custom light mode styles */
+        
         body {
-            background-color: #ffffff; /* bg-white */
+            background-color: #ffffff;
+            /* bg-white */
         }
+        
         .custom-bg {
             background-color: white;
         }
+        
         .custom-text {
-            color: #4B5563; /* text-gray-600 */
+            color: #4B5563;
+            /* text-gray-600 */
         }
+        
         .post-button {
             background-color: #3b82f6;
         }
+        
         .text-accent {
             color: #3b82f6;
         }
+        
         .border-accent {
             border-color: #3b82f6;
         }
-
         /* Dark mode styles */
+        
         .dark body {
-            background-color: #111827; /* bg-gray-900 */
+            background-color: #111827;
+            /* bg-gray-900 */
         }
+        
         .dark .bg-white {
-            background-color: #1F2937; /* bg-gray-800 for general white backgrounds */
+            background-color: #1F2937;
+            /* bg-gray-800 for general white backgrounds */
         }
+        
         .dark .bg-gray-50 {
-            background-color: #111827; /* bg-gray-900 for lighter gray backgrounds */
+            background-color: #111827;
+            /* bg-gray-900 for lighter gray backgrounds */
         }
+        
         .dark .custom-bg {
-            background-color: #1F2937; /* bg-gray-800 */
-            border-color: #4B5563; /* border-gray-600 */
+            background-color: #1F2937;
+            /* bg-gray-800 */
+            border-color: #4B5563;
+            /* border-gray-600 */
         }
+        
         .dark .custom-text,
         .dark .english-text,
-        .dark h1, .dark h2, .dark h3, .dark p, .dark span,
+        .dark h1,
+        .dark h2,
+        .dark h3,
+        .dark p,
+        .dark span,
         .dark a:not(.post-button) {
-            color: #D1D5DB; /* text-gray-300 */
+            color: #D1D5DB;
+            /* text-gray-300 */
         }
+        
         .dark nav a.text-accent {
-            color: #60A5FA; /* A lighter blue for accent in dark mode */
+            color: #60A5FA;
+            /* A lighter blue for accent in dark mode */
             border-color: #60A5FA;
         }
+        
         .dark nav a.custom-text:hover {
             color: #60A5FA;
         }
+        
         .dark .border-b.border-gray-200,
         .dark .border.border-gray-200,
         .dark .border-t.border-gray-300 {
-            border-color: #4B5563; /* border-gray-600 */
+            border-color: #4B5563;
+            /* border-gray-600 */
         }
+        
         .dark .text-gray-600 {
-            color: #D1D5DB; /* text-gray-300 */
+            color: #D1D5DB;
+            /* text-gray-300 */
         }
+        
         .dark .hover\:text-red-500:hover {
-            color: #EF4444; /* text-red-500 */
+            color: #EF4444;
+            /* text-red-500 */
         }
+        
         .dark .bg-blue-100 {
-            background-color: #1E40AF; /* A darker blue for icon backgrounds */
+            background-color: #1E40AF;
+            /* A darker blue for icon backgrounds */
         }
-        .dark .bg-\[\#000249\] { /* Targeting the specific color of the bullet points */
-             background-color: #60A5FA;
+        
+        .dark .bg-\[\#000249\] {
+            /* Targeting the specific color of the bullet points */
+            background-color: #60A5FA;
         }
         /* === Hero Slider Styles === */
+        
         .hero-slider {
             position: relative;
             width: 100%;
@@ -79,7 +154,7 @@
             overflow: hidden;
             background-color: #111;
         }
-
+        
         .slide {
             width: 100%;
             height: 100%;
@@ -92,12 +167,12 @@
             display: grid;
             place-items: center;
         }
-
+        
         .slide.active {
             opacity: 1;
             z-index: 2;
         }
-
+        
         .slide img {
             width: 100%;
             height: 100%;
@@ -106,26 +181,26 @@
             grid-column: 1 / -1;
             grid-row: 1 / -1;
         }
-
+        
         .slide-content {
             grid-column: 1 / -1;
             grid-row: 1 / -1;
-            text-align:center;
+            text-align: center;
             width: 90%;
             max-width: 1200px;
             z-index: 3;
             color: white;
         }
-
+        
         .slide-content h2 {
             font-size: clamp(2rem, 6vw, 4rem);
             margin-bottom: 1rem;
             font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color:white;
+            color: white;
         }
-
+        
         .slide-content p {
             font-size: clamp(1rem, 2.5vw, 1.25rem);
             margin-bottom: 2.5rem;
@@ -136,7 +211,7 @@
             margin-right: auto;
             color: white;
         }
-
+        
         .cta-button {
             display: inline-block;
             background-image: linear-gradient(to right, #4A90E2, #3b82f6);
@@ -150,13 +225,13 @@
             border: none;
             transition: all 0.4s ease;
         }
-
+        
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
-
         /* Navigation Arrows */
+        
         .slider-control {
             position: absolute;
             top: 50%;
@@ -176,29 +251,29 @@
             align-items: center;
             justify-content: center;
         }
-
+        
         .hero-slider:hover .slider-control {
             opacity: 1;
         }
-
+        
         .slider-control:hover {
             background-color: rgba(0, 0, 0, 0.5);
         }
-
+        
         .slider-control svg {
             width: 24px;
             height: 24px;
         }
-
+        
         .prev {
             left: 20px;
         }
-
+        
         .next {
             right: 20px;
         }
-
         /* Navigation Dots */
+        
         .slider-dots {
             position: absolute;
             bottom: 30px;
@@ -208,7 +283,7 @@
             z-index: 10;
             gap: 12px;
         }
-
+        
         .dot {
             width: 25px;
             height: 4px;
@@ -217,12 +292,12 @@
             transition: background-color 0.4s ease;
             border-radius: 2px;
         }
-
+        
         .dot.active {
             background-color: #fff;
         }
-
         /* Responsive Design */
+        
         @media (max-width: 768px) {
             .slide-content p {
                 display: none;
@@ -232,7 +307,7 @@
                 width: 40px;
                 height: 40px;
             }
-             .prev {
+            .prev {
                 left: 10px;
             }
             .next {
@@ -247,43 +322,38 @@
     <header class="custom-bg shadow-sm border-b border-gray-200 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
+                <!-- Left: Logo -->
                 <div class="flex items-center">
-                    <img src="../../image/logo/logo.png" alt="Logo" class="h-[75px]" onerror="this.onerror=null;this.src='https://placehold.co/100x40/000249/ffffff?text=Logo';">
+                    <img src="../../image/logo/logo.png" alt="Logo" class="h-[75px]">
                 </div>
 
+                <!-- Center: Navigation - Same structure as Event page -->
                 <nav class="hidden md:flex space-x-8">
                     <a href="../../index.html" class="custom-text hover:text-accent transition-colors font-medium english-text">Home</a>
                     <a href="../html/event.html" class="custom-text hover:text-accent transition-colors font-medium english-text">Event</a>
                     <a href="../html/about.html" class="text-accent font-medium border-b-2 border-accent pb-1 english-text">About</a>
                 </nav>
 
+                <!-- Right: Action buttons - Same structure without Post button -->
                 <div class="flex items-center space-x-4">
-                    <!-- <button id="favoriteBtn" class="p-2 text-gray-600 hover:text-red-500 transition-colors relative">
-                        <i class="fas fa-heart text-xl"></i>
-                        <span id="favoriteCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
-                    </button> -->
-
-                    <button class="p-2 text-gray-600 hover:text-accent transition-colors">
-                        <i class="fas fa-user-circle text-xl"></i>
-                    </button>
-
+                    <button class="p-2 text-gray-600 hover:text-red-500 transition-colors relative">
+                    <i class="fas fa-heart text-xl"></i>
+                </button>
                     <button id="theme-toggle" type="button" class="p-2 text-gray-600 hover:text-accent rounded-lg text-sm">
-                        <i id="theme-toggle-dark-icon" class="fas fa-moon text-xl hidden"></i>
-                        <i id="theme-toggle-light-icon" class="fas fa-sun text-xl hidden"></i>
-                    </button>
-
-                    <!-- <button id="postEventBtn" class="post-button text-white px-4 py-2 rounded-lg flex items-center space-x-2">
-                        <i class="fas fa-plus"></i>
-                        <span class="english-text">Post</span>
-                    </button> -->
-                     <div class="md:hidden flex items-center">
+                    <i id="theme-toggle-dark-icon" class="fas fa-moon text-xl hidden"></i>
+                    <i id="theme-toggle-light-icon" class="fas fa-sun text-xl hidden"></i>
+                </button>
+                    <!-- Invisible placeholder to maintain spacing -->
+                    <div class="w-[84px] h-[40px]"></div>
+                    <div class="md:hidden flex items-center">
                         <button id="mobile-menu-button" class="p-2 text-gray-600 hover:text-accent transition-colors">
-                            <i class="fas fa-bars text-xl"></i>
-                        </button>
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
                     </div>
                 </div>
             </div>
-             <div id="mobile-menu" class="hidden md:hidden">
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden">
                 <a href="../../index.html" class="block py-2 px-4 text-sm custom-text hover:text-accent">Home</a>
                 <a href="../html/event.html" class="block py-2 px-4 text-sm custom-text hover:text-accent">Event</a>
                 <a href="../html/about.html" class="block py-2 px-4 text-sm text-accent">About</a>
@@ -319,18 +389,18 @@
             </div>
 
             <button class="slider-control prev">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
-            </button>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+                </button>
             <button class="slider-control next">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
-            </button>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                </button>
 
             <div class="slider-dots"></div>
         </section>
 
         <section class="py-16 bg-white">
             <div class="container mx-auto px-4">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-[180px] items-center">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-[70px] lg:gap-[180px] p items-center">
                     <div data-aos="fade-right" data-aos-duration="1000">
                         <img src="../../image/logo/banner.jpg" alt="Sports Stadium" class="w-full h-full object-cover rounded-2xl border border-gray-200" id="stadiumImage" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Stadium';">
                     </div>
@@ -446,23 +516,25 @@
                 <nav data-aos="fade-up" data-aos-delay="300" data-aos-anchor-placement="top-bottom">
                     <h3 class="text-lg font-semibold mb-4 english-text">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="../../index.html" class="custom-text hover:text-accent transition-colors english-text">News</a></li>
+                        <li><a href="../../index.html" class="custom-text hover:text-accent transition-colors english-text">Home</a></li>
                         <li><a href="../html/event.html" class="custom-text hover:text-accent transition-colors english-text">Event</a></li>
-                        <li><a href="../html/about.html" class="custom-text hover:text-accent transition-colors english-text">About Us</a></li>
+                        <li><a href="../html/about.html" class="custom-text hover:text-accent transition-colors english-text">About</a></li>
                     </ul>
                 </nav>
                 <nav data-aos="fade-up" data-aos-delay="400" data-aos-anchor-placement="top-bottom">
                     <h3 class="text-lg font-semibold mb-4 english-text">Contact Us</h3>
-                    
+
                     <ul class="space-y-2">
-                        <li><a href="#" class="custom-text hover:text-accent transition-colors english-text text-gray-600 hover:text-accent transition-colors">
-                            <i class="fa-solid fa-envelope "></i> info@sporthub.com
-                        </a>
-                    </li>
-                    <li><a href="#" class="custom-text hover:text-accent transition-colors english-text text-gray-600 hover:text-accent transition-colors">
-                        <i class="fa-solid fa-location-dot "></i> #24, Street 562, Sangkat Boeung Kak I, Khan Toul Kork, Phnom Penh, Cambodia
-                    </a>
-                </li>
+                        <li>
+                            <a href="#" class="custom-text hover:text-accent transition-colors english-text text-gray-600 hover:text-accent transition-colors">
+                                <i class="fa-solid fa-envelope "></i> info@sporthub.com
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="custom-text hover:text-accent transition-colors english-text text-gray-600 hover:text-accent transition-colors">
+                                <i class="fa-solid fa-location-dot "></i> #24, Street 562, Sangkat Boeung Kak I, Khan Toul Kork, Phnom Penh, Cambodia
+                            </a>
+                        </li>
 
                     </ul>
                 </nav>
@@ -525,7 +597,7 @@
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
                 }
-            // If theme was not set in localStorage, check system preference and set it
+                // If theme was not set in localStorage, check system preference and set it
             } else {
                 if (document.documentElement.classList.contains('dark')) {
                     document.documentElement.classList.remove('dark');
