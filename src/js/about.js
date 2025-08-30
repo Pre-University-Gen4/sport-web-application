@@ -92,7 +92,7 @@ let members = [{
         ],
     },
     {
-        name: "Chhorn sengleang",
+        name: "Chhorn Seavleng",
         role: "Member",
         image: "../../image/photo/Leng.jpg",
         socialLinks: [{
